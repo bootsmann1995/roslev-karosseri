@@ -1,0 +1,33 @@
+{
+	"name": "nuxt-app",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"codegen": "graphql-codegen -r dotenv/config"
+	},
+	"devDependencies": {
+		"@graphql-codegen/cli": "^4.0.1",
+		"@graphql-codegen/typed-document-node": "^5.0.1",
+		"@graphql-codegen/typescript": "^4.0.1",
+		"@graphql-codegen/typescript-operations": "^4.0.1",
+		"@nuxt/devtools": "latest",
+		"@nuxtjs/eslint-config-typescript": "^12.0.0",
+		"@nuxtjs/tailwindcss": "^6.8.0",
+		"@types/node": "^18.17.0",
+		"@vue/eslint-config-prettier": "^8.0.0",
+		"eslint": "^8.45.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-prettier": "^5.0.0",
+		"eslint-plugin-tailwindcss": "^3.13.0",
+		"eslint-plugin-vue": "^9.15.1",
+		"nuxt": "^3.6.5",
+		"nuxt-icons": "^3.2.1",
+		"nuxt-security": "^0.14.2",
+		"sass": "^1.64.1",
+		"stylelint": "^15.10.2"
+	}
+}
