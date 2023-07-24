@@ -19,8 +19,15 @@ export type Scalars = {
   FloatType: { input: any; output: any; }
   IntType: { input: any; output: any; }
   ItemId: { input: any; output: any; }
+  JsonField: { input: any; output: any; }
   MetaTagAttributes: { input: any; output: any; }
   UploadId: { input: any; output: any; }
+};
+
+/** Specifies how to filter Boolean fields */
+export type BooleanFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
 export type CollectionMetadata = {
@@ -53,11 +60,157 @@ export type ColorField = {
   red: Scalars['IntType']['output'];
 };
 
+/** Record of type Virksomheds info (company) */
+export type CompanyRecord = RecordInterface & {
+  __typename?: 'CompanyRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  address?: Maybe<Scalars['String']['output']>;
+  companyNumber?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  phone?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Record of type Virksomheds info (company) */
+export type CompanyRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Record of type Kontakt (contact_page) */
+export type ContactPageRecord = RecordInterface & {
+  __typename?: 'ContactPageRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  contactPersons: Array<ContactPersonRecord>;
+  googleMapsLink?: Maybe<Scalars['String']['output']>;
+  headline?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  seo?: Maybe<SeoField>;
+  slug?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Record of type Kontakt (contact_page) */
+export type ContactPageRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Block of type Kontakt person (contact_person) */
+export type ContactPersonRecord = RecordInterface & {
+  __typename?: 'ContactPersonRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  avatar?: Maybe<FileField>;
+  id: Scalars['ItemId']['output'];
+  jobArea?: Maybe<Scalars['String']['output']>;
+  jobTitle?: Maybe<Scalars['String']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Kontakt person (contact_person) */
+export type ContactPersonRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Specifies how to filter by creation datetime */
+export type CreatedAtFilter = {
+  /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  eq?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  neq?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
 export enum FaviconType {
   AppleTouchIcon = 'appleTouchIcon',
   Icon = 'icon',
   MsApplication = 'msApplication'
 }
+
+export type FiftyBlockModelLinkField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord;
+
+export type FiftyBlockModelTextField = {
+  __typename?: 'FiftyBlockModelTextField';
+  blocks: Array<Scalars['String']['output']>;
+  links: Array<FiftyBlockModelTextLinksField>;
+  value: Scalars['JsonField']['output'];
+};
+
+export type FiftyBlockModelTextLinksField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord;
+
+/** Block of type 50/50 (fifty_block) */
+export type FiftyBlockRecord = RecordInterface & {
+  __typename?: 'FiftyBlockRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  headline?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  image?: Maybe<FileField>;
+  link?: Maybe<FiftyBlockModelLinkField>;
+  text?: Maybe<FiftyBlockModelTextField>;
+};
+
+
+/** Block of type 50/50 (fifty_block) */
+export type FiftyBlockRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
 
 export type FileField = FileFieldInterface & {
   __typename?: 'FileField';
@@ -216,6 +369,67 @@ export type FileFieldInterfaceUrlArgs = {
   imgixParams?: InputMaybe<ImgixParams>;
 };
 
+/** Specifies how to filter Single-file/image fields */
+export type FileFilter = {
+  /** Search for records with an exact match. The specified value must be an Upload ID */
+  eq?: InputMaybe<Scalars['UploadId']['input']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records that have one of the specified uploads */
+  in?: InputMaybe<Array<InputMaybe<Scalars['UploadId']['input']>>>;
+  /** Exclude records with an exact match. The specified value must be an Upload ID */
+  neq?: InputMaybe<Scalars['UploadId']['input']>;
+  /** Filter records that do not have one of the specified uploads */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']['input']>>>;
+};
+
+/** Linking fields */
+export enum ForsideModelFieldsReferencingProductPageModel {
+  Forside_produkter = 'forside_produkter',
+  Forside_produkter__productItem_text = 'forside_produkter__productItem_text'
+}
+
+export type ForsideModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ForsideModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ForsideModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  image?: InputMaybe<FileFilter>;
+  overskrift?: InputMaybe<StringFilter>;
+  seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
+};
+
+export enum ForsideModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  Id_ASC = 'id_ASC',
+  Id_DESC = 'id_DESC',
+  Overskrift_ASC = 'overskrift_ASC',
+  Overskrift_DESC = 'overskrift_DESC'
+}
+
 /** Record of type Forside (forside) */
 export type ForsideRecord = RecordInterface & {
   __typename?: 'ForsideRecord';
@@ -232,14 +446,60 @@ export type ForsideRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
+  citater: Array<QuoteItemRecord>;
   id: Scalars['ItemId']['output'];
+  image?: Maybe<FileField>;
   overskrift?: Maybe<Scalars['String']['output']>;
+  produkter: Array<ProductItemRecord>;
+  seo?: Maybe<SeoField>;
+  slug?: Maybe<Scalars['String']['output']>;
+  usp: Array<UspItemRecord>;
 };
 
 
 /** Record of type Forside (forside) */
 export type ForsideRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
+};
+
+/** Block of type Galleri (gallery_block) */
+export type GalleryBlockRecord = RecordInterface & {
+  __typename?: 'GalleryBlockRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  images: Array<FileField>;
+};
+
+
+/** Block of type Galleri (gallery_block) */
+export type GalleryBlockRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Specifies how to filter Multiple files/images field */
+export type GalleryFilter = {
+  /** Filter records that have all of the specified uploads. The specified values must be Upload IDs */
+  allIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']['input']>>>;
+  /** Filter records that have one of the specified uploads. The specified values must be Upload IDs */
+  anyIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']['input']>>>;
+  /** Search for records with an exact match. The specified values must be Upload IDs */
+  eq?: InputMaybe<Array<InputMaybe<Scalars['UploadId']['input']>>>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records that do not have any of the specified uploads. The specified values must be Upload IDs */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']['input']>>>;
 };
 
 export type GlobalSeoField = {
@@ -249,6 +509,32 @@ export type GlobalSeoField = {
   siteName?: Maybe<Scalars['String']['output']>;
   titleSuffix?: Maybe<Scalars['String']['output']>;
   twitterAccount?: Maybe<Scalars['String']['output']>;
+};
+
+/** Block of type Billede (image_block) */
+export type ImageBlockRecord = RecordInterface & {
+  __typename?: 'ImageBlockRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  image?: Maybe<FileField>;
+};
+
+
+/** Block of type Billede (image_block) */
+export type ImageBlockRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 export type ImgixParams = {
@@ -1671,17 +1957,422 @@ export type InUseFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
+/** Specifies how to filter by linking fields */
+export type InverseRelationshipFieldFilterBetweenForsideAndProductPage = {
+  /** Filter linking records that reference current record in at least one of the specified fields */
+  anyIn?: InputMaybe<Array<ForsideModelFieldsReferencingProductPageModel>>;
+  /** Filter linking records that do not reference current record in any of the specified fields */
+  notIn?: InputMaybe<Array<ForsideModelFieldsReferencingProductPageModel>>;
+};
+
+/** Specifies how to filter by linking fields */
+export type InverseRelationshipFieldFilterBetweenLandingPageAndProductPage = {
+  /** Filter linking records that reference current record in at least one of the specified fields */
+  anyIn?: InputMaybe<Array<LandingPageModelFieldsReferencingProductPageModel>>;
+  /** Filter linking records that do not reference current record in any of the specified fields */
+  notIn?: InputMaybe<Array<LandingPageModelFieldsReferencingProductPageModel>>;
+};
+
+/** Specifies how to filter by linking fields */
+export type InverseRelationshipFieldFilterBetweenMenuAndProductPage = {
+  /** Filter linking records that reference current record in at least one of the specified fields */
+  anyIn?: InputMaybe<Array<MenuModelFieldsReferencingProductPageModel>>;
+  /** Filter linking records that do not reference current record in any of the specified fields */
+  notIn?: InputMaybe<Array<MenuModelFieldsReferencingProductPageModel>>;
+};
+
+/** Specifies how to filter by linking fields */
+export type InverseRelationshipFieldFilterBetweenNewsPageAndProductPage = {
+  /** Filter linking records that reference current record in at least one of the specified fields */
+  anyIn?: InputMaybe<Array<NewsPageModelFieldsReferencingProductPageModel>>;
+  /** Filter linking records that do not reference current record in any of the specified fields */
+  notIn?: InputMaybe<Array<NewsPageModelFieldsReferencingProductPageModel>>;
+};
+
+/** Specifies how to filter by linking fields */
+export type InverseRelationshipFieldFilterBetweenProductPageAndProductPage = {
+  /** Filter linking records that reference current record in at least one of the specified fields */
+  anyIn?: InputMaybe<Array<ProductPageModelFieldsReferencingProductPageModel>>;
+  /** Filter linking records that do not reference current record in any of the specified fields */
+  notIn?: InputMaybe<Array<ProductPageModelFieldsReferencingProductPageModel>>;
+};
+
+/** Specifies how to filter linking records */
+export type InverseRelationshipFilterBetweenForsideAndProductPage = {
+  /** Specifies how to filter by linking fields */
+  fields?: InputMaybe<InverseRelationshipFieldFilterBetweenForsideAndProductPage>;
+  /** Specifies how to filter by linking locales */
+  locales?: InputMaybe<LinkingLocalesFilter>;
+};
+
+/** Specifies how to filter linking records */
+export type InverseRelationshipFilterBetweenLandingPageAndProductPage = {
+  /** Specifies how to filter by linking fields */
+  fields?: InputMaybe<InverseRelationshipFieldFilterBetweenLandingPageAndProductPage>;
+  /** Specifies how to filter by linking locales */
+  locales?: InputMaybe<LinkingLocalesFilter>;
+};
+
+/** Specifies how to filter linking records */
+export type InverseRelationshipFilterBetweenMenuAndProductPage = {
+  /** Specifies how to filter by linking fields */
+  fields?: InputMaybe<InverseRelationshipFieldFilterBetweenMenuAndProductPage>;
+  /** Specifies how to filter by linking locales */
+  locales?: InputMaybe<LinkingLocalesFilter>;
+};
+
+/** Specifies how to filter linking records */
+export type InverseRelationshipFilterBetweenNewsPageAndProductPage = {
+  /** Specifies how to filter by linking fields */
+  fields?: InputMaybe<InverseRelationshipFieldFilterBetweenNewsPageAndProductPage>;
+  /** Specifies how to filter by linking locales */
+  locales?: InputMaybe<LinkingLocalesFilter>;
+};
+
+/** Specifies how to filter linking records */
+export type InverseRelationshipFilterBetweenProductPageAndProductPage = {
+  /** Specifies how to filter by linking fields */
+  fields?: InputMaybe<InverseRelationshipFieldFilterBetweenProductPageAndProductPage>;
+  /** Specifies how to filter by linking locales */
+  locales?: InputMaybe<LinkingLocalesFilter>;
+};
+
+/** Specifies how to filter by ID */
+export type ItemIdFilter = {
+  /** Search the record with the specified ID */
+  eq?: InputMaybe<Scalars['ItemId']['input']>;
+  /** Search records with the specified IDs */
+  in?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
+  /** Exclude the record with the specified ID */
+  neq?: InputMaybe<Scalars['ItemId']['input']>;
+  /** Search records that do not have the specified IDs */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
+};
+
 export enum ItemStatus {
   Draft = 'draft',
   Published = 'published',
   Updated = 'updated'
 }
 
+export type LandingPageModelBlokListeField = FiftyBlockRecord | GalleryBlockRecord | ImageBlockRecord | LinkBlockRecord | TextBlockRecord;
+
+/** Linking fields */
+export enum LandingPageModelFieldsReferencingProductPageModel {
+  LandingPage_blokListe = 'landingPage_blokListe',
+  LandingPage_blokListe__fiftyBlock_link = 'landingPage_blokListe__fiftyBlock_link',
+  LandingPage_blokListe__fiftyBlock_text = 'landingPage_blokListe__fiftyBlock_text',
+  LandingPage_blokListe__linkBlock_link = 'landingPage_blokListe__linkBlock_link',
+  LandingPage_blokListe__textBlock_text = 'landingPage_blokListe__textBlock_text'
+}
+
+export type LandingPageModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<LandingPageModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<LandingPageModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  introImage?: InputMaybe<FileFilter>;
+  overskrift?: InputMaybe<StringFilter>;
+  seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
+};
+
+export enum LandingPageModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  Id_ASC = 'id_ASC',
+  Id_DESC = 'id_DESC',
+  Overskrift_ASC = 'overskrift_ASC',
+  Overskrift_DESC = 'overskrift_DESC'
+}
+
+/** Record of type Landingsside (landing_page) */
+export type LandingPageRecord = RecordInterface & {
+  __typename?: 'LandingPageRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  blokListe: Array<LandingPageModelBlokListeField>;
+  id: Scalars['ItemId']['output'];
+  introImage?: Maybe<FileField>;
+  overskrift?: Maybe<Scalars['String']['output']>;
+  seo?: Maybe<SeoField>;
+  slug?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Record of type Landingsside (landing_page) */
+export type LandingPageRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type LinkBlockModelLinkField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord;
+
+/** Block of type link (link_block) */
+export type LinkBlockRecord = RecordInterface & {
+  __typename?: 'LinkBlockRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  link?: Maybe<LinkBlockModelLinkField>;
+};
+
+
+/** Block of type link (link_block) */
+export type LinkBlockRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Linking locales */
+export enum LinkingLocale {
+  _nonLocalized = '_nonLocalized',
+  Da_DK = 'da_DK'
+}
+
+/** Specifies how to filter by linking locales */
+export type LinkingLocalesFilter = {
+  /** Filter linking records that link to current record in at least one of the specified locales */
+  anyIn?: InputMaybe<Array<LinkingLocale>>;
+  /** Filter linking records that do not link to current record in any of the specified locales */
+  notIn?: InputMaybe<Array<LinkingLocale>>;
+};
+
+export type MenuItemModelMenuLinkField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord;
+
+/** Block of type menu_item (menu_item) */
+export type MenuItemRecord = RecordInterface & {
+  __typename?: 'MenuItemRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  childMenuLinks: Array<LinkBlockRecord>;
+  id: Scalars['ItemId']['output'];
+  menuLink?: Maybe<MenuItemModelMenuLinkField>;
+};
+
+
+/** Block of type menu_item (menu_item) */
+export type MenuItemRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Linking fields */
+export enum MenuModelFieldsReferencingProductPageModel {
+  Menu_mainMenu = 'menu_mainMenu',
+  Menu_mainMenu__linkBlock_link = 'menu_mainMenu__linkBlock_link',
+  Menu_productMenu = 'menu_productMenu',
+  Menu_productMenu__menuItem_childMenuLinks__linkBlock_link = 'menu_productMenu__menuItem_childMenuLinks__linkBlock_link',
+  Menu_productMenu__menuItem_menuLink = 'menu_productMenu__menuItem_menuLink'
+}
+
+export type MenuModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<MenuModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<MenuModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+};
+
+export enum MenuModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  Id_ASC = 'id_ASC',
+  Id_DESC = 'id_DESC'
+}
+
+/** Record of type Menu (menu) */
+export type MenuRecord = RecordInterface & {
+  __typename?: 'MenuRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  mainMenu: Array<LinkBlockRecord>;
+  productMenu: Array<MenuItemRecord>;
+};
+
+
+/** Record of type Menu (menu) */
+export type MenuRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 export enum MuxThumbnailFormatType {
   Gif = 'gif',
   Jpg = 'jpg',
   Png = 'png'
 }
+
+export type NewsPageModelBlokListeField = FiftyBlockRecord | GalleryBlockRecord | ImageBlockRecord | LinkBlockRecord | TextBlockRecord;
+
+/** Linking fields */
+export enum NewsPageModelFieldsReferencingProductPageModel {
+  NewsPage_blokListe = 'newsPage_blokListe',
+  NewsPage_blokListe__fiftyBlock_link = 'newsPage_blokListe__fiftyBlock_link',
+  NewsPage_blokListe__fiftyBlock_text = 'newsPage_blokListe__fiftyBlock_text',
+  NewsPage_blokListe__linkBlock_link = 'newsPage_blokListe__linkBlock_link',
+  NewsPage_blokListe__textBlock_text = 'newsPage_blokListe__textBlock_text'
+}
+
+export type NewsPageModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<NewsPageModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<NewsPageModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  introImage?: InputMaybe<FileFilter>;
+  overskrift?: InputMaybe<StringFilter>;
+  parent?: InputMaybe<ParentFilter>;
+  position?: InputMaybe<PositionFilter>;
+  seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
+};
+
+export enum NewsPageModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  Id_ASC = 'id_ASC',
+  Id_DESC = 'id_DESC',
+  Overskrift_ASC = 'overskrift_ASC',
+  Overskrift_DESC = 'overskrift_DESC',
+  Position_ASC = 'position_ASC',
+  Position_DESC = 'position_DESC'
+}
+
+/** Record of type Nyhed (news_page) */
+export type NewsPageRecord = RecordInterface & {
+  __typename?: 'NewsPageRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  blokListe: Array<NewsPageModelBlokListeField>;
+  children?: Maybe<Array<Maybe<NewsPageRecord>>>;
+  id: Scalars['ItemId']['output'];
+  introImage?: Maybe<FileField>;
+  overskrift?: Maybe<Scalars['String']['output']>;
+  parent?: Maybe<NewsPageRecord>;
+  position?: Maybe<Scalars['IntType']['output']>;
+  seo?: Maybe<SeoField>;
+  slug?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Record of type Nyhed (news_page) */
+export type NewsPageRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
 
 /** Specifies how to filter by image orientation */
 export type OrientationFilter = {
@@ -1691,19 +2382,347 @@ export type OrientationFilter = {
   neq?: InputMaybe<UploadOrientation>;
 };
 
+/** Specifies how to filter by parent (tree-like collections only) */
+export type ParentFilter = {
+  /** Filter records children of the specified record. Value must be a Record ID */
+  eq?: InputMaybe<Scalars['ItemId']['input']>;
+  /** Filter records with a parent record or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+};
+
+/** Specifies how to filter by position (sorted and tree-like collections) */
+export type PositionFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars['IntType']['input']>;
+  /** Filter records with a value that's strictly greater than the one specified */
+  gt?: InputMaybe<Scalars['IntType']['input']>;
+  /** Filter records with a value that's greater than or equal to the one specified */
+  gte?: InputMaybe<Scalars['IntType']['input']>;
+  /** Filter records with a value that's less than the one specified */
+  lt?: InputMaybe<Scalars['IntType']['input']>;
+  /** Filter records with a value that's less or equal than the one specified */
+  lte?: InputMaybe<Scalars['IntType']['input']>;
+  /** Exclude records with an exact match */
+  neq?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+export type ProductItemModelTextField = {
+  __typename?: 'ProductItemModelTextField';
+  blocks: Array<Scalars['String']['output']>;
+  links: Array<ProductItemModelTextLinksField>;
+  value: Scalars['JsonField']['output'];
+};
+
+export type ProductItemModelTextLinksField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord;
+
+/** Block of type Produkt (product_item) */
+export type ProductItemRecord = RecordInterface & {
+  __typename?: 'ProductItemRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  headline?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<FileField>;
+  id: Scalars['ItemId']['output'];
+  text?: Maybe<ProductItemModelTextField>;
+};
+
+
+/** Block of type Produkt (product_item) */
+export type ProductItemRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type ProductPageModelBlokListeField = FiftyBlockRecord | GalleryBlockRecord | ImageBlockRecord | LinkBlockRecord | TextBlockRecord;
+
+/** Linking fields */
+export enum ProductPageModelFieldsReferencingProductPageModel {
+  ProductPage_blokListe = 'productPage_blokListe',
+  ProductPage_blokListe__fiftyBlock_link = 'productPage_blokListe__fiftyBlock_link',
+  ProductPage_blokListe__fiftyBlock_text = 'productPage_blokListe__fiftyBlock_text',
+  ProductPage_blokListe__linkBlock_link = 'productPage_blokListe__linkBlock_link',
+  ProductPage_blokListe__textBlock_text = 'productPage_blokListe__textBlock_text'
+}
+
+export type ProductPageModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ProductPageModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<ProductPageModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  introImage?: InputMaybe<GalleryFilter>;
+  overskrift?: InputMaybe<StringFilter>;
+  parent?: InputMaybe<ParentFilter>;
+  position?: InputMaybe<PositionFilter>;
+  seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
+};
+
+export enum ProductPageModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  Id_ASC = 'id_ASC',
+  Id_DESC = 'id_DESC',
+  Overskrift_ASC = 'overskrift_ASC',
+  Overskrift_DESC = 'overskrift_DESC',
+  Position_ASC = 'position_ASC',
+  Position_DESC = 'position_DESC'
+}
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord = RecordInterface & {
+  __typename?: 'ProductPageRecord';
+  _allReferencingForsides: Array<ForsideRecord>;
+  /** Returns meta information regarding a record collection */
+  _allReferencingForsidesMeta: CollectionMetadata;
+  _allReferencingLandingPages: Array<LandingPageRecord>;
+  /** Returns meta information regarding a record collection */
+  _allReferencingLandingPagesMeta: CollectionMetadata;
+  _allReferencingMenus: Array<MenuRecord>;
+  /** Returns meta information regarding a record collection */
+  _allReferencingMenusMeta: CollectionMetadata;
+  _allReferencingNewsPages: Array<NewsPageRecord>;
+  /** Returns meta information regarding a record collection */
+  _allReferencingNewsPagesMeta: CollectionMetadata;
+  _allReferencingProductPages: Array<ProductPageRecord>;
+  /** Returns meta information regarding a record collection */
+  _allReferencingProductPagesMeta: CollectionMetadata;
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  blokListe: Array<ProductPageModelBlokListeField>;
+  children?: Maybe<Array<Maybe<ProductPageRecord>>>;
+  id: Scalars['ItemId']['output'];
+  introImage: Array<FileField>;
+  overskrift?: Maybe<Scalars['String']['output']>;
+  parent?: Maybe<ProductPageRecord>;
+  position?: Maybe<Scalars['IntType']['output']>;
+  seo?: Maybe<SeoField>;
+  slug?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_AllReferencingForsidesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ForsideModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ForsideModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenForsideAndProductPage>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_AllReferencingForsidesMetaArgs = {
+  filter?: InputMaybe<ForsideModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenForsideAndProductPage>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_AllReferencingLandingPagesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<LandingPageModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<LandingPageModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenLandingPageAndProductPage>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_AllReferencingLandingPagesMetaArgs = {
+  filter?: InputMaybe<LandingPageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenLandingPageAndProductPage>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_AllReferencingMenusArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<MenuModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<MenuModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenMenuAndProductPage>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_AllReferencingMenusMetaArgs = {
+  filter?: InputMaybe<MenuModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenMenuAndProductPage>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_AllReferencingNewsPagesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<NewsPageModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<NewsPageModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenNewsPageAndProductPage>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_AllReferencingNewsPagesMetaArgs = {
+  filter?: InputMaybe<NewsPageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenNewsPageAndProductPage>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_AllReferencingProductPagesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ProductPageModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ProductPageModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenProductPageAndProductPage>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_AllReferencingProductPagesMetaArgs = {
+  filter?: InputMaybe<ProductPageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  through?: InputMaybe<InverseRelationshipFilterBetweenProductPageAndProductPage>;
+};
+
+
+/** Record of type Artikel (product_page) */
+export type ProductPageRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Specifies how to filter by publication datetime */
+export type PublishedAtFilter = {
+  /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  eq?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  neq?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
 /** The query root for this schema */
 export type Query = {
   __typename?: 'Query';
+  /** Returns meta information regarding a record collection */
+  _allLandingPagesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allNewsPagesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allProductPagesMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta: CollectionMetadata;
   /** Returns the single instance record */
   _site: Site;
+  /** Returns a collection of records */
+  allLandingPages: Array<LandingPageRecord>;
+  /** Returns a collection of records */
+  allNewsPages: Array<NewsPageRecord>;
+  /** Returns a collection of records */
+  allProductPages: Array<ProductPageRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns the single instance record */
+  company?: Maybe<CompanyRecord>;
+  /** Returns the single instance record */
+  contactPage?: Maybe<ContactPageRecord>;
+  /** Returns the single instance record */
   forside?: Maybe<ForsideRecord>;
+  /** Returns a specific record */
+  landingPage?: Maybe<LandingPageRecord>;
+  /** Returns the single instance record */
+  menu?: Maybe<MenuRecord>;
+  /** Returns a specific record */
+  newsPage?: Maybe<NewsPageRecord>;
+  /** Returns a specific record */
+  productPage?: Maybe<ProductPageRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllLandingPagesMetaArgs = {
+  filter?: InputMaybe<LandingPageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllNewsPagesMetaArgs = {
+  filter?: InputMaybe<NewsPageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllProductPagesMetaArgs = {
+  filter?: InputMaybe<ProductPageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
 };
 
 
@@ -1722,6 +2741,39 @@ export type Query_SiteArgs = {
 
 
 /** The query root for this schema */
+export type QueryAllLandingPagesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<LandingPageModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<LandingPageModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
+export type QueryAllNewsPagesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<NewsPageModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<NewsPageModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
+export type QueryAllProductPagesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ProductPageModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ProductPageModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
 export type QueryAllUploadsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<UploadFilter>;
@@ -1733,9 +2785,57 @@ export type QueryAllUploadsArgs = {
 
 
 /** The query root for this schema */
+export type QueryCompanyArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type QueryContactPageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
 export type QueryForsideArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type QueryLandingPageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<LandingPageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<LandingPageModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryMenuArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type QueryNewsPageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<NewsPageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<NewsPageModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryProductPageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ProductPageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ProductPageModelOrderBy>>>;
 };
 
 
@@ -1745,6 +2845,33 @@ export type QueryUploadArgs = {
   filter?: InputMaybe<UploadFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
+};
+
+/** Block of type Citat (quote_item) */
+export type QuoteItemRecord = RecordInterface & {
+  __typename?: 'QuoteItemRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  qouteText?: Maybe<Scalars['String']['output']>;
+  reference?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Citat (quote_item) */
+export type QuoteItemRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 export type RecordInterface = {
@@ -1811,6 +2938,12 @@ export type SeoField = {
   twitterCard?: Maybe<Scalars['String']['output']>;
 };
 
+/** Specifies how to filter SEO meta tags fields */
+export type SeoFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+};
+
 export type Site = {
   __typename?: 'Site';
   favicon?: Maybe<FileField>;
@@ -1834,6 +2967,52 @@ export enum SiteLocale {
   Da_DK = 'da_DK'
 }
 
+/** Specifies how to filter Slug fields */
+export type SlugFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars['String']['input']>;
+  /** Filter records that have one of the specified slugs */
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Exclude records with an exact match */
+  neq?: InputMaybe<Scalars['String']['input']>;
+  /** Filter records that do have one of the specified slugs */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+/** Specifies how to filter by status */
+export type StatusFilter = {
+  /** Search the record with the specified status */
+  eq?: InputMaybe<ItemStatus>;
+  /** Search records with the specified statuses */
+  in?: InputMaybe<Array<InputMaybe<ItemStatus>>>;
+  /** Exclude the record with the specified status */
+  neq?: InputMaybe<ItemStatus>;
+  /** Search records without the specified statuses */
+  notIn?: InputMaybe<Array<InputMaybe<ItemStatus>>>;
+};
+
+/** Specifies how to filter Single-line string fields */
+export type StringFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars['String']['input']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED] */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records that equal one of the specified values */
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Filter records with the specified field set as blank (null or empty string) */
+  isBlank?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records with the specified field present (neither null, nor empty string) */
+  isPresent?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records based on a regular expression */
+  matches?: InputMaybe<StringMatchesFilter>;
+  /** Exclude records with an exact match */
+  neq?: InputMaybe<Scalars['String']['input']>;
+  /** Filter records that do not equal one of the specified values */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Exclude records based on a regular expression */
+  notMatches?: InputMaybe<StringMatchesFilter>;
+};
+
 export type StringMatchesFilter = {
   caseSensitive?: InputMaybe<Scalars['BooleanType']['input']>;
   pattern: Scalars['String']['input'];
@@ -1847,6 +3026,41 @@ export type Tag = {
   tag: Scalars['String']['output'];
 };
 
+export type TextBlockModelTextField = {
+  __typename?: 'TextBlockModelTextField';
+  blocks: Array<Scalars['String']['output']>;
+  links: Array<TextBlockModelTextLinksField>;
+  value: Scalars['JsonField']['output'];
+};
+
+export type TextBlockModelTextLinksField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord;
+
+/** Block of type Tekst (text_block) */
+export type TextBlockRecord = RecordInterface & {
+  __typename?: 'TextBlockRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  text?: Maybe<TextBlockModelTextField>;
+};
+
+
+/** Block of type Tekst (text_block) */
+export type TextBlockRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter by upload type */
 export type TypeFilter = {
   /** Search uploads with the specified type */
@@ -1857,6 +3071,24 @@ export type TypeFilter = {
   neq?: InputMaybe<UploadType>;
   /** Search uploads without the specified types */
   notIn?: InputMaybe<Array<InputMaybe<UploadType>>>;
+};
+
+/** Specifies how to filter by update datetime */
+export type UpdatedAtFilter = {
+  /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  eq?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument. */
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument. */
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
+  /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
+  neq?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 /** Specifies how to filter by default alt */
@@ -2189,11 +3421,63 @@ export type UploadWidthFilter = {
   neq?: InputMaybe<Scalars['IntType']['input']>;
 };
 
+/** Block of type Salgspunkt/tekstpunkt (usp_item) */
+export type UspItemRecord = RecordInterface & {
+  __typename?: 'UspItemRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Block of type Salgspunkt/tekstpunkt (usp_item) */
+export type UspItemRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 export enum VideoMp4Res {
   High = 'high',
   Low = 'low',
   Medium = 'medium'
 }
+
+/** Block of type Video (med scroll effekt) (video_scroll_block) */
+export type VideoScrollBlockRecord = RecordInterface & {
+  __typename?: 'VideoScrollBlockRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  video?: Maybe<FileField>;
+};
+
+
+/** Block of type Video (med scroll effekt) (video_scroll_block) */
+export type VideoScrollBlockRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
 
 export type FocalPoint = {
   __typename?: 'focalPoint';
@@ -2201,10 +3485,65 @@ export type FocalPoint = {
   y: Scalars['FloatType']['output'];
 };
 
+type BlockListFrament_FiftyBlockRecord_Fragment = { __typename?: 'FiftyBlockRecord', id: any, headline?: string | null, _modelApiKey: string, link?: { __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null } | null, text?: { __typename?: 'FiftyBlockModelTextField', value: any, links: Array<{ __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null }> } | null, image?: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null } | null };
+
+type BlockListFrament_GalleryBlockRecord_Fragment = { __typename?: 'GalleryBlockRecord', id: any, _modelApiKey: string, images: Array<{ __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null }> };
+
+type BlockListFrament_ImageBlockRecord_Fragment = { __typename?: 'ImageBlockRecord', id: any, _modelApiKey: string, image?: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null } | null };
+
+type BlockListFrament_LinkBlockRecord_Fragment = { __typename?: 'LinkBlockRecord', _modelApiKey: string, id: any, link?: { __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null } | null };
+
+type BlockListFrament_TextBlockRecord_Fragment = { __typename?: 'TextBlockRecord', id: any, _modelApiKey: string, text?: { __typename?: 'TextBlockModelTextField', value: any, links: Array<{ __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null }> } | null };
+
+export type BlockListFramentFragment = BlockListFrament_FiftyBlockRecord_Fragment | BlockListFrament_GalleryBlockRecord_Fragment | BlockListFrament_ImageBlockRecord_Fragment | BlockListFrament_LinkBlockRecord_Fragment | BlockListFrament_TextBlockRecord_Fragment;
+
+export type FiftyFiftyFragmentFragment = { __typename?: 'FiftyBlockRecord', id: any, headline?: string | null, _modelApiKey: string, link?: { __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null } | null, text?: { __typename?: 'FiftyBlockModelTextField', value: any, links: Array<{ __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null }> } | null, image?: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null } | null };
+
+export type GalleryBlockFragmentFragment = { __typename?: 'GalleryBlockRecord', id: any, _modelApiKey: string, images: Array<{ __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null }> };
+
+export type ImageFragmentFragment = { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null };
+
+export type ImageBlockFragmentFragment = { __typename?: 'ImageBlockRecord', id: any, _modelApiKey: string, image?: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null } | null };
+
+type LinkFragment_ContactPageRecord_Fragment = { __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null };
+
+type LinkFragment_ForsideRecord_Fragment = { __typename?: 'ForsideRecord', id: any, overskrift?: string | null };
+
+type LinkFragment_LandingPageRecord_Fragment = { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null };
+
+type LinkFragment_NewsPageRecord_Fragment = { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null };
+
+type LinkFragment_ProductPageRecord_Fragment = { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null };
+
+export type LinkFragmentFragment = LinkFragment_ContactPageRecord_Fragment | LinkFragment_ForsideRecord_Fragment | LinkFragment_LandingPageRecord_Fragment | LinkFragment_NewsPageRecord_Fragment | LinkFragment_ProductPageRecord_Fragment;
+
+export type LinkBlockFragmentFragment = { __typename?: 'LinkBlockRecord', _modelApiKey: string, id: any, link?: { __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null } | null };
+
+export type TextBlockFragmentFragment = { __typename?: 'TextBlockRecord', id: any, _modelApiKey: string, text?: { __typename?: 'TextBlockModelTextField', value: any, links: Array<{ __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null }> } | null };
+
 export type FrontpageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type FrontpageQuery = { __typename?: 'Query', forside?: { __typename?: 'ForsideRecord', overskrift?: string | null } | null };
 
+export type LandingPageQueryVariables = Exact<{ [key: string]: never; }>;
 
+
+export type LandingPageQuery = { __typename?: 'Query', landingPage?: { __typename?: 'LandingPageRecord', overskrift?: string | null, slug?: string | null, introImage?: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null } | null, seo?: { __typename?: 'SeoField', title?: string | null, twitterCard?: string | null, description?: string | null, image?: { __typename?: 'FileField', url: string } | null } | null, blokListe: Array<{ __typename?: 'FiftyBlockRecord', id: any, headline?: string | null, _modelApiKey: string, link?: { __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null } | null, text?: { __typename?: 'FiftyBlockModelTextField', value: any, links: Array<{ __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null }> } | null, image?: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null } | null } | { __typename?: 'GalleryBlockRecord', id: any, _modelApiKey: string, images: Array<{ __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null }> } | { __typename?: 'ImageBlockRecord', id: any, _modelApiKey: string, image?: { __typename?: 'FileField', responsiveImage?: { __typename?: 'ResponsiveImage', width: any, webpSrcSet: string, title?: string | null, srcSet: string, src: string, sizes: string } | null } | null } | { __typename?: 'LinkBlockRecord', _modelApiKey: string, id: any, link?: { __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null } | null } | { __typename?: 'TextBlockRecord', id: any, _modelApiKey: string, text?: { __typename?: 'TextBlockModelTextField', value: any, links: Array<{ __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null }> } | null }> } | null };
+
+export type MenuQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MenuQuery = { __typename?: 'Query', menu?: { __typename?: 'MenuRecord', mainMenu: Array<{ __typename?: 'LinkBlockRecord', link?: { __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null } | null }>, productMenu: Array<{ __typename?: 'MenuItemRecord', menuLink?: { __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null } | null, childMenuLinks: Array<{ __typename?: 'LinkBlockRecord', link?: { __typename?: 'ContactPageRecord', id: any, slug?: string | null, headline?: string | null } | { __typename?: 'ForsideRecord', id: any, overskrift?: string | null } | { __typename?: 'LandingPageRecord', id: any, slug?: string | null, overskrift?: string | null } | { __typename?: 'NewsPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null, parent?: { __typename?: 'NewsPageRecord', slug?: string | null } | null } | null } | { __typename?: 'ProductPageRecord', id: any, overskrift?: string | null, slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null, parent?: { __typename?: 'ProductPageRecord', slug?: string | null } | null } | null } | null }> }> } | null };
+
+export const LinkFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LinkBlockModelLinkField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContactPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ForsideRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LandingPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NewsPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProductPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}}]} as unknown as DocumentNode<LinkFragmentFragment, unknown>;
+export const ImageFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FileField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}},{"kind":"ObjectField","name":{"kind":"Name","value":"crop"},"value":{"kind":"EnumValue","value":"focalpoint"}},{"kind":"ObjectField","name":{"kind":"Name","value":"q"},"value":{"kind":"StringValue","value":"85","block":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"sizes"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"webpSrcSet"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"sizes"}}]}}]}}]} as unknown as DocumentNode<ImageFragmentFragment, unknown>;
+export const FiftyFiftyFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FiftyFiftyFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FiftyBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"link"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LinkBlockModelLinkField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContactPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ForsideRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LandingPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NewsPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProductPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FileField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}},{"kind":"ObjectField","name":{"kind":"Name","value":"crop"},"value":{"kind":"EnumValue","value":"focalpoint"}},{"kind":"ObjectField","name":{"kind":"Name","value":"q"},"value":{"kind":"StringValue","value":"85","block":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"sizes"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"webpSrcSet"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"sizes"}}]}}]}}]} as unknown as DocumentNode<FiftyFiftyFragmentFragment, unknown>;
+export const ImageBlockFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ImageBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FileField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}},{"kind":"ObjectField","name":{"kind":"Name","value":"crop"},"value":{"kind":"EnumValue","value":"focalpoint"}},{"kind":"ObjectField","name":{"kind":"Name","value":"q"},"value":{"kind":"StringValue","value":"85","block":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"sizes"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"webpSrcSet"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"sizes"}}]}}]}}]} as unknown as DocumentNode<ImageBlockFragmentFragment, unknown>;
+export const GalleryBlockFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GalleryBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GalleryBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FileField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}},{"kind":"ObjectField","name":{"kind":"Name","value":"crop"},"value":{"kind":"EnumValue","value":"focalpoint"}},{"kind":"ObjectField","name":{"kind":"Name","value":"q"},"value":{"kind":"StringValue","value":"85","block":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"sizes"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"webpSrcSet"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"sizes"}}]}}]}}]} as unknown as DocumentNode<GalleryBlockFragmentFragment, unknown>;
+export const TextBlockFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TextBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"text"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LinkBlockModelLinkField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContactPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ForsideRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LandingPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NewsPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProductPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}}]} as unknown as DocumentNode<TextBlockFragmentFragment, unknown>;
+export const LinkBlockFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LinkBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LinkBlockModelLinkField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContactPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ForsideRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LandingPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NewsPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProductPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}}]} as unknown as DocumentNode<LinkBlockFragmentFragment, unknown>;
+export const BlockListFramentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BlockListFrament"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LandingPageModelBlokListeField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FiftyFiftyFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageBlockFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GalleryBlockFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"TextBlockFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkBlockFragment"}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LinkBlockModelLinkField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContactPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ForsideRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LandingPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NewsPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProductPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FileField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}},{"kind":"ObjectField","name":{"kind":"Name","value":"crop"},"value":{"kind":"EnumValue","value":"focalpoint"}},{"kind":"ObjectField","name":{"kind":"Name","value":"q"},"value":{"kind":"StringValue","value":"85","block":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"sizes"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"webpSrcSet"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"sizes"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FiftyFiftyFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FiftyBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"link"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ImageBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GalleryBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GalleryBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TextBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"text"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LinkBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}}]}}]} as unknown as DocumentNode<BlockListFramentFragment, unknown>;
 export const FrontpageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Frontpage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"forside"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}}]}}]} as unknown as DocumentNode<FrontpageQuery, FrontpageQueryVariables>;
+export const LandingPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"LandingPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"landingPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"introImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"seo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"twitterCard"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"blokListe"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"BlockListFrament"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LinkBlockModelLinkField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContactPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ForsideRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LandingPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NewsPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProductPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FileField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"responsiveImage"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"imgixParams"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"auto"},"value":{"kind":"EnumValue","value":"format"}},{"kind":"ObjectField","name":{"kind":"Name","value":"crop"},"value":{"kind":"EnumValue","value":"focalpoint"}},{"kind":"ObjectField","name":{"kind":"Name","value":"q"},"value":{"kind":"StringValue","value":"85","block":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"fit"},"value":{"kind":"EnumValue","value":"crop"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"sizes"},"value":{"kind":"StringValue","value":"","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"width"}},{"kind":"Field","name":{"kind":"Name","value":"webpSrcSet"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"srcSet"}},{"kind":"Field","name":{"kind":"Name","value":"src"}},{"kind":"Field","name":{"kind":"Name","value":"sizes"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"FiftyFiftyFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"FiftyBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"link"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"text"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"value"}}]}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ImageBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"image"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"GalleryBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"GalleryBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"images"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"TextBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"TextBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"text"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkBlockFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LinkBlockRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_modelApiKey"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"link"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BlockListFrament"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LandingPageModelBlokListeField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"FiftyFiftyFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageBlockFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"GalleryBlockFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"TextBlockFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkBlockFragment"}}]}}]} as unknown as DocumentNode<LandingPageQuery, LandingPageQueryVariables>;
+export const MenuDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Menu"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"menu"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mainMenu"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"productMenu"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"menuLink"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}},{"kind":"Field","name":{"kind":"Name","value":"childMenuLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"link"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"LinkFragment"}}]}}]}}]}}]}}]}},{"kind":"FragmentDefinition","name":{"kind":"Name","value":"LinkFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LinkBlockModelLinkField"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ContactPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"headline"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ForsideRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"LandingPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"NewsPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}},{"kind":"InlineFragment","typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"ProductPageRecord"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"overskrift"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}}]} as unknown as DocumentNode<MenuQuery, MenuQueryVariables>;

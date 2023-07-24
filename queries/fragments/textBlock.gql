@@ -1,0 +1,10 @@
+fragment TextBlockFragment on TextBlockRecord {
+	id
+	_modelApiKey
+	text {
+		value
+		links {
+			...LinkFragment
+		}
+	}
+}

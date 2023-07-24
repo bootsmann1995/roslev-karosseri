@@ -1,0 +1,19 @@
+query Menu {
+	menu {
+		mainMenu {
+			link {
+				...LinkFragment
+			}
+		}
+		productMenu {
+			menuLink {
+				...LinkFragment
+			}
+			childMenuLinks {
+				link {
+					...LinkFragment
+				}
+			}
+		}
+	}
+}

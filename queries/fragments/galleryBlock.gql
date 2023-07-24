@@ -1,0 +1,7 @@
+fragment GalleryBlockFragment on GalleryBlockRecord {
+	id
+	_modelApiKey
+	images {
+		...ImageFragment
+	}
+}

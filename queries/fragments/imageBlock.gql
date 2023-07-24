@@ -1,0 +1,7 @@
+fragment ImageBlockFragment on ImageBlockRecord {
+	id
+	_modelApiKey
+	image {
+		...ImageFragment
+	}
+}

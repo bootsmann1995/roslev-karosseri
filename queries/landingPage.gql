@@ -1,0 +1,20 @@
+query LandingPage {
+	landingPage {
+		introImage {
+			...ImageFragment
+		}
+		overskrift
+		slug
+		seo {
+			title
+			twitterCard
+			description
+			image {
+				url
+			}
+		}
+		blokListe {
+			...BlockListFrament
+		}
+	}
+}

@@ -16,6 +16,7 @@ export default defineNuxtConfig({
 		compressPublicAssets: true,
 		routeRules: {
 			"/*": { swr: true },
+			// '/old-page': { redirect: '/new-page' },
 		},
 	},
 	typescript: {

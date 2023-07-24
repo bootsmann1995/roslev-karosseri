@@ -1,0 +1,7 @@
+fragment BlockListFrament on LandingPageModelBlokListeField {
+	...FiftyFiftyFragment
+	...ImageBlockFragment
+	...GalleryBlockFragment
+	...TextBlockFragment
+	...LinkBlockFragment
+}

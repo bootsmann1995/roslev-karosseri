@@ -1,0 +1,10 @@
+fragment ImageFragment on FileField {
+	responsiveImage(imgixParams: { auto: format, crop: focalpoint, q: "85", fit: crop }, sizes: "") {
+		width
+		webpSrcSet
+		title
+		srcSet
+		src
+		sizes
+	}
+}
