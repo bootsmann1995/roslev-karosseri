@@ -11,6 +11,16 @@ export default defineNuxtConfig({
 		},
 		pageTransition: { name: "page", mode: "out-in" },
 	},
+	experimental: { payloadExtraction: true },
+	nitro: {
+		compressPublicAssets: true,
+		routeRules: {
+			"/*": { swr: true },
+		},
+	},
+	typescript: {
+		strict: true,
+	},
 	security: {
 		headers: {
 			contentSecurityPolicy: {
@@ -25,16 +35,6 @@ export default defineNuxtConfig({
 				"upgrade-insecure-requests": true,
 			},
 		},
-	},
-	experimental: { payloadExtraction: true },
-	nitro: {
-		compressPublicAssets: true,
-		routeRules: {
-			"/*": { swr: true },
-		},
-	},
-	typescript: {
-		strict: true,
 	},
 	laitRobots: {
 		allowRobots: process.env.ROBOTS ?? "false",
