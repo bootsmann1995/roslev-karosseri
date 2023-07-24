@@ -1,0 +1,19 @@
+schema:
+    - ${GQL_HOST} # graphQl endpoint
+headers:
+    Authorization: "Bearer ${GQL_TOKEN}" # Headers
+    Content-Type: "application/json"
+    Accept: "application/json"
+documents: "./queries/**/*.gql" # path to the graphQl files
+generates:
+    schema.graphql:
+        plugins:
+            - schema-ast
+    generated-types/index.ts:
+        plugins:
+            - typescript
+            - typescript-operations
+            - typed-document-node
+        config:
+            namingConvention:
+                enumValues: change-case-all#upperCaseFirst
