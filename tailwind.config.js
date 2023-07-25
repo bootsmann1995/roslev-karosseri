@@ -319,7 +319,7 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				white: "#ffffff",
+				white: "#f5f5f5",
 				black: "#000000",
 				success: {
 					50: "#E9F6F2",

@@ -120,7 +120,8 @@ type ContactPersonRecord implements RecordInterface {
 """Specifies how to filter by creation datetime"""
 input CreatedAtFilter {
   """
-  Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's within the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
   """
   eq: DateTime
 
@@ -130,12 +131,14 @@ input CreatedAtFilter {
   exists: BooleanType
 
   """
-  Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's strictly greater than the one specified.
+  Seconds and milliseconds are truncated from the argument.
   """
   gt: DateTime
 
   """
-  Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's greater than or equal to than the one
+  specified. Seconds and milliseconds are truncated from the argument.
   """
   gte: DateTime
 
@@ -145,12 +148,14 @@ input CreatedAtFilter {
   lt: DateTime
 
   """
-  Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's less or equal than the one specified.
+  Seconds and milliseconds are truncated from the argument.
   """
   lte: DateTime
 
   """
-  Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's outside the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
   """
   neq: DateTime
 }
@@ -220,6 +225,7 @@ type FileField implements FileFieldInterface {
   ): String
   author: String
   basename: String!
+  blurhash: String
   blurUpThumb(
     """Imgix transformations to apply to the image"""
     imgixParams: ImgixParams
@@ -235,7 +241,6 @@ type FileField implements FileFieldInterface {
     """Maximum image dimension (defaults to 24px)"""
     size: Int! = 24
   ): String
-  blurhash: String
   colors: [ColorField!]!
   copyright: String
   customData(
@@ -317,6 +322,7 @@ interface FileFieldInterface {
   ): String
   author: String
   basename: String!
+  blurhash: String
   blurUpThumb(
     """Imgix transformations to apply to the image"""
     imgixParams: ImgixParams
@@ -332,7 +338,6 @@ interface FileFieldInterface {
     """Maximum image dimension (defaults to 24px)"""
     size: Int! = 24
   ): String
-  blurhash: String
   colors: [ColorField!]!
   copyright: String
   customData(
@@ -422,9 +427,15 @@ input FileFilter {
 }
 
 """
-Represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point).
+Represents signed double-precision fractional values as specified by [IEEE
+754](http://en.wikipedia.org/wiki/IEEE_floating_point).
 """
 scalar FloatType
+
+type focalPoint {
+  x: FloatType!
+  y: FloatType!
+}
 
 """Linking fields"""
 enum ForsideModelFieldsReferencingProductPageModel {
@@ -433,8 +444,6 @@ enum ForsideModelFieldsReferencingProductPageModel {
 }
 
 input ForsideModelFilter {
-  AND: [ForsideModelFilter]
-  OR: [ForsideModelFilter]
   _createdAt: CreatedAtFilter
   _firstPublishedAt: PublishedAtFilter
   _isValid: BooleanFilter
@@ -443,8 +452,10 @@ input ForsideModelFilter {
   _status: StatusFilter
   _unpublishingScheduledAt: PublishedAtFilter
   _updatedAt: UpdatedAtFilter
+  AND: [ForsideModelFilter]
   id: ItemIdFilter
   image: FileFilter
+  OR: [ForsideModelFilter]
   overskrift: StringFilter
   seo: SeoFilter
   slug: SlugFilter
@@ -1095,6 +1106,13 @@ input ImgixParams {
   fpDebug: BooleanType
 
   """
+  Frames Per Second
+  
+  Specifies the framerate of the generated image.
+  """
+  fps: IntType
+
+  """
   Focal Point X Position
   
   Sets the relative horizontal value for the focal point of an image
@@ -1126,13 +1144,6 @@ input ImgixParams {
   [Open Imgix reference »](https://docs.imgix.com/apis/url/focalpoint-crop/fp-z)
   """
   fpZ: FloatType
-
-  """
-  Frames Per Second
-  
-  Specifies the framerate of the generated image.
-  """
-  fps: IntType
 
   """
   Frame Selection
@@ -2072,8 +2083,8 @@ enum ImgixParamsFm {
   mp4
   pjpg
   png
-  png8
   png32
+  png8
   webm
   webp
 }
@@ -2138,16 +2149,16 @@ enum ImgixParamsTxtFit {
   max
 }
 
+"""
+Represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+"""
+scalar IntType
+
 """Specifies how to filter by usage"""
 input InUseFilter {
   """Search uploads that are currently used by some record or not"""
   eq: BooleanType
 }
-
-"""
-Represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-"""
-scalar IntType
 
 """Specifies how to filter by linking fields"""
 input InverseRelationshipFieldFilterBetweenForsideAndProductPage {
@@ -2296,8 +2307,6 @@ enum LandingPageModelFieldsReferencingProductPageModel {
 }
 
 input LandingPageModelFilter {
-  AND: [LandingPageModelFilter]
-  OR: [LandingPageModelFilter]
   _createdAt: CreatedAtFilter
   _firstPublishedAt: PublishedAtFilter
   _isValid: BooleanFilter
@@ -2306,8 +2315,10 @@ input LandingPageModelFilter {
   _status: StatusFilter
   _unpublishingScheduledAt: PublishedAtFilter
   _updatedAt: UpdatedAtFilter
+  AND: [LandingPageModelFilter]
   id: ItemIdFilter
   introImage: FileFilter
+  OR: [LandingPageModelFilter]
   overskrift: StringFilter
   seo: SeoFilter
   slug: SlugFilter
@@ -2446,8 +2457,6 @@ enum MenuModelFieldsReferencingProductPageModel {
 }
 
 input MenuModelFilter {
-  AND: [MenuModelFilter]
-  OR: [MenuModelFilter]
   _createdAt: CreatedAtFilter
   _firstPublishedAt: PublishedAtFilter
   _isValid: BooleanFilter
@@ -2456,7 +2465,9 @@ input MenuModelFilter {
   _status: StatusFilter
   _unpublishingScheduledAt: PublishedAtFilter
   _updatedAt: UpdatedAtFilter
+  AND: [MenuModelFilter]
   id: ItemIdFilter
+  OR: [MenuModelFilter]
 }
 
 enum MenuModelOrderBy {
@@ -2525,8 +2536,6 @@ enum NewsPageModelFieldsReferencingProductPageModel {
 }
 
 input NewsPageModelFilter {
-  AND: [NewsPageModelFilter]
-  OR: [NewsPageModelFilter]
   _createdAt: CreatedAtFilter
   _firstPublishedAt: PublishedAtFilter
   _isValid: BooleanFilter
@@ -2535,8 +2544,10 @@ input NewsPageModelFilter {
   _status: StatusFilter
   _unpublishingScheduledAt: PublishedAtFilter
   _updatedAt: UpdatedAtFilter
+  AND: [NewsPageModelFilter]
   id: ItemIdFilter
   introImage: FileFilter
+  OR: [NewsPageModelFilter]
   overskrift: StringFilter
   parent: ParentFilter
   position: PositionFilter
@@ -2693,8 +2704,6 @@ enum ProductPageModelFieldsReferencingProductPageModel {
 }
 
 input ProductPageModelFilter {
-  AND: [ProductPageModelFilter]
-  OR: [ProductPageModelFilter]
   _createdAt: CreatedAtFilter
   _firstPublishedAt: PublishedAtFilter
   _isValid: BooleanFilter
@@ -2703,8 +2712,10 @@ input ProductPageModelFilter {
   _status: StatusFilter
   _unpublishingScheduledAt: PublishedAtFilter
   _updatedAt: UpdatedAtFilter
+  AND: [ProductPageModelFilter]
   id: ItemIdFilter
   introImage: GalleryFilter
+  OR: [ProductPageModelFilter]
   overskrift: StringFilter
   parent: ParentFilter
   position: PositionFilter
@@ -2751,7 +2762,7 @@ type ProductPageRecord implements RecordInterface {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [ForsideModelOrderBy] = [_updatedAt_DESC]
+    orderBy: [ForsideModelOrderBy] = []
 
     """Skip the first results"""
     skip: IntType
@@ -2782,7 +2793,7 @@ type ProductPageRecord implements RecordInterface {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [LandingPageModelOrderBy] = [_updatedAt_DESC]
+    orderBy: [LandingPageModelOrderBy] = []
 
     """Skip the first results"""
     skip: IntType
@@ -2813,7 +2824,7 @@ type ProductPageRecord implements RecordInterface {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [MenuModelOrderBy] = [_updatedAt_DESC]
+    orderBy: [MenuModelOrderBy] = []
 
     """Skip the first results"""
     skip: IntType
@@ -2844,7 +2855,7 @@ type ProductPageRecord implements RecordInterface {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [NewsPageModelOrderBy] = [position_ASC]
+    orderBy: [NewsPageModelOrderBy] = []
 
     """Skip the first results"""
     skip: IntType
@@ -2875,7 +2886,7 @@ type ProductPageRecord implements RecordInterface {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [ProductPageModelOrderBy] = [position_ASC]
+    orderBy: [ProductPageModelOrderBy] = []
 
     """Skip the first results"""
     skip: IntType
@@ -2926,7 +2937,8 @@ type ProductPageRecord implements RecordInterface {
 """Specifies how to filter by publication datetime"""
 input PublishedAtFilter {
   """
-  Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's within the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
   """
   eq: DateTime
 
@@ -2936,12 +2948,14 @@ input PublishedAtFilter {
   exists: BooleanType
 
   """
-  Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's strictly greater than the one specified.
+  Seconds and milliseconds are truncated from the argument.
   """
   gt: DateTime
 
   """
-  Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's greater than or equal to than the one
+  specified. Seconds and milliseconds are truncated from the argument.
   """
   gte: DateTime
 
@@ -2951,12 +2965,14 @@ input PublishedAtFilter {
   lt: DateTime
 
   """
-  Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's less or equal than the one specified.
+  Seconds and milliseconds are truncated from the argument.
   """
   lte: DateTime
 
   """
-  Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's outside the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
   """
   neq: DateTime
 }
@@ -3019,7 +3035,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [LandingPageModelOrderBy] = [_updatedAt_DESC]
+    orderBy: [LandingPageModelOrderBy] = []
 
     """Skip the first results"""
     skip: IntType
@@ -3038,7 +3054,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [NewsPageModelOrderBy] = [position_ASC]
+    orderBy: [NewsPageModelOrderBy] = []
 
     """Skip the first results"""
     skip: IntType
@@ -3057,7 +3073,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [ProductPageModelOrderBy] = [position_ASC]
+    orderBy: [ProductPageModelOrderBy] = []
 
     """Skip the first results"""
     skip: IntType
@@ -3076,7 +3092,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [UploadOrderBy] = [_createdAt_DESC]
+    orderBy: [UploadOrderBy] = []
 
     """Skip the first results"""
     skip: IntType
@@ -3125,7 +3141,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [LandingPageModelOrderBy] = [_updatedAt_DESC]
+    orderBy: [LandingPageModelOrderBy] = []
   ): LandingPageRecord
 
   """Returns the single instance record"""
@@ -3149,7 +3165,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [NewsPageModelOrderBy] = [position_ASC]
+    orderBy: [NewsPageModelOrderBy] = []
   ): NewsPageRecord
 
   """Returns a specific record"""
@@ -3162,7 +3178,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [ProductPageModelOrderBy] = [position_ASC]
+    orderBy: [ProductPageModelOrderBy] = []
   ): ProductPageRecord
 
   """Returns a specific asset"""
@@ -3175,7 +3191,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [UploadOrderBy] = [_createdAt_DESC]
+    orderBy: [UploadOrderBy] = []
   ): FileField
 }
 
@@ -3281,7 +3297,7 @@ type Site {
   favicon: FileField
   faviconMetaTags(
     """The variants to build"""
-    variants: [FaviconType] = [icon]
+    variants: [FaviconType] = []
   ): [Tag!]!
   globalSeo(
     """
@@ -3427,7 +3443,8 @@ input TypeFilter {
 """Specifies how to filter by update datetime"""
 input UpdatedAtFilter {
   """
-  Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's within the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
   """
   eq: DateTime
 
@@ -3437,12 +3454,14 @@ input UpdatedAtFilter {
   exists: BooleanType
 
   """
-  Filter records with a value that's strictly greater than the one specified. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's strictly greater than the one specified.
+  Seconds and milliseconds are truncated from the argument.
   """
   gt: DateTime
 
   """
-  Filter records with a value that's greater than or equal to than the one specified. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's greater than or equal to than the one
+  specified. Seconds and milliseconds are truncated from the argument.
   """
   gte: DateTime
 
@@ -3452,12 +3471,14 @@ input UpdatedAtFilter {
   lt: DateTime
 
   """
-  Filter records with a value that's less or equal than the one specified. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's less or equal than the one specified.
+  Seconds and milliseconds are truncated from the argument.
   """
   lte: DateTime
 
   """
-  Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument.
+  Filter records with a value that's outside the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
   """
   neq: DateTime
 }
@@ -3580,11 +3601,10 @@ input UploadFilenameFilter {
 }
 
 input UploadFilter {
-  AND: [UploadFilter]
-  OR: [UploadFilter]
   _createdAt: UploadCreatedAtFilter
   _updatedAt: UploadUpdatedAtFilter
   alt: UploadAltFilter
+  AND: [UploadFilter]
   author: UploadAuthorFilter
   basename: UploadBasenameFilter
   colors: UploadColorsFilter
@@ -3597,6 +3617,7 @@ input UploadFilter {
   md5: UploadMd5Filter
   mimeType: UploadMimeTypeFilter
   notes: UploadNotesFilter
+  OR: [UploadFilter]
   orientation: OrientationFilter
   resolution: ResolutionFilter
   size: UploadSizeFilter
@@ -3857,7 +3878,7 @@ type UploadVideoField {
     """
     The file extension of the requested image format. Either png, jpg or gif
     """
-    format: MuxThumbnailFormatType = jpg
+    format: MuxThumbnailFormatType
   ): String!
 }
 
@@ -3934,9 +3955,4 @@ type VideoScrollBlockRecord implements RecordInterface {
   _updatedAt: DateTime!
   id: ItemId!
   video: FileField
-}
-
-type focalPoint {
-  x: FloatType!
-  y: FloatType!
 }

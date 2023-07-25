@@ -11,6 +11,7 @@ export default defineNuxtConfig({
 		},
 		pageTransition: { name: "page", mode: "out-in" },
 	},
+	css: ["@/assets/styles/global.scss"],
 	experimental: { payloadExtraction: true },
 	nitro: {
 		compressPublicAssets: true,
