@@ -10,7 +10,9 @@ stagedFiles.forEach((file) => {
 		try {
 			execSync(`eslint --ext .js,.ts,.vue ${file}`);
 		} catch (error) {
-			process.exitCode = "Lint error";
+			// eslint-disable-next-line no-console
+			console.error(`Linting failed at ${file}`);
+			process.exitCode = 22;
 		}
 	}
 });

@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run lint-staged
+npm run lint-staged || (echo 'Pre-commit hook failed. Please check the linting errors.' && exit 22)
