@@ -1,1 +1,5 @@
-export default defineNuxtComponent({});
+export default defineNuxtComponent({
+	setup() {
+		console.log("test");
+	},
+});

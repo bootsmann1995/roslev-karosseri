@@ -20,7 +20,7 @@ module.exports = {
 	plugins: ["@typescript-eslint"],
 	rules: {
 		"@typescript-eslint/explicit-module-boundary-types": 0,
-		"no-console": 1,
+		"no-console": 2,
 		"no-debugger": 1,
 		"vue/multi-word-component-names": 0,
 		"@typescript-eslint/indent": ["error", "tab"],
