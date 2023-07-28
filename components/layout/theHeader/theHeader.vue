@@ -1,5 +1,5 @@
 <template>
-	<div class="fixed w-screen left-0 top-0">
+	<div class="fixed w-screen left-0 top-0 z-10">
 		<div class="container">
 			<header class="container-row">
 				<div class="col-span-8 lg:col-span-3 flex justify-start items-center">

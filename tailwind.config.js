@@ -6,6 +6,11 @@ module.exports = {
 		container: false,
 	},
 	theme: {
+		fontFamily: {
+			body: ["Quicksand", "sans-serif"],
+			display: ["Quicksand", "sans-serif"],
+			quicksand: ["Quicksand", "sans-serif"],
+		},
 		screens: {
 			sm: "375px",
 			md: "768px",
@@ -381,7 +386,7 @@ module.exports = {
 					display: "grid",
 					gridTemplateColumns: theme("gridTemplateColumns.4"),
 					columnGap: ".5rem",
-					"@media (min-width: 1024px)": {
+					"@media (min-width: 768px)": {
 						gridTemplateColumns: theme("gridTemplateColumns.16"),
 						columnGap: ".75rem",
 					},

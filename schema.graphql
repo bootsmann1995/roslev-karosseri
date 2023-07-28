@@ -459,6 +459,7 @@ input ForsideModelFilter {
   overskrift: StringFilter
   seo: SeoFilter
   slug: SlugFilter
+  text: StringFilter
 }
 
 enum ForsideModelOrderBy {
@@ -482,6 +483,8 @@ enum ForsideModelOrderBy {
   id_DESC
   overskrift_ASC
   overskrift_DESC
+  text_ASC
+  text_DESC
 }
 
 """Record of type Forside (forside)"""
@@ -511,6 +514,7 @@ type ForsideRecord implements RecordInterface {
   produkter: [ProductItemRecord!]!
   seo: SeoField
   slug: String
+  text: String
   usp: [UspItemRecord!]!
 }
 

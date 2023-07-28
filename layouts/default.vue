@@ -1,7 +1,7 @@
 <template>
-	<div class="bg-white min-h-screen">
+	<div class="bg-white min-h-screen font-quicksand">
 		<LayoutTheHeader />
-		<main class="pt-[56px]">
+		<main class="pt-[74px]">
 			<NuxtPage />
 		</main>
 	</div>
