@@ -5,7 +5,7 @@ const { execSync } = require("child_process");
 
 const stagedFiles = execSync("git diff --cached --name-only", { encoding: "utf-8" }).split("\n");
 const extensions = ["js", "vue", "ts"];
-const ignoredFiles = ["generated-types/index"];
+const ignoredFiles = ["generated-types/index", ".json"];
 
 const checkForAllowedFiles = (file) => {
 	let lintFile = false;
@@ -31,8 +31,8 @@ stagedFiles.forEach((file, i) => {
 	if (file.trim().length > 0) {
 		// eslint-disable-next-line no-console
 		console.log("linting: ", file, ` - ${i + 1}/${stagedFiles.length}`);
-		let lintFile = checkForAllowedFiles();
-		let ignoreFile = checkForIgnoredFile();
+		let lintFile = checkForAllowedFiles(file);
+		let ignoreFile = checkForIgnoredFile(file);
 
 		if (lintFile && !ignoreFile) {
 			try {
