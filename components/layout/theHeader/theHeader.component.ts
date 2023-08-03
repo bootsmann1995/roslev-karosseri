@@ -11,6 +11,13 @@ export default defineNuxtComponent({
 
 		const { data } = await useFetch<HeaderMenu>("/api/header");
 
+		const menu = computed(() => {
+			return {
+				mainMenu: data?.value?.mainMenu,
+				productMenu: data?.value?.productMenu,
+			};
+		});
+
 		const openMenu = () => {
 			menuIsOpen.value = !menuIsOpen.value;
 		};
@@ -26,6 +33,7 @@ export default defineNuxtComponent({
 			openMenu,
 			menuIsOpen,
 			data,
+			menu,
 		};
 	},
 });

@@ -1,11 +1,11 @@
 <template>
 	<div class="fixed w-screen left-0 top-0 z-10">
-		<div class="px-5">
+		<div class="px-5 relative z-50">
 			<header
 				class="relative flex justify-between items-center header-comp mt-2 p-3"
 				:class="{ 'is-scrolled': headerIsScrolledBy && !menuIsOpen }"
 			>
-				<div>
+				<div class="">
 					<button
 						type="button"
 						class="flex items-center justify-center group burger-wrap"
@@ -32,11 +32,15 @@
 					<IconCSS
 						name="majesticons:search-line"
 						class="transition-all ease-locomotive-ease-2 duration-[350ms]"
-						:class="[{ '!bg-night-black-500': headerIsScrolledBy }, { '!bg-white': !headerIsScrolledBy }]"
+						:class="[
+							{ '!bg-night-black-500': headerIsScrolledBy || menuIsOpen },
+							{ '!bg-white': !headerIsScrolledBy && !menuIsOpen },
+						]"
 					/>
 				</div>
 			</header>
 		</div>
+		<LayoutTheHeaderMenu :data="menu" :is-active="menuIsOpen" />
 	</div>
 </template>
 <script lang="ts" src="./theHeader.component" />

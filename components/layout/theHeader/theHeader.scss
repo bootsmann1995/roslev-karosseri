@@ -83,7 +83,7 @@
 	span {
 		@apply block w-6 h-[2px] bg-white rounded-full;
 		transition:
-			opacity cubic-bezier(0.65, 0.05, 0.36, 1) 0.4s 0s,
+			opacity cubic-bezier(0.65, 0.05, 0.36, 1) 300ms 0ms,
 			transform cubic-bezier(0.65, 0.05, 0.36, 1) 0.5s 300ms;
 
 		&:nth-child(1) {
@@ -118,11 +118,14 @@
 
 		span {
 			@apply delay-0 bg-white;
+			transition:
+				opacity cubic-bezier(0.65, 0.05, 0.36, 1) 300ms 300ms,
+				transform cubic-bezier(0.65, 0.05, 0.36, 1) 0.5s 00ms;
 			&:nth-child(1) {
-				@apply transform origin-left -translate-x-8 duration-[350];
+				@apply transform origin-left -translate-x-8;
 			}
 			&:nth-child(2) {
-				@apply mt-[5px] transform origin-center translate-x-8 duration-[350] ease-locomotive-ease;
+				@apply mt-[5px] transform origin-center translate-x-8;
 			}
 		}
 	}
