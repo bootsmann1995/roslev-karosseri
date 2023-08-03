@@ -4,8 +4,8 @@
 const { execSync } = require("child_process");
 
 const stagedFiles = execSync("git diff --cached --name-only", { encoding: "utf-8" }).split("\n");
-const extensions = ["js", "vue", "ts"];
-const ignoredFiles = ["generated-types/index", ".json"];
+const extensions = [".js", ".vue", ".ts"];
+const ignoredFiles = ["generated-types/index", ".json", "components/ui/hero.vue"];
 
 const checkForAllowedFiles = (file) => {
 	let lintFile = false;

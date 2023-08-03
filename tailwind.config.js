@@ -324,8 +324,11 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				white: "#f5f5f5",
+				white: "#F7F7FF",
 				black: "#000000",
+				"night-black": {
+					500: "#131112",
+				},
 				success: {
 					50: "#E9F6F2",
 					500: "#21a179",
@@ -340,6 +343,12 @@ module.exports = {
 					100: "#FDF0DA",
 					500: "#F4B446",
 					800: "#62481C",
+				},
+				gray: {
+					500: "#60656F",
+				},
+				brown: {
+					500: "#C49991",
 				},
 				blue: {
 					500: "#eff3f6",
@@ -371,6 +380,8 @@ module.exports = {
 			},
 			transitionTimingFunction: {
 				"lait-ease": "cubic-bezier(0.785, 0.135, 0.15, 0.86);",
+				"locomotive-ease": "cubic-bezier(0.65, 0.05, 0.36, 1);",
+				"locomotive-ease-2": "cubic-bezier(0.4, 0.15, 0, 1);",
 			},
 			aspectRatio: {
 				"4/3": "4 / 3",

@@ -2,30 +2,12 @@
 export default defineNuxtConfig({
 	devtools: { enabled: false },
 	sourcemap: false,
-	modules: ["@nuxtjs/tailwindcss", "nuxt-icons", "~/modules/robots", "@nuxt/image"],
-	app: {
-		head: {
-			htmlAttrs: {
-				lang: "en",
-			},
-			link: [
-				{
-					rel: "preconnect",
-					href: "https://fonts.googleapis.com",
-					crossorigin: "anonymous",
-				},
-				{
-					rel: "preconnect",
-					href: "https://fonts.gstatic.com",
-					crossorigin: "anonymous",
-				},
-				{
-					rel: "stylesheet",
-					href: "https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap",
-				},
-			],
+	modules: ["@nuxtjs/tailwindcss", "nuxt-icons", "~/modules/robots", "@nuxt/image", "nuxt-icon"],
+	runtimeConfig: {
+		public: {
+			GQL_TOKEN: process.env.GQL_TOKEN,
+			GQL_HOST: process.env.GQL_HOST,
 		},
-		pageTransition: { name: "page", mode: "out-in" },
 	},
 	css: ["@/assets/styles/global.scss"],
 	image: {
@@ -36,10 +18,11 @@ export default defineNuxtConfig({
 	experimental: { payloadExtraction: true },
 	nitro: {
 		compressPublicAssets: true,
-		routeRules: {
-			// "/*": { swr: true },
-			// '/old-page': { redirect: '/new-page' },
-		},
+		routeRules: {},
+	},
+	delayHydration: {
+		// enables nuxt-delay-hydration in dev mode for testing
+		debug: process.env.NODE_ENV === "development" ? false : "mount",
 	},
 	typescript: {
 		strict: true,

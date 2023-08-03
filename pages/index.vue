@@ -1,8 +1,6 @@
 <template>
-	<div class="container">
-		<div class="container-row">
-			<UiHero v-if="data" :data="data" />
-		</div>
+	<div>
+		<UiHero v-if="hero" :data="hero" />
 	</div>
 </template>
 <script lang="ts" src="./index.page"></script>
