@@ -1,41 +1,47 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	devtools: { enabled: true },
+	devtools: { enabled: false },
 	sourcemap: false,
-	modules: ["@nuxtjs/tailwindcss", "nuxt-security", "nuxt-icons", "~/modules/robots"],
-	app: {
-		head: {
-			htmlAttrs: {
-				lang: "en",
-			},
+	modules: ["@nuxtjs/tailwindcss", "nuxt-icons", "~/modules/robots", "@nuxt/image", "nuxt-icon"],
+	runtimeConfig: {
+		public: {
+			GQL_TOKEN: process.env.GQL_TOKEN,
+			GQL_HOST: process.env.GQL_HOST,
 		},
-		pageTransition: { name: "page", mode: "out-in" },
 	},
-	security: {
-		headers: {
-			contentSecurityPolicy: {
-				"base-uri": ["'self'"],
-				"font-src": ["'self'", "https:", "data:"],
-				"form-action": ["'self'"],
-				"frame-ancestors": ["'self'"],
-				"img-src": ["'self'", "data:"],
-				"object-src": ["'none'"],
-				"script-src-attr": ["'none'"],
-				"style-src": ["'self'", "https:", "'unsafe-inline'"],
-				"upgrade-insecure-requests": true,
-			},
+	css: ["@/assets/styles/global.scss"],
+	image: {
+		imgix: {
+			baseURL: "",
 		},
 	},
 	experimental: { payloadExtraction: true },
 	nitro: {
 		compressPublicAssets: true,
-		routeRules: {
-			"/*": { swr: true },
-		},
+		routeRules: {},
+	},
+	delayHydration: {
+		// enables nuxt-delay-hydration in dev mode for testing
+		debug: process.env.NODE_ENV === "development" ? false : "mount",
 	},
 	typescript: {
 		strict: true,
 	},
+	// security: {
+	// 	headers: {
+	// 		contentSecurityPolicy: {
+	// 			"base-uri": ["'self'"],
+	// 			"font-src": ["'self'", "https:", "data:"],
+	// 			"form-action": ["'self'"],
+	// 			"frame-ancestors": ["'self'"],
+	// 			"img-src": ["'self'", "data:"],
+	// 			"object-src": ["'none'"],
+	// 			"script-src-attr": ["'none'"],
+	// 			"style-src": ["'self'", "https:", "'unsafe-inline'"],
+	// 			"upgrade-insecure-requests": true,
+	// 		},
+	// 	},
+	// },
 	laitRobots: {
 		allowRobots: process.env.ROBOTS ?? "false",
 		userAgent: "*",

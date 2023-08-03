@@ -1,0 +1,17 @@
+fragment FiftyFiftyFragment on FiftyBlockRecord {
+	id
+	headline
+	_modelApiKey
+	link {
+		...LinkFragment
+	}
+	text {
+		links {
+			...LinkFragment
+		}
+		value
+	}
+	image {
+		...ImageFragment
+	}
+}

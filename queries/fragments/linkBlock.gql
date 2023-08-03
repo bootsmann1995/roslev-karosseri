@@ -1,0 +1,7 @@
+fragment LinkBlockFragment on LinkBlockRecord {
+	_modelApiKey
+	id
+	link {
+		...LinkFragment
+	}
+}

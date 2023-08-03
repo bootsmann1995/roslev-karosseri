@@ -1,7 +1,6 @@
 <template>
-	<div>test</div>
+	<div>
+		<UiHero v-if="hero" :data="hero" />
+	</div>
 </template>
-
-<script setup></script>
-
-<style lang="scss"></style>
+<script lang="ts" src="./index.page"></script>

@@ -1,0 +1,76 @@
+@tailwind utilities;
+$counter: 0.1;
+$counter2: 0.3;
+
+.navigation-menu {
+	@apply ease-locomotive-ease duration-[650ms] transition-[background-color,clip-path];
+	.navigation-link {
+		transition: all 0.8s cubic-bezier(0.65, 0.05, 0.36, 1);
+		transition-delay: 0;
+		opacity: 0;
+		position: relative;
+		transform: translateX(-40px);
+	}
+
+	clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+	&.is-open {
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+
+		.navigation-link {
+			opacity: 1;
+			transform: translateX(0px);
+		}
+
+		@for $i from 1 through 20 {
+			$counter: $counter + 0.03;
+
+			.navigation-link {
+				&:nth-child(#{$i}) {
+					transition-delay: $counter + s;
+				}
+			}
+		}
+	}
+
+	.social-link {
+		transition: all 400ms cubic-bezier(0.65, 0.05, 0.36, 1);
+		transition-delay: 0;
+		opacity: 0;
+		position: relative;
+		transform: translateY(40px);
+	}
+
+	clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+	&.is-open {
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+
+		.social-link {
+			opacity: 1;
+			transition: all 1s cubic-bezier(0.65, 0.05, 0.36, 1);
+			transform: translateY(0px);
+
+			&:nth-child(1) {
+				transition-delay: 0.3s;
+			}
+
+			&:nth-child(2) {
+				transition-delay: 0.35s;
+			}
+
+			&:nth-child(3) {
+				transition-delay: 0.4s;
+			}
+
+			&:nth-child(4) {
+				transition-delay: 0.45s;
+			}
+		}
+	}
+}
+
+@keyframes fadeInTranslation {
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}

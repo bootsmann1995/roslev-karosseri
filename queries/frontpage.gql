@@ -1,5 +1,26 @@
 query Frontpage {
 	forside {
+		image {
+			url
+		}
 		overskrift
+		text
+		slug
+		seo {
+			description
+			title
+			twitterCard
+			image {
+				url
+			}
+		}
+		citater {
+			qouteText
+			id
+		}
+		usp {
+			text
+			id
+		}
 	}
 }

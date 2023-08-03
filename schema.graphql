@@ -1,3 +1,9 @@
+"""Specifies how to filter Boolean fields"""
+input BooleanFilter {
+  """Search for records with an exact match"""
+  eq: BooleanType
+}
+
 """Represents `true` or `false` values."""
 scalar BooleanType
 
@@ -29,6 +35,131 @@ type ColorField {
   red: IntType!
 }
 
+"""Record of type Virksomheds info (company)"""
+type CompanyRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  address: String
+  companyNumber: String
+  email: String
+  id: ItemId!
+  phone: String
+}
+
+"""Record of type Kontakt (contact_page)"""
+type ContactPageRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  contactPersons: [ContactPersonRecord!]!
+  googleMapsLink: String
+  headline: String
+  id: ItemId!
+  seo: SeoField
+  slug: String
+}
+
+"""Block of type Kontakt person (contact_person)"""
+type ContactPersonRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  avatar: FileField
+  id: ItemId!
+  jobArea: String
+  jobTitle: String
+  name: String
+}
+
+"""Specifies how to filter by creation datetime"""
+input CreatedAtFilter {
+  """
+  Filter records with a value that's within the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
+  """
+  eq: DateTime
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+
+  """
+  Filter records with a value that's strictly greater than the one specified.
+  Seconds and milliseconds are truncated from the argument.
+  """
+  gt: DateTime
+
+  """
+  Filter records with a value that's greater than or equal to than the one
+  specified. Seconds and milliseconds are truncated from the argument.
+  """
+  gte: DateTime
+
+  """
+  Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument.
+  """
+  lt: DateTime
+
+  """
+  Filter records with a value that's less or equal than the one specified.
+  Seconds and milliseconds are truncated from the argument.
+  """
+  lte: DateTime
+
+  """
+  Filter records with a value that's outside the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
+  """
+  neq: DateTime
+}
+
 scalar CustomData
 
 """A ISO 8601 compliant datetime value"""
@@ -38,6 +169,43 @@ enum FaviconType {
   appleTouchIcon
   icon
   msApplication
+}
+
+union FiftyBlockModelLinkField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord
+
+type FiftyBlockModelTextField {
+  blocks: [String!]!
+  links: [FiftyBlockModelTextLinksField!]!
+  value: JsonField!
+}
+
+union FiftyBlockModelTextLinksField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord
+
+"""Block of type 50/50 (fifty_block)"""
+type FiftyBlockRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  headline: String
+  id: ItemId!
+  image: FileField
+  link: FiftyBlockModelLinkField
+  text: FiftyBlockModelTextField
 }
 
 type FileField implements FileFieldInterface {
@@ -57,6 +225,7 @@ type FileField implements FileFieldInterface {
   ): String
   author: String
   basename: String!
+  blurhash: String
   blurUpThumb(
     """Imgix transformations to apply to the image"""
     imgixParams: ImgixParams
@@ -72,7 +241,6 @@ type FileField implements FileFieldInterface {
     """Maximum image dimension (defaults to 24px)"""
     size: Int! = 24
   ): String
-  blurhash: String
   colors: [ColorField!]!
   copyright: String
   customData(
@@ -154,6 +322,7 @@ interface FileFieldInterface {
   ): String
   author: String
   basename: String!
+  blurhash: String
   blurUpThumb(
     """Imgix transformations to apply to the image"""
     imgixParams: ImgixParams
@@ -169,7 +338,6 @@ interface FileFieldInterface {
     """Maximum image dimension (defaults to 24px)"""
     size: Int! = 24
   ): String
-  blurhash: String
   colors: [ColorField!]!
   copyright: String
   customData(
@@ -234,10 +402,90 @@ interface FileFieldInterface {
   width: IntType
 }
 
+"""Specifies how to filter Single-file/image fields"""
+input FileFilter {
+  """
+  Search for records with an exact match. The specified value must be an Upload ID
+  """
+  eq: UploadId
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+
+  """Filter records that have one of the specified uploads"""
+  in: [UploadId]
+
+  """
+  Exclude records with an exact match. The specified value must be an Upload ID
+  """
+  neq: UploadId
+
+  """Filter records that do not have one of the specified uploads"""
+  notIn: [UploadId]
+}
+
 """
-Represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point).
+Represents signed double-precision fractional values as specified by [IEEE
+754](http://en.wikipedia.org/wiki/IEEE_floating_point).
 """
 scalar FloatType
+
+type focalPoint {
+  x: FloatType!
+  y: FloatType!
+}
+
+"""Linking fields"""
+enum ForsideModelFieldsReferencingProductPageModel {
+  forside_produkter
+  forside_produkter__productItem_text
+}
+
+input ForsideModelFilter {
+  _createdAt: CreatedAtFilter
+  _firstPublishedAt: PublishedAtFilter
+  _isValid: BooleanFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _updatedAt: UpdatedAtFilter
+  AND: [ForsideModelFilter]
+  id: ItemIdFilter
+  image: FileFilter
+  OR: [ForsideModelFilter]
+  overskrift: StringFilter
+  seo: SeoFilter
+  slug: SlugFilter
+  text: StringFilter
+}
+
+enum ForsideModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  id_ASC
+  id_DESC
+  overskrift_ASC
+  overskrift_DESC
+  text_ASC
+  text_DESC
+}
 
 """Record of type Forside (forside)"""
 type ForsideRecord implements RecordInterface {
@@ -259,8 +507,67 @@ type ForsideRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  citater: [QuoteItemRecord!]!
   id: ItemId!
+  image: FileField
   overskrift: String
+  produkter: [ProductItemRecord!]!
+  seo: SeoField
+  slug: String
+  text: String
+  usp: [UspItemRecord!]!
+}
+
+"""Block of type Galleri (gallery_block)"""
+type GalleryBlockRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  images: [FileField!]!
+}
+
+"""Specifies how to filter Multiple files/images field"""
+input GalleryFilter {
+  """
+  Filter records that have all of the specified uploads. The specified values must be Upload IDs
+  """
+  allIn: [UploadId]
+
+  """
+  Filter records that have one of the specified uploads. The specified values must be Upload IDs
+  """
+  anyIn: [UploadId]
+
+  """
+  Search for records with an exact match. The specified values must be Upload IDs
+  """
+  eq: [UploadId]
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+
+  """
+  Filter records that do not have any of the specified uploads. The specified values must be Upload IDs
+  """
+  notIn: [UploadId]
 }
 
 type GlobalSeoField {
@@ -269,6 +576,30 @@ type GlobalSeoField {
   siteName: String
   titleSuffix: String
   twitterAccount: String
+}
+
+"""Block of type Billede (image_block)"""
+type ImageBlockRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  image: FileField
 }
 
 input ImgixParams {
@@ -779,6 +1110,13 @@ input ImgixParams {
   fpDebug: BooleanType
 
   """
+  Frames Per Second
+  
+  Specifies the framerate of the generated image.
+  """
+  fps: IntType
+
+  """
   Focal Point X Position
   
   Sets the relative horizontal value for the focal point of an image
@@ -810,13 +1148,6 @@ input ImgixParams {
   [Open Imgix reference »](https://docs.imgix.com/apis/url/focalpoint-crop/fp-z)
   """
   fpZ: FloatType
-
-  """
-  Frames Per Second
-  
-  Specifies the framerate of the generated image.
-  """
-  fps: IntType
 
   """
   Frame Selection
@@ -1756,8 +2087,8 @@ enum ImgixParamsFm {
   mp4
   pjpg
   png
-  png8
   png32
+  png8
   webm
   webp
 }
@@ -1822,23 +2153,371 @@ enum ImgixParamsTxtFit {
   max
 }
 
+"""
+Represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+"""
+scalar IntType
+
 """Specifies how to filter by usage"""
 input InUseFilter {
   """Search uploads that are currently used by some record or not"""
   eq: BooleanType
 }
 
-"""
-Represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-"""
-scalar IntType
+"""Specifies how to filter by linking fields"""
+input InverseRelationshipFieldFilterBetweenForsideAndProductPage {
+  """
+  Filter linking records that reference current record in at least one of the specified fields
+  """
+  anyIn: [ForsideModelFieldsReferencingProductPageModel!]
+
+  """
+  Filter linking records that do not reference current record in any of the specified fields
+  """
+  notIn: [ForsideModelFieldsReferencingProductPageModel!]
+}
+
+"""Specifies how to filter by linking fields"""
+input InverseRelationshipFieldFilterBetweenLandingPageAndProductPage {
+  """
+  Filter linking records that reference current record in at least one of the specified fields
+  """
+  anyIn: [LandingPageModelFieldsReferencingProductPageModel!]
+
+  """
+  Filter linking records that do not reference current record in any of the specified fields
+  """
+  notIn: [LandingPageModelFieldsReferencingProductPageModel!]
+}
+
+"""Specifies how to filter by linking fields"""
+input InverseRelationshipFieldFilterBetweenMenuAndProductPage {
+  """
+  Filter linking records that reference current record in at least one of the specified fields
+  """
+  anyIn: [MenuModelFieldsReferencingProductPageModel!]
+
+  """
+  Filter linking records that do not reference current record in any of the specified fields
+  """
+  notIn: [MenuModelFieldsReferencingProductPageModel!]
+}
+
+"""Specifies how to filter by linking fields"""
+input InverseRelationshipFieldFilterBetweenNewsPageAndProductPage {
+  """
+  Filter linking records that reference current record in at least one of the specified fields
+  """
+  anyIn: [NewsPageModelFieldsReferencingProductPageModel!]
+
+  """
+  Filter linking records that do not reference current record in any of the specified fields
+  """
+  notIn: [NewsPageModelFieldsReferencingProductPageModel!]
+}
+
+"""Specifies how to filter by linking fields"""
+input InverseRelationshipFieldFilterBetweenProductPageAndProductPage {
+  """
+  Filter linking records that reference current record in at least one of the specified fields
+  """
+  anyIn: [ProductPageModelFieldsReferencingProductPageModel!]
+
+  """
+  Filter linking records that do not reference current record in any of the specified fields
+  """
+  notIn: [ProductPageModelFieldsReferencingProductPageModel!]
+}
+
+"""Specifies how to filter linking records"""
+input InverseRelationshipFilterBetweenForsideAndProductPage {
+  """Specifies how to filter by linking fields"""
+  fields: InverseRelationshipFieldFilterBetweenForsideAndProductPage
+
+  """Specifies how to filter by linking locales"""
+  locales: LinkingLocalesFilter
+}
+
+"""Specifies how to filter linking records"""
+input InverseRelationshipFilterBetweenLandingPageAndProductPage {
+  """Specifies how to filter by linking fields"""
+  fields: InverseRelationshipFieldFilterBetweenLandingPageAndProductPage
+
+  """Specifies how to filter by linking locales"""
+  locales: LinkingLocalesFilter
+}
+
+"""Specifies how to filter linking records"""
+input InverseRelationshipFilterBetweenMenuAndProductPage {
+  """Specifies how to filter by linking fields"""
+  fields: InverseRelationshipFieldFilterBetweenMenuAndProductPage
+
+  """Specifies how to filter by linking locales"""
+  locales: LinkingLocalesFilter
+}
+
+"""Specifies how to filter linking records"""
+input InverseRelationshipFilterBetweenNewsPageAndProductPage {
+  """Specifies how to filter by linking fields"""
+  fields: InverseRelationshipFieldFilterBetweenNewsPageAndProductPage
+
+  """Specifies how to filter by linking locales"""
+  locales: LinkingLocalesFilter
+}
+
+"""Specifies how to filter linking records"""
+input InverseRelationshipFilterBetweenProductPageAndProductPage {
+  """Specifies how to filter by linking fields"""
+  fields: InverseRelationshipFieldFilterBetweenProductPageAndProductPage
+
+  """Specifies how to filter by linking locales"""
+  locales: LinkingLocalesFilter
+}
 
 scalar ItemId
+
+"""Specifies how to filter by ID"""
+input ItemIdFilter {
+  """Search the record with the specified ID"""
+  eq: ItemId
+
+  """Search records with the specified IDs"""
+  in: [ItemId]
+
+  """Exclude the record with the specified ID"""
+  neq: ItemId
+
+  """Search records that do not have the specified IDs"""
+  notIn: [ItemId]
+}
 
 enum ItemStatus {
   draft
   published
   updated
+}
+
+scalar JsonField
+
+union LandingPageModelBlokListeField = FiftyBlockRecord | GalleryBlockRecord | ImageBlockRecord | LinkBlockRecord | TextBlockRecord
+
+"""Linking fields"""
+enum LandingPageModelFieldsReferencingProductPageModel {
+  landingPage_blokListe
+  landingPage_blokListe__fiftyBlock_link
+  landingPage_blokListe__fiftyBlock_text
+  landingPage_blokListe__linkBlock_link
+  landingPage_blokListe__textBlock_text
+}
+
+input LandingPageModelFilter {
+  _createdAt: CreatedAtFilter
+  _firstPublishedAt: PublishedAtFilter
+  _isValid: BooleanFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _updatedAt: UpdatedAtFilter
+  AND: [LandingPageModelFilter]
+  id: ItemIdFilter
+  introImage: FileFilter
+  OR: [LandingPageModelFilter]
+  overskrift: StringFilter
+  seo: SeoFilter
+  slug: SlugFilter
+}
+
+enum LandingPageModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  id_ASC
+  id_DESC
+  overskrift_ASC
+  overskrift_DESC
+}
+
+"""Record of type Landingsside (landing_page)"""
+type LandingPageRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  blokListe: [LandingPageModelBlokListeField!]!
+  id: ItemId!
+  introImage: FileField
+  overskrift: String
+  seo: SeoField
+  slug: String
+}
+
+union LinkBlockModelLinkField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord
+
+"""Block of type link (link_block)"""
+type LinkBlockRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  link: LinkBlockModelLinkField
+}
+
+"""Linking locales"""
+enum LinkingLocale {
+  _nonLocalized
+  da_DK
+}
+
+"""Specifies how to filter by linking locales"""
+input LinkingLocalesFilter {
+  """
+  Filter linking records that link to current record in at least one of the specified locales
+  """
+  anyIn: [LinkingLocale!]
+
+  """
+  Filter linking records that do not link to current record in any of the specified locales
+  """
+  notIn: [LinkingLocale!]
+}
+
+union MenuItemModelMenuLinkField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord
+
+"""Block of type menu_item (menu_item)"""
+type MenuItemRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  childMenuLinks: [LinkBlockRecord!]!
+  id: ItemId!
+  menuLink: MenuItemModelMenuLinkField
+}
+
+"""Linking fields"""
+enum MenuModelFieldsReferencingProductPageModel {
+  menu_mainMenu
+  menu_mainMenu__linkBlock_link
+  menu_productMenu
+  menu_productMenu__menuItem_childMenuLinks__linkBlock_link
+  menu_productMenu__menuItem_menuLink
+}
+
+input MenuModelFilter {
+  _createdAt: CreatedAtFilter
+  _firstPublishedAt: PublishedAtFilter
+  _isValid: BooleanFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _updatedAt: UpdatedAtFilter
+  AND: [MenuModelFilter]
+  id: ItemIdFilter
+  OR: [MenuModelFilter]
+}
+
+enum MenuModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  id_ASC
+  id_DESC
+}
+
+"""Record of type Menu (menu)"""
+type MenuRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  mainMenu: [LinkBlockRecord!]!
+  productMenu: [MenuItemRecord!]!
 }
 
 scalar MetaTagAttributes
@@ -1847,6 +2526,93 @@ enum MuxThumbnailFormatType {
   gif
   jpg
   png
+}
+
+union NewsPageModelBlokListeField = FiftyBlockRecord | GalleryBlockRecord | ImageBlockRecord | LinkBlockRecord | TextBlockRecord
+
+"""Linking fields"""
+enum NewsPageModelFieldsReferencingProductPageModel {
+  newsPage_blokListe
+  newsPage_blokListe__fiftyBlock_link
+  newsPage_blokListe__fiftyBlock_text
+  newsPage_blokListe__linkBlock_link
+  newsPage_blokListe__textBlock_text
+}
+
+input NewsPageModelFilter {
+  _createdAt: CreatedAtFilter
+  _firstPublishedAt: PublishedAtFilter
+  _isValid: BooleanFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _updatedAt: UpdatedAtFilter
+  AND: [NewsPageModelFilter]
+  id: ItemIdFilter
+  introImage: FileFilter
+  OR: [NewsPageModelFilter]
+  overskrift: StringFilter
+  parent: ParentFilter
+  position: PositionFilter
+  seo: SeoFilter
+  slug: SlugFilter
+}
+
+enum NewsPageModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  id_ASC
+  id_DESC
+  overskrift_ASC
+  overskrift_DESC
+  position_ASC
+  position_DESC
+}
+
+"""Record of type Nyhed (news_page)"""
+type NewsPageRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  blokListe: [NewsPageModelBlokListeField!]!
+  children: [NewsPageRecord]
+  id: ItemId!
+  introImage: FileField
+  overskrift: String
+  parent: NewsPageRecord
+  position: IntType
+  seo: SeoField
+  slug: String
 }
 
 """Specifies how to filter by image orientation"""
@@ -1858,8 +2624,389 @@ input OrientationFilter {
   neq: UploadOrientation
 }
 
+"""Specifies how to filter by parent (tree-like collections only)"""
+input ParentFilter {
+  """
+  Filter records children of the specified record. Value must be a Record ID
+  """
+  eq: ItemId
+
+  """Filter records with a parent record or not"""
+  exists: BooleanType
+}
+
+"""Specifies how to filter by position (sorted and tree-like collections)"""
+input PositionFilter {
+  """Search for records with an exact match"""
+  eq: IntType
+
+  """
+  Filter records with a value that's strictly greater than the one specified
+  """
+  gt: IntType
+
+  """
+  Filter records with a value that's greater than or equal to the one specified
+  """
+  gte: IntType
+
+  """Filter records with a value that's less than the one specified"""
+  lt: IntType
+
+  """
+  Filter records with a value that's less or equal than the one specified
+  """
+  lte: IntType
+
+  """Exclude records with an exact match"""
+  neq: IntType
+}
+
+type ProductItemModelTextField {
+  blocks: [String!]!
+  links: [ProductItemModelTextLinksField!]!
+  value: JsonField!
+}
+
+union ProductItemModelTextLinksField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord
+
+"""Block of type Produkt (product_item)"""
+type ProductItemRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  headline: String
+  icon: FileField
+  id: ItemId!
+  text: ProductItemModelTextField
+}
+
+union ProductPageModelBlokListeField = FiftyBlockRecord | GalleryBlockRecord | ImageBlockRecord | LinkBlockRecord | TextBlockRecord
+
+"""Linking fields"""
+enum ProductPageModelFieldsReferencingProductPageModel {
+  productPage_blokListe
+  productPage_blokListe__fiftyBlock_link
+  productPage_blokListe__fiftyBlock_text
+  productPage_blokListe__linkBlock_link
+  productPage_blokListe__textBlock_text
+}
+
+input ProductPageModelFilter {
+  _createdAt: CreatedAtFilter
+  _firstPublishedAt: PublishedAtFilter
+  _isValid: BooleanFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _updatedAt: UpdatedAtFilter
+  AND: [ProductPageModelFilter]
+  id: ItemIdFilter
+  introImage: GalleryFilter
+  OR: [ProductPageModelFilter]
+  overskrift: StringFilter
+  parent: ParentFilter
+  position: PositionFilter
+  seo: SeoFilter
+  slug: SlugFilter
+}
+
+enum ProductPageModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  id_ASC
+  id_DESC
+  overskrift_ASC
+  overskrift_DESC
+  position_ASC
+  position_DESC
+}
+
+"""Record of type Artikel (product_page)"""
+type ProductPageRecord implements RecordInterface {
+  _allReferencingForsides(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: ForsideModelFilter
+
+    """Limit the number of results"""
+    first: IntType = 20
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [ForsideModelOrderBy] = []
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Specifies how to filter linking records"""
+    through: InverseRelationshipFilterBetweenForsideAndProductPage
+  ): [ForsideRecord!]!
+
+  """Returns meta information regarding a record collection"""
+  _allReferencingForsidesMeta(
+    filter: ForsideModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Specifies how to filter linking records"""
+    through: InverseRelationshipFilterBetweenForsideAndProductPage
+  ): CollectionMetadata!
+  _allReferencingLandingPages(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: LandingPageModelFilter
+
+    """Limit the number of results"""
+    first: IntType = 20
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [LandingPageModelOrderBy] = []
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Specifies how to filter linking records"""
+    through: InverseRelationshipFilterBetweenLandingPageAndProductPage
+  ): [LandingPageRecord!]!
+
+  """Returns meta information regarding a record collection"""
+  _allReferencingLandingPagesMeta(
+    filter: LandingPageModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Specifies how to filter linking records"""
+    through: InverseRelationshipFilterBetweenLandingPageAndProductPage
+  ): CollectionMetadata!
+  _allReferencingMenus(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: MenuModelFilter
+
+    """Limit the number of results"""
+    first: IntType = 20
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [MenuModelOrderBy] = []
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Specifies how to filter linking records"""
+    through: InverseRelationshipFilterBetweenMenuAndProductPage
+  ): [MenuRecord!]!
+
+  """Returns meta information regarding a record collection"""
+  _allReferencingMenusMeta(
+    filter: MenuModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Specifies how to filter linking records"""
+    through: InverseRelationshipFilterBetweenMenuAndProductPage
+  ): CollectionMetadata!
+  _allReferencingNewsPages(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: NewsPageModelFilter
+
+    """Limit the number of results"""
+    first: IntType = 20
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [NewsPageModelOrderBy] = []
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Specifies how to filter linking records"""
+    through: InverseRelationshipFilterBetweenNewsPageAndProductPage
+  ): [NewsPageRecord!]!
+
+  """Returns meta information regarding a record collection"""
+  _allReferencingNewsPagesMeta(
+    filter: NewsPageModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Specifies how to filter linking records"""
+    through: InverseRelationshipFilterBetweenNewsPageAndProductPage
+  ): CollectionMetadata!
+  _allReferencingProductPages(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: ProductPageModelFilter
+
+    """Limit the number of results"""
+    first: IntType = 20
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [ProductPageModelOrderBy] = []
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Specifies how to filter linking records"""
+    through: InverseRelationshipFilterBetweenProductPageAndProductPage
+  ): [ProductPageRecord!]!
+
+  """Returns meta information regarding a record collection"""
+  _allReferencingProductPagesMeta(
+    filter: ProductPageModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Specifies how to filter linking records"""
+    through: InverseRelationshipFilterBetweenProductPageAndProductPage
+  ): CollectionMetadata!
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  blokListe: [ProductPageModelBlokListeField!]!
+  children: [ProductPageRecord]
+  id: ItemId!
+  introImage: [FileField!]!
+  overskrift: String
+  parent: ProductPageRecord
+  position: IntType
+  seo: SeoField
+  slug: String
+}
+
+"""Specifies how to filter by publication datetime"""
+input PublishedAtFilter {
+  """
+  Filter records with a value that's within the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
+  """
+  eq: DateTime
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+
+  """
+  Filter records with a value that's strictly greater than the one specified.
+  Seconds and milliseconds are truncated from the argument.
+  """
+  gt: DateTime
+
+  """
+  Filter records with a value that's greater than or equal to than the one
+  specified. Seconds and milliseconds are truncated from the argument.
+  """
+  gte: DateTime
+
+  """
+  Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument.
+  """
+  lt: DateTime
+
+  """
+  Filter records with a value that's less or equal than the one specified.
+  Seconds and milliseconds are truncated from the argument.
+  """
+  lte: DateTime
+
+  """
+  Filter records with a value that's outside the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
+  """
+  neq: DateTime
+}
+
 """The query root for this schema"""
 type Query {
+  """Returns meta information regarding a record collection"""
+  _allLandingPagesMeta(
+    filter: LandingPageModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): CollectionMetadata!
+
+  """Returns meta information regarding a record collection"""
+  _allNewsPagesMeta(
+    filter: NewsPageModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): CollectionMetadata!
+
+  """Returns meta information regarding a record collection"""
+  _allProductPagesMeta(
+    filter: ProductPageModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): CollectionMetadata!
+
   """Returns meta information regarding an assets collection"""
   _allUploadsMeta(
     filter: UploadFilter
@@ -1879,6 +3026,63 @@ type Query {
     locale: SiteLocale
   ): Site!
 
+  """Returns a collection of records"""
+  allLandingPages(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: LandingPageModelFilter
+
+    """Limit the number of results"""
+    first: IntType = 20
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [LandingPageModelOrderBy] = []
+
+    """Skip the first results"""
+    skip: IntType
+  ): [LandingPageRecord!]!
+
+  """Returns a collection of records"""
+  allNewsPages(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: NewsPageModelFilter
+
+    """Limit the number of results"""
+    first: IntType = 20
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [NewsPageModelOrderBy] = []
+
+    """Skip the first results"""
+    skip: IntType
+  ): [NewsPageRecord!]!
+
+  """Returns a collection of records"""
+  allProductPages(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: ProductPageModelFilter
+
+    """Limit the number of results"""
+    first: IntType = 20
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [ProductPageModelOrderBy] = []
+
+    """Skip the first results"""
+    skip: IntType
+  ): [ProductPageRecord!]!
+
   """Returns a collection of assets"""
   allUploads(
     """
@@ -1892,11 +3096,33 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [UploadOrderBy] = [_createdAt_DESC]
+    orderBy: [UploadOrderBy] = []
 
     """Skip the first results"""
     skip: IntType
   ): [FileField!]!
+
+  """Returns the single instance record"""
+  company(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): CompanyRecord
+
+  """Returns the single instance record"""
+  contactPage(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): ContactPageRecord
 
   """Returns the single instance record"""
   forside(
@@ -1909,6 +3135,56 @@ type Query {
     locale: SiteLocale
   ): ForsideRecord
 
+  """Returns a specific record"""
+  landingPage(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: LandingPageModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [LandingPageModelOrderBy] = []
+  ): LandingPageRecord
+
+  """Returns the single instance record"""
+  menu(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): MenuRecord
+
+  """Returns a specific record"""
+  newsPage(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: NewsPageModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [NewsPageModelOrderBy] = []
+  ): NewsPageRecord
+
+  """Returns a specific record"""
+  productPage(
+    """
+    If you want to fallback to a default translation when a translation has not been found
+    """
+    fallbackLocales: [SiteLocale!]
+    filter: ProductPageModelFilter
+
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    orderBy: [ProductPageModelOrderBy] = []
+  ): ProductPageRecord
+
   """Returns a specific asset"""
   upload(
     """
@@ -1919,8 +3195,33 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [UploadOrderBy] = [_createdAt_DESC]
+    orderBy: [UploadOrderBy] = []
   ): FileField
+}
+
+"""Block of type Citat (quote_item)"""
+type QuoteItemRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  qouteText: String
+  reference: String
 }
 
 interface RecordInterface {
@@ -1988,11 +3289,19 @@ type SeoField {
   twitterCard: String
 }
 
+"""Specifies how to filter SEO meta tags fields"""
+input SeoFilter {
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+}
+
 type Site {
   favicon: FileField
   faviconMetaTags(
     """The variants to build"""
-    variants: [FaviconType] = [icon]
+    variants: [FaviconType] = []
   ): [Tag!]!
   globalSeo(
     """
@@ -2010,6 +3319,72 @@ enum SiteLocale {
   da_DK
 }
 
+"""Specifies how to filter Slug fields"""
+input SlugFilter {
+  """Search for records with an exact match"""
+  eq: String
+
+  """Filter records that have one of the specified slugs"""
+  in: [String]
+
+  """Exclude records with an exact match"""
+  neq: String
+
+  """Filter records that do have one of the specified slugs"""
+  notIn: [String]
+}
+
+"""Specifies how to filter by status"""
+input StatusFilter {
+  """Search the record with the specified status"""
+  eq: ItemStatus
+
+  """Search records with the specified statuses"""
+  in: [ItemStatus]
+
+  """Exclude the record with the specified status"""
+  neq: ItemStatus
+
+  """Search records without the specified statuses"""
+  notIn: [ItemStatus]
+}
+
+"""Specifies how to filter Single-line string fields"""
+input StringFilter {
+  """Search for records with an exact match"""
+  eq: String
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED]
+  """
+  exists: BooleanType
+
+  """Filter records that equal one of the specified values"""
+  in: [String]
+
+  """
+  Filter records with the specified field set as blank (null or empty string)
+  """
+  isBlank: BooleanType
+
+  """
+  Filter records with the specified field present (neither null, nor empty string)
+  """
+  isPresent: BooleanType
+
+  """Filter records based on a regular expression"""
+  matches: StringMatchesFilter
+
+  """Exclude records with an exact match"""
+  neq: String
+
+  """Filter records that do not equal one of the specified values"""
+  notIn: [String]
+
+  """Exclude records based on a regular expression"""
+  notMatches: StringMatchesFilter
+}
+
 input StringMatchesFilter {
   caseSensitive: BooleanType = false
   pattern: String!
@@ -2020,6 +3395,38 @@ type Tag {
   attributes: MetaTagAttributes
   content: String
   tag: String!
+}
+
+type TextBlockModelTextField {
+  blocks: [String!]!
+  links: [TextBlockModelTextLinksField!]!
+  value: JsonField!
+}
+
+union TextBlockModelTextLinksField = ContactPageRecord | ForsideRecord | LandingPageRecord | NewsPageRecord | ProductPageRecord
+
+"""Block of type Tekst (text_block)"""
+type TextBlockRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  text: TextBlockModelTextField
 }
 
 """Specifies how to filter by upload type"""
@@ -2035,6 +3442,49 @@ input TypeFilter {
 
   """Search uploads without the specified types"""
   notIn: [UploadType]
+}
+
+"""Specifies how to filter by update datetime"""
+input UpdatedAtFilter {
+  """
+  Filter records with a value that's within the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
+  """
+  eq: DateTime
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+
+  """
+  Filter records with a value that's strictly greater than the one specified.
+  Seconds and milliseconds are truncated from the argument.
+  """
+  gt: DateTime
+
+  """
+  Filter records with a value that's greater than or equal to than the one
+  specified. Seconds and milliseconds are truncated from the argument.
+  """
+  gte: DateTime
+
+  """
+  Filter records with a value that's less than the one specified. Seconds and milliseconds are truncated from the argument.
+  """
+  lt: DateTime
+
+  """
+  Filter records with a value that's less or equal than the one specified.
+  Seconds and milliseconds are truncated from the argument.
+  """
+  lte: DateTime
+
+  """
+  Filter records with a value that's outside the specified minute range. Seconds
+  and milliseconds are truncated from the argument.
+  """
+  neq: DateTime
 }
 
 """Specifies how to filter by default alt"""
@@ -2155,11 +3605,10 @@ input UploadFilenameFilter {
 }
 
 input UploadFilter {
-  AND: [UploadFilter]
-  OR: [UploadFilter]
   _createdAt: UploadCreatedAtFilter
   _updatedAt: UploadUpdatedAtFilter
   alt: UploadAltFilter
+  AND: [UploadFilter]
   author: UploadAuthorFilter
   basename: UploadBasenameFilter
   colors: UploadColorsFilter
@@ -2172,6 +3621,7 @@ input UploadFilter {
   md5: UploadMd5Filter
   mimeType: UploadMimeTypeFilter
   notes: UploadNotesFilter
+  OR: [UploadFilter]
   orientation: OrientationFilter
   resolution: ResolutionFilter
   size: UploadSizeFilter
@@ -2432,7 +3882,7 @@ type UploadVideoField {
     """
     The file extension of the requested image format. Either png, jpg or gif
     """
-    format: MuxThumbnailFormatType = jpg
+    format: MuxThumbnailFormatType
   ): String!
 }
 
@@ -2457,13 +3907,56 @@ input UploadWidthFilter {
   neq: IntType
 }
 
+"""Block of type Salgspunkt/tekstpunkt (usp_item)"""
+type UspItemRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  text: String
+}
+
 enum VideoMp4Res {
   high
   low
   medium
 }
 
-type focalPoint {
-  x: FloatType!
-  y: FloatType!
+"""Block of type Video (med scroll effekt) (video_scroll_block)"""
+type VideoScrollBlockRecord implements RecordInterface {
+  _createdAt: DateTime!
+
+  """Editing URL"""
+  _editingUrl: String
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  id: ItemId!
+  video: FileField
 }
