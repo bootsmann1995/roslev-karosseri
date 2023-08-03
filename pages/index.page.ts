@@ -15,9 +15,19 @@ export default defineNuxtComponent({
 			} as ForsideRecord;
 		});
 
+		const salesPoints = computed(() => {
+			if (!data.value || data.value?.usp.length === 0) {
+				return null;
+			}
+			return {
+				usp: data.value?.usp,
+			};
+		});
+
 		return {
 			data,
 			hero,
+			salesPoints,
 		};
 	},
 });

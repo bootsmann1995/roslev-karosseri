@@ -8,4 +8,9 @@ export default defineNuxtComponent({
 			default: null,
 		},
 	},
+	setup() {
+		const iconList = ref(["teenyicons:certificate-solid", "ph:coins-duotone", "solar:hand-stars-linear"]);
+
+		return { iconList };
+	},
 });
