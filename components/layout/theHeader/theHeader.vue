@@ -2,7 +2,7 @@
 	<div class="fixed w-screen left-0 top-0 z-10">
 		<div class="px-5 relative z-50">
 			<header
-				class="relative flex justify-between items-center header-comp mt-2 p-3"
+				class="relative grid grid-cols-3 justify-between items-center header-comp mt-2 p-3"
 				:class="{ 'is-scrolled': headerIsScrolledBy && !menuIsOpen }"
 			>
 				<div class="">
@@ -28,7 +28,7 @@
 				<div>
 					<img class="w-full h-6 object-contain" src="~/assets/images/logo.png" alt="logo" />
 				</div>
-				<div>
+				<div class="flex justify-end">
 					<IconCSS
 						name="majesticons:search-line"
 						class="transition-all ease-locomotive-ease-2 duration-[350ms]"
