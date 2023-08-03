@@ -8,7 +8,11 @@
 				<div>
 					<ul>
 						<li v-for="item in data.mainMenu" :key="item.link.id">
-							{{ item.link.headline ?? item.link.overskrift }}
+							<NuxtLink
+								:to="(item.link.parent != null ? item.link.parent?.slug + '/' : '') + item.link?.slug"
+							>
+								{{ item.link.headline ?? item.link.overskrift }}
+							</NuxtLink>
 						</li>
 					</ul>
 				</div>
