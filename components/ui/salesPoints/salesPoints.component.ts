@@ -9,8 +9,14 @@ export default defineNuxtComponent({
 		},
 	},
 	setup() {
-		const iconList = ref(["teenyicons:certificate-solid", "ph:coins-duotone", "solar:hand-stars-linear"]);
+		const iconList = ref(["fluent:certificate-16-regular", "majesticons:coins-line", "solar:hand-stars-linear"]);
 
-		return { iconList };
+		const isMobile = ref(false);
+
+		onMounted(() => {
+			isMobile.value = window.innerWidth < 768;
+		});
+
+		return { iconList, isMobile };
 	},
 });

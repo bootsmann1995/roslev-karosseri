@@ -2,7 +2,14 @@
 export default defineNuxtConfig({
 	devtools: { enabled: false },
 	sourcemap: false,
-	modules: ["@nuxtjs/tailwindcss", "nuxt-icons", "~/modules/robots", "@nuxt/image", "nuxt-icon"],
+	modules: [
+		"@nuxtjs/tailwindcss",
+		"nuxt-icons",
+		"~/modules/robots",
+		"@nuxt/image",
+		"nuxt-icon",
+		"nuxt-delay-hydration",
+	],
 	runtimeConfig: {
 		public: {
 			GQL_TOKEN: process.env.GQL_TOKEN,
