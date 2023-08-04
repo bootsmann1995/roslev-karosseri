@@ -21,7 +21,7 @@ export default defineNuxtComponent({
 			}
 			return {
 				usp: data.value?.usp,
-			};
+			} as ForsideRecord;
 		});
 
 		return {

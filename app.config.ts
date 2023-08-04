@@ -23,5 +23,5 @@ export default defineAppConfig({
 			},
 		],
 	},
-	pageTransition: { name: "page", mode: "out-in" },
+	pageTransition: { name: "default", mode: "out-in" },
 });

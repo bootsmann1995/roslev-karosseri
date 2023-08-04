@@ -4,6 +4,7 @@ export default defineNuxtComponent({
 	async setup() {
 		const headerIsScrolledBy = ref(false);
 		const menuIsOpen = ref(false);
+		const router = useRouter();
 
 		onBeforeMount(() => {
 			checkScroll();
@@ -27,6 +28,14 @@ export default defineNuxtComponent({
 				headerIsScrolledBy.value = window.scrollY > 10;
 			});
 		};
+
+		watch(
+			router.currentRoute,
+			() => {
+				menuIsOpen.value = false;
+			},
+			{ deep: true }
+		);
 
 		return {
 			headerIsScrolledBy,
