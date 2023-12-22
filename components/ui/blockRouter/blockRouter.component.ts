@@ -1,6 +1,8 @@
 import { useConfirmDialog, useMediaQuery } from "@vueuse/core";
 import type { PropType } from "vue";
 import type { CaseItemQuery, ResponsiveImage } from "~/generated-types";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default defineNuxtComponent({
 	props: {
