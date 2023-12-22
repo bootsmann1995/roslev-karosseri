@@ -9,7 +9,12 @@
 					<ul>
 						<li v-for="item in data.mainMenu" :key="item.link.id">
 							<NuxtLink
-								:to="(item.link.parent != null ? item.link.parent?.slug + '/' : '') + item.link?.slug"
+								class="text-h2-sm font-normal"
+								:to="
+									'/' +
+									(item.link.parent != null ? item.link.parent?.slug + '/' : '') +
+									item.link?.slug
+								"
 							>
 								{{ item.link.headline ?? item.link.overskrift }}
 							</NuxtLink>
@@ -22,7 +27,11 @@
 					<li class="list-none pl-0 navigation-link">
 						<NuxtLink
 							class="text-[52px] uppercase mb-5 hover:text-white transition-[color] duration-[200ms] ease-locomotive-ease"
-							:to="(item.menuLink.parent != null ? item.menuLink.parent + '/' : '') + item.menuLink.slug"
+							:to="
+								'/' +
+								(item.menuLink.parent != null ? item.menuLink.parent + '/' : '') +
+								item.menuLink.slug
+							"
 							@mouseover="setHoverColor(index)"
 							@mouseleave="setHoverColor(-1)"
 						>
@@ -36,7 +45,9 @@
 					>
 						<NuxtLink
 							class="text-[32px] hover:text-white transition-[color] duration-[500ms] ease-locomotive-ease"
-							:to="(child.link.parent != null ? child.link.parent?.slug + '/' : '') + child.link.slug"
+							:to="
+								'/' + (child.link.parent != null ? child.link.parent?.slug + '/' : '') + child.link.slug
+							"
 							@mouseover="setHoverColor(_index)"
 							@mouseleave="setHoverColor(-1)"
 						>

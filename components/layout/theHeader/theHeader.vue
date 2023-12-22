@@ -9,7 +9,7 @@
 					<button
 						type="button"
 						class="flex items-center justify-center group burger-wrap"
-						:class="{ 'is-active': menuIsOpen }"
+						:class="[{ 'is-active': menuIsOpen }, { 'is-sub': activeMenuClass }]"
 						@click="openMenu"
 					>
 						<div class="burger">
@@ -25,16 +25,16 @@
 						<p class="ml-5">Menu</p>
 					</button>
 				</div>
-				<div>
+				<NuxtLink to="/" class="block">
 					<img class="w-full h-6 object-contain" src="~/assets/images/logo.png" alt="logo" />
-				</div>
+				</NuxtLink>
 				<div class="flex justify-end">
 					<IconCSS
 						name="majesticons:search-line"
 						class="transition-all ease-locomotive-ease-2 duration-[350ms]"
 						:class="[
-							{ '!bg-night-black-500': headerIsScrolledBy || menuIsOpen },
-							{ '!bg-white': !headerIsScrolledBy && !menuIsOpen },
+							{ '!bg-night-black-500': headerIsScrolledBy || menuIsOpen || activeMenuClass },
+							{ '!bg-white': !headerIsScrolledBy && !menuIsOpen && !activeMenuClass },
 						]"
 					/>
 				</div>

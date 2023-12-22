@@ -1,0 +1,16 @@
+query Products {
+	allProductPages {
+		slug
+		introText
+		overskrift
+		icon {
+			...ImageFragment
+		}
+		introImage {
+			...ImageFragment
+		}
+		parent {
+			slug
+		}
+	}
+}

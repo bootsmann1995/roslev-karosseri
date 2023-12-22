@@ -2,7 +2,9 @@ import { HeaderMenu } from "interfaces/layout/header.interface";
 
 export default defineNuxtComponent({
 	async setup() {
-		const headerIsScrolledBy = ref(false);
+		const headerIsScrolledBy = useState("headerIsScrolledBy", () => false);
+		const activeMenuClass = useState("activeMenuClass");
+
 		const menuIsOpen = ref(false);
 		const router = useRouter();
 
@@ -43,6 +45,7 @@ export default defineNuxtComponent({
 			menuIsOpen,
 			data,
 			menu,
+			activeMenuClass,
 		};
 	},
 });

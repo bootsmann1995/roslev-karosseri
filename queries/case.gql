@@ -1,0 +1,75 @@
+query CaseItem($slug: String) {
+	allCases(filter: { slug: { eq: $slug } }) {
+		teaser
+		slug
+		overskrift
+		billede {
+			responsiveImage(imgixParams: { auto: format, fit: crop, crop: focalpoint, ar: "16:9" }) {
+				width
+				webpSrcSet
+				title
+				srcSet
+				src
+				sizes
+				height
+				bgColor
+				base64
+				aspectRatio
+				alt
+			}
+		}
+		indhold {
+			... on FiftyBlockRecord {
+				id
+				reverse
+				_modelApiKey
+				image {
+					responsiveImage(imgixParams: { ar: "4:3", auto: format, crop: focalpoint, fit: crop }) {
+						alt
+						aspectRatio
+						base64
+						bgColor
+						height
+						sizes
+						src
+						srcSet
+						title
+						webpSrcSet
+						width
+					}
+				}
+				text {
+					value
+				}
+				headline
+			}
+			... on GalleryBlockRecord {
+				id
+				_modelApiKey
+				images {
+					responsiveImage(imgixParams: { ar: "16:9", fit: crop, auto: format, crop: focalpoint }) {
+						width
+						webpSrcSet
+						title
+						srcSet
+						src
+						sizes
+						height
+						bgColor
+						base64
+						aspectRatio
+						alt
+					}
+				}
+			}
+			... on TextBlockRecord {
+				id
+				_modelApiKey
+				overskrift
+				text {
+					value
+				}
+			}
+		}
+	}
+}

@@ -1,5 +1,6 @@
 import { ForsideRecord } from "generated-types";
 import { PropType } from "vue";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default defineNuxtComponent({
 	props: {
@@ -12,11 +13,12 @@ export default defineNuxtComponent({
 		const iconList = ref(["fluent:certificate-16-regular", "majesticons:coins-line", "solar:hand-stars-linear"]);
 
 		const isMobile = ref(false);
+		const uItem = ref<HTMLElement[] | null>();
 
 		onMounted(() => {
 			isMobile.value = window.innerWidth < 768;
 		});
 
-		return { iconList, isMobile };
+		return { iconList, isMobile, uItem };
 	},
 });

@@ -1,15 +1,17 @@
-import { DocumentNode } from "graphql";
-import { GraphQLClient } from "graphql-request";
+import type { DocumentNode } from "graphql";
+import { GraphQLClient, type Variables } from "graphql-request";
+import type { RuntimeConfig } from "nuxt/schema";
 
-const cache: { [key: string]: object } = {};
+const cache: { [key: string]: unknown } = {};
 
 export async function request<T>(
 	query: DocumentNode,
-	variables: unknown | null = null,
-	key: string | null = null
+	variables: Variables | null = null,
+	key: string | null = null,
+	config: RuntimeConfig
 ): Promise<T> {
-	const host = process.env.GQL_HOST;
-	const token = process.env.GQL_TOKEN;
+	const host = config.public.GQL_HOST;
+	const token = config.public.GQL_TOKEN;
 	const client = new GraphQLClient(host, {
 		headers: {
 			authorization: `Bearer ${token}`,
@@ -19,9 +21,9 @@ export async function request<T>(
 		return cache[key] as T;
 	}
 	try {
-		const response = await client.request(query, variables).catch((err) => {
+		const response = await client.request(query, variables ?? undefined).catch((err) => {
 			if (err) {
-				console.log(err);
+				throw err;
 			}
 		});
 		if (key) {

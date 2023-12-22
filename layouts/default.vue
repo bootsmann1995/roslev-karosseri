@@ -5,6 +5,13 @@
 			<div id="smooth-content">
 				<main class="bg-white">
 					<NuxtPage />
+					<footer class="bg-slate-800">
+						<div class="container">
+							<div class="container-row">
+								<div class="col-span-16 h-[300px]"></div>
+							</div>
+						</div>
+					</footer>
 				</main>
 			</div>
 		</div>

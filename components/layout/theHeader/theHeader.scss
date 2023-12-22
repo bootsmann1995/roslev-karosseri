@@ -12,6 +12,13 @@
 	}
 }
 
+.burger-wrap.is-sub .burger {
+	@apply border-night-black-500;
+	span {
+		@apply bg-night-black-500;
+	}
+}
+
 .header-comp.is-scrolled {
 	&::before {
 		@apply opacity-100;

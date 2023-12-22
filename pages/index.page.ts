@@ -1,7 +1,14 @@
-import { ForsideRecord } from "generated-types";
+import type { ForsideRecord } from "~/generated-types";
+import { useMediaQuery } from "@vueuse/core";
 
 export default defineNuxtComponent({
 	async setup() {
+		const activeMenuClass = useState("activeMenuClass");
+		const isLargeScreen = useMediaQuery("(min-width: 968px)") ?? ref(false);
+		onBeforeMount(() => {
+			activeMenuClass.value = false;
+		});
+
 		const { data } = await useFetch<ForsideRecord>("/api/frontpage");
 
 		const hero = computed(() => {
@@ -26,6 +33,7 @@ export default defineNuxtComponent({
 
 		return {
 			data,
+			isLargeScreen,
 			hero,
 			salesPoints,
 		};

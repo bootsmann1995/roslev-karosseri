@@ -1,29 +1,8 @@
 fragment LinkFragment on LinkBlockModelLinkField {
-	... on ContactPageRecord {
-		id
-		slug
-		headline
-	}
 	... on ForsideRecord {
 		id
 		slug
 		overskrift
-	}
-	... on LandingPageRecord {
-		id
-		slug
-		overskrift
-	}
-	... on NewsPageRecord {
-		id
-		overskrift
-		slug
-		parent {
-			slug
-			parent {
-				slug
-			}
-		}
 	}
 	... on ProductPageRecord {
 		id
@@ -35,5 +14,25 @@ fragment LinkFragment on LinkBlockModelLinkField {
 				slug
 			}
 		}
+	}
+	... on ContactPageRecord {
+		id
+		overskrift
+		slug
+	}
+	... on ForsideRecord {
+		id
+		overskrift
+		slug
+	}
+	... on CaseRecord {
+		id
+		overskrift
+		slug
+	}
+	... on CaseoverviewRecord {
+		id
+		overskrift
+		slug
 	}
 }
