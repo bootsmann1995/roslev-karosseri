@@ -2,6 +2,18 @@ query Frontpage {
 	forside {
 		image {
 			url
+			responsiveImage(imgixParams: { auto: format, fit: crop, crop: focalpoint, ar: "16:9" }) {
+				srcSet
+				webpSrcSet
+				sizes
+				src
+				width
+				height
+				aspectRatio
+				alt
+				title
+				__typename
+			}
 		}
 		overskrift
 		text
