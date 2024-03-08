@@ -19,19 +19,15 @@ export default defineNuxtComponent({
 
 		const resetSmooth = () => {
 			const smooth = ScrollSmoother.get();
-
+			smooth?.kill();
 			setTimeout(() => {
-				smooth?.kill();
-				setTimeout(() => {
-					ScrollSmoother.create({
-						smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
-						effects: true, // looks for data-speed and data-lag attributes on elements
-						smoothTouch: 0.1, // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
-					});
-					ScrollTrigger.normalizeScroll(true);
-				}, 300);
-				// ScrollSmoother.get();
-			}, 200);
+				ScrollSmoother.create({
+					smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
+					effects: true, // looks for data-speed and data-lag attributes on elements
+					smoothTouch: 0.1, // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
+				});
+				ScrollTrigger.normalizeScroll(true);
+			}, 500);
 		};
 		watch(
 			router.currentRoute,

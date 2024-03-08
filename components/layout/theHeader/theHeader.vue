@@ -33,7 +33,7 @@
 					<img class="w-full h-5 lg:h-6 object-contain" src="~/assets/images/logo.png" alt="logo" />
 				</NuxtLink>
 				<div class="flex justify-end">
-					<IconCSS
+					<!-- <IconCSS
 						name="majesticons:search-line"
 						class="transition-all ease-locomotive-ease-2 duration-[350ms]"
 						:class="[
@@ -42,7 +42,7 @@
 							},
 							{ '!bg-white': !headerIsScrolledBy && !menuIsOpen && !activeMenuClass && !lightMode },
 						]"
-					/>
+					/> -->
 				</div>
 			</header>
 		</div>

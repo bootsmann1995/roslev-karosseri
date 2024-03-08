@@ -1,8 +1,10 @@
 <template>
 	<div>
 		<div class="container">
-			<div class="container-row pt-[100px]">
-				<h1 class="col-span-12 text-h2 mb-7">{{ data?.page?.overskrift }}</h1>
+			<div class="container-row pt-[100px] lg:pt-[180px]">
+				<h1 :data-speed="isMobile === true ? 'clamp(1.0)' : `clamp(1)`" class="col-span-12 text-h2 mb-7">
+					{{ data?.page?.overskrift }}
+				</h1>
 			</div>
 			<div class="container-row mb-8 lg:mb-12">
 				<div class="col-span-16 lg:col-span-8">
