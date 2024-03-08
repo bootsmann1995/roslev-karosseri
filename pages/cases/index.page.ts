@@ -15,6 +15,12 @@ export default defineNuxtComponent({
 			throw createError("Page Not Found");
 		}
 
+		const seoMetaTags = data.value?.page?._seoMetaTags ?? null;
+		if (seoMetaTags) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			useSeoMeta(createSeoMeta(seoMetaTags as any));
+		}
+
 		const resetSmooth = () => {
 			const smooth = ScrollSmoother.get();
 			smooth?.kill();

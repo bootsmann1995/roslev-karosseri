@@ -34,7 +34,7 @@ input CaseModelFilter {
   teaser: TextFilter
 }
 
-union CaseModelIndholdField = FiftyBlockRecord | GalleryBlockRecord | TextBlockRecord | VideoScrollBlockRecord
+union CaseModelIndholdField = FiftyBlockRecord | GalleryBlockRecord | ImageBlockRecord | TextBlockRecord | VideoScrollBlockRecord
 
 enum CaseModelOrderBy {
   _createdAt_ASC

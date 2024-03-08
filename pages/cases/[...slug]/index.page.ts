@@ -13,6 +13,12 @@ export default defineNuxtComponent({
 			throw createError("Page Not Found");
 		}
 
+		const seoMetaTags = data.value?._seoMetaTags ?? null;
+		if (seoMetaTags) {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			useSeoMeta(createSeoMeta(seoMetaTags as any));
+		}
+
 		return {
 			data,
 		};
