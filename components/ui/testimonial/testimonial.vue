@@ -1,6 +1,6 @@
 <template>
 	<div class="container mb-[100px]">
-		<div class="container-row">
+		<div class="container-row" :data-speed="`clamp(1)`">
 			<div class="col-span-full lg:col-span-11 lg:col-start-3">
 				<div class="w-full relative block">
 					<Swiper
@@ -29,7 +29,7 @@
 									/>
 								</div>
 								<div
-									class="col-span-full max-lg:pt-[40px] max-lg:pb-8 max-lg:px-7 max-lg:bg-light-grey max-lg:rounded-md lg:col-start-4 lg:col-span-7 lg:row-start-2"
+									class="col-span-full max-lg:pt-[40px] max-lg:pb-8 max-lg:px-2 max-lg:bg-light-grey max-lg:rounded-md lg:col-start-4 lg:col-span-7 lg:row-start-2"
 								>
 									<h2 class="text-h3-sm lg:text-h3 text-blue-500 mb-2">
 										{{ testimonial.qouteText }}
