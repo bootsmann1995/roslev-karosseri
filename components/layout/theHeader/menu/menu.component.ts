@@ -1,4 +1,5 @@
 import { HeaderMenu } from "interfaces/layout/header.interface";
+import menu from "./menu.vue";
 
 export default defineNuxtComponent({
 	props: {
@@ -39,9 +40,15 @@ export default defineNuxtComponent({
 			}
 		};
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		const menuPrefix = (item: any) => {
+			return createLink(item);
+		};
+
 		return {
 			setHoverColor,
 			currentColor,
+			menuPrefix,
 			socialLinks,
 		};
 	},

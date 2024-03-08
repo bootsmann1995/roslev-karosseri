@@ -6,15 +6,28 @@
 					v-if="item._modelApiKey === 'text_block'"
 					:key="item.id"
 					:data-speed="isMobile ? 'clamp(1)' : 'clamp(1.1)'"
-					class="col-span-16 lg:col-start-2 lg:col-span-14 text-center mb-6 mt-6 lg:mt-11 lg:mb-8"
+					class="col-span-16 lg:col-start-2 lg:col-span-14 mb-6 mt-6 lg:mt-11 lg:mb-8"
 				>
-					<h2 class="text-h3-sm lg:text-h3 mb-2">{{ item.overskrift }}</h2>
-					<DatocmsStructuredText
-						:data="item.text"
-						:render-inline-record="renderInlineRecord"
-						:render-link-to-record="renderLinkToRecord"
-					/>
+					<div class="container-row">
+						<h2
+							class="col-span-full lg:col-span-6 text-h3-sm lg:text-h3 mb-2 break-words hyphens-auto"
+							lang="da"
+						>
+							{{ item.overskrift }}
+						</h2>
+						<UtilsStructuredText
+							class="col-span-full lg:col-span-10 break-words hyphens-auto"
+							:text="item.text"
+							lang="da"
+							:unique-key="item.id"
+						/>
+					</div>
 				</div>
+				<div
+					v-if="item._modelApiKey === 'text_block'"
+					:key="item.id"
+					:data-speed="isMobile ? 'clamp(1)' : 'clamp(1.1)'"
+				></div>
 				<div
 					v-if="item._modelApiKey === 'fifty_block'"
 					:key="item.id"

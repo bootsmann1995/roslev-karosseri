@@ -4,6 +4,7 @@ export default defineNuxtComponent({
 	async setup() {
 		const headerIsScrolledBy = useState("headerIsScrolledBy", () => false);
 		const activeMenuClass = useState("activeMenuClass");
+		const lightMode = useState("lightMode");
 
 		const menuIsOpen = ref(false);
 		const router = useRouter();
@@ -46,6 +47,7 @@ export default defineNuxtComponent({
 			data,
 			menu,
 			activeMenuClass,
+			lightMode,
 		};
 	},
 });

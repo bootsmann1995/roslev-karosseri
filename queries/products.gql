@@ -1,5 +1,6 @@
 query Products {
 	allProductPages {
+		__typename
 		slug
 		introText
 		overskrift

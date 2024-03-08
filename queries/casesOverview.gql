@@ -1,5 +1,6 @@
 query CasesOverview {
 	allCases {
+		__typename
 		teaser
 		slug
 		overskrift
@@ -25,13 +26,11 @@ query CasesOverview {
 	caseoverview {
 		teaser
 		overskrift
-		seo {
-			title
-			image {
-				url
-			}
-			description
-			twitterCard
+		_seoMetaTags {
+			tag
+			attributes
+			content
+			__typename
 		}
 	}
 }

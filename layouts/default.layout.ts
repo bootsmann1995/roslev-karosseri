@@ -4,7 +4,7 @@ import gsap from "gsap";
 export default defineNuxtComponent({
 	setup() {
 		const router = useRouter();
-
+		const lightMode = useState("lightMode");
 		onMounted(() => {
 			gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 			// create the scrollSmoother before your scrollTriggers
@@ -37,8 +37,13 @@ export default defineNuxtComponent({
 			router.currentRoute,
 			() => {
 				resetSmooth();
+				lightMode.value = false;
 			},
 			{ deep: true }
 		);
+
+		return {
+			lightMode,
+		};
 	},
 });

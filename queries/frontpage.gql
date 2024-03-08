@@ -22,5 +22,11 @@ query Frontpage {
 			text
 			id
 		}
+		_seoMetaTags {
+			tag
+			attributes
+			content
+			__typename
+		}
 	}
 }

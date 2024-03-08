@@ -4,7 +4,7 @@ export default defineNuxtComponent({
 	async setup() {
 		const { params } = useRoute();
 		const activeMenuClass = useState("activeMenuClass");
-		onBeforeMount(() => {
+		onMounted(() => {
 			activeMenuClass.value = true;
 		});
 		const { data } = await useFetch<CaseItemQuery["allCases"][0]>("/api/case/" + params.slug);

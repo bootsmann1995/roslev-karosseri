@@ -29,11 +29,16 @@ export default defineNuxtComponent({
 			}, 150);
 		};
 
+		const linkMap = (link: any) => {
+			return createLink(link);
+		};
+
 		watch(isMobile, () => {
 			resetSmooth();
 		});
 
 		return {
+			linkMap,
 			data,
 			isMobile,
 			activeMenuClass,

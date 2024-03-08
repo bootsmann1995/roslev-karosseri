@@ -5,5 +5,13 @@ export default defineNuxtComponent({
 			default: () => [],
 		},
 	},
-	setup() {},
+	setup() {
+		const linkMap = (link: any) => {
+			return createLink(link);
+		};
+
+		return {
+			linkMap,
+		};
+	},
 });

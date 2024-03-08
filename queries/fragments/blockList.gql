@@ -1,4 +1,4 @@
-fragment BlockListFrament on ProductPageModelBlokListeField {
+fragment BlockListFragment on ProductPageModelBlokListeField {
 	...FiftyFiftyFragment
 	...ImageBlockFragment
 	...GalleryBlockFragment

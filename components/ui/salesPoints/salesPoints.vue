@@ -5,7 +5,7 @@
 				v-for="(item, i) in data.usp"
 				ref="uItem"
 				:key="item.id"
-				class="rounded-xl bg-gray-200 p-3 h-[200px] grid grid-rows-2 mb-5"
+				class="rounded-xl bg-gray-200 p-3 h-[200px] grid grid-rows-2 mb-8 last-of-type:mb-0"
 				data-speed="clamp(0.8)"
 			>
 				<div class="row-start-1 grid place-items-center">

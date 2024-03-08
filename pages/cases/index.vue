@@ -18,7 +18,7 @@
 						<nuxt-link
 							v-for="card in item"
 							:key="card.slug ?? ''"
-							:to="`/cases/${card.slug}`"
+							:to="linkMap(card)"
 							class="block rounded-xxl overflow-hidden mb-2 relative after:content-[''''] after:absolute group"
 						>
 							<DatocmsImage class="aspect-3/4" :data="card.billede?.responsiveImage" />
@@ -35,7 +35,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="h-[10vh] lg:h-[50vh]"></div>
+		<div class="h-[10vh] lg:h-[60vh]"></div>
 	</div>
 </template>
 <script lang="ts" src="./index.page.ts" />

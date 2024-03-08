@@ -1,0 +1,33 @@
+query ProductPage($slug: String!) {
+	allProductPages(filter: { slug: { eq: $slug } }) {
+		slug
+		__typename
+		introText
+		overskrift
+		icon {
+			...ImageFragment
+		}
+		introImage {
+			responsiveImage(imgixParams: { auto: format, crop: focalpoint, q: "85", fit: crop }, sizes: "") {
+				width
+				webpSrcSet
+				title
+				srcSet
+				src
+				sizes
+			}
+		}
+		blokListe {
+			...BlockListFragment
+		}
+		parent {
+			slug
+		}
+		_seoMetaTags {
+			tag
+			attributes
+			content
+			__typename
+		}
+	}
+}

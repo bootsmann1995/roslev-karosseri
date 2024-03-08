@@ -1,0 +1,8 @@
+query CompanyInfo {
+	company {
+		companyNumber
+		address
+		email
+		phone
+	}
+}

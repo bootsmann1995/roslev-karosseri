@@ -18,6 +18,13 @@ query CaseItem($slug: String) {
 				alt
 			}
 		}
+
+		_seoMetaTags {
+			tag
+			attributes
+			content
+			__typename
+		}
 		indhold {
 			... on FiftyBlockRecord {
 				id

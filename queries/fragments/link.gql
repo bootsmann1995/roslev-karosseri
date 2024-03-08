@@ -1,10 +1,12 @@
 fragment LinkFragment on LinkBlockModelLinkField {
 	... on ForsideRecord {
+		__typename
 		id
 		slug
 		overskrift
 	}
 	... on ProductPageRecord {
+		__typename
 		id
 		overskrift
 		slug
@@ -16,21 +18,25 @@ fragment LinkFragment on LinkBlockModelLinkField {
 		}
 	}
 	... on ContactPageRecord {
+		__typename
 		id
 		overskrift
 		slug
 	}
 	... on ForsideRecord {
+		__typename
 		id
 		overskrift
 		slug
 	}
 	... on CaseRecord {
+		__typename
 		id
 		overskrift
 		slug
 	}
 	... on CaseoverviewRecord {
+		__typename
 		id
 		overskrift
 		slug

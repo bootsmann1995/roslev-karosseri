@@ -3,35 +3,25 @@
 		class="navigation-menu fixed h-screen w-screen top-0 left-0 z-10 pt-[15vh]"
 		:class="[{ 'is-open': isActive === true }, `bg-[${currentColor}]`]"
 	>
-		<div class="grid grid-cols-2 px-8">
-			<div class="col-start-1">
+		<div class="grid grid-cols-1 lg:grid-cols-2 px-2 lg:px-8">
+			<div class="col-start-1 max-lg:row-start-2">
 				<div>
-					<ul>
+					<ul class="max-lg mt-5">
 						<li v-for="item in data.mainMenu" :key="item.link.id">
-							<NuxtLink
-								class="text-h2-sm font-normal"
-								:to="
-									'/' +
-									(item.link.parent != null ? item.link.parent?.slug + '/' : '') +
-									item.link?.slug
-								"
-							>
+							<NuxtLink class="max-lg:text-t3 lg:text-h2-sm !font-normal" :to="menuPrefix(item.link)">
 								{{ item.link.headline ?? item.link.overskrift }}
 							</NuxtLink>
 						</li>
 					</ul>
 				</div>
 			</div>
-			<nav class="col-start-2">
+
+			<nav class="lg:col-start-2 max-lg:row-start-1">
 				<template v-for="(item, index) in data.productMenu" :key="item.menuLink.id">
 					<li class="list-none pl-0 navigation-link">
 						<NuxtLink
-							class="text-[52px] uppercase mb-5 hover:text-white transition-[color] duration-[200ms] ease-locomotive-ease"
-							:to="
-								'/' +
-								(item.menuLink.parent != null ? item.menuLink.parent + '/' : '') +
-								item.menuLink.slug
-							"
+							class="text-[24px] lg:text-[52px] uppercase mb-5 hover:text-white transition-[color] duration-[200ms] ease-locomotive-ease"
+							:to="menuPrefix(item.menuLink)"
 							@mouseover="setHoverColor(index)"
 							@mouseleave="setHoverColor(-1)"
 						>
@@ -41,13 +31,11 @@
 					<li
 						v-for="(child, _index) in item.childMenuLinks"
 						:key="child.link.id"
-						class="list-none pl-10 navigation-link"
+						class="list-none pl-2 lg:pl-10 navigation-link"
 					>
 						<NuxtLink
-							class="text-[32px] hover:text-white transition-[color] duration-[500ms] ease-locomotive-ease"
-							:to="
-								'/' + (child.link.parent != null ? child.link.parent?.slug + '/' : '') + child.link.slug
-							"
+							class="text-[20px] lg:text-[32px] hover:text-white transition-[color] duration-[500ms] ease-locomotive-ease"
+							:to="menuPrefix(child.link)"
 							@mouseover="setHoverColor(_index)"
 							@mouseleave="setHoverColor(-1)"
 						>
@@ -57,7 +45,7 @@
 				</template>
 			</nav>
 		</div>
-		<div class="absolute bottom-0 pb-10 flex justify-end px-10 w-full">
+		<div class="absolute bottom-0 pb-10 flex lg:justify-end px-2 lg:px-10 w-full">
 			<NuxtLink v-for="social in socialLinks" :key="social.name" to="/" class="social-link">
 				<IconCSS
 					class="!w-7 !h-7 mr-5 transition-[background-color] duration-[350ms] ease-locomotive-ease hover:!bg-blue-500"

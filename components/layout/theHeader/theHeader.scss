@@ -41,13 +41,29 @@
 		@apply text-night-black-500;
 	}
 
+	@media (min-width: 1024px) {
+		.burger-wrap:hover .burger {
+			&::after {
+				transform: scale3d(1, 1, 1);
+			}
+
+			span {
+				@apply bg-white;
+			}
+		}
+		.burger-wrap:hover p {
+			@apply -translate-x-2;
+		}
+	}
+}
+@media (min-width: 1024px) {
 	.burger-wrap:hover .burger {
 		&::after {
 			transform: scale3d(1, 1, 1);
 		}
 
 		span {
-			@apply bg-white;
+			@apply bg-night-black-500;
 		}
 	}
 
@@ -56,26 +72,12 @@
 	}
 }
 
-.burger-wrap:hover .burger {
-	&::after {
-		transform: scale3d(1, 1, 1);
-	}
-
-	span {
-		@apply bg-night-black-500;
-	}
-}
-
-.burger-wrap:hover p {
-	@apply -translate-x-2;
-}
-
 .burger-wrap p {
 	@apply text-white text-[14px] transition-all duration-300 ease-locomotive-ease-2;
 }
 
 .burger {
-	@apply relative w-8 h-8 flex flex-col justify-center items-center cursor-pointer rounded-full border-[1px] border-white transition-all duration-300 ease-locomotive-ease-2 overflow-hidden;
+	@apply relative w-6 h-6 lg:w-8 lg:h-8 flex flex-col justify-center items-center cursor-pointer rounded-full border-[1px] border-white transition-all duration-300 ease-locomotive-ease-2 overflow-hidden;
 
 	&:after {
 		content: "";
@@ -88,7 +90,7 @@
 	}
 
 	span {
-		@apply block w-6 h-[2px] bg-white rounded-full;
+		@apply block w-3 lg:w-6 h-[2px] bg-white rounded-full;
 		transition:
 			opacity cubic-bezier(0.65, 0.05, 0.36, 1) 300ms 0ms,
 			transform cubic-bezier(0.65, 0.05, 0.36, 1) 0.5s 300ms;
@@ -113,8 +115,10 @@
 }
 
 .burger-wrap.is-active {
-	&:hover .burger-x div {
-		@apply bg-white;
+	@media (min-width: 1024px) {
+		&:hover .burger-x div {
+			@apply bg-white;
+		}
 	}
 	.burger {
 		@apply border-night-black-500;

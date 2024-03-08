@@ -1,7 +1,7 @@
 <template>
-	<section class="w-full flex justify-center items-center pt-[100px] pb-[250px]">
+	<section class="w-full flex justify-center items-center pt-[70px] lg:pt-[100px] pb-[100px] lg:pb-[250px]">
 		<div class="grid grid-cols-12 max-w-[1240px] mx-3 lg:mx-6 gap-1 mx-6">
-			<div class="text-center col-span-full mt-10 mb-12">
+			<div class="text-center col-span-full mt-5 lg:mt-10 mb-8 lg:mb-12">
 				<h2 class="text-center text-d3 font-normal" :data-speed="`clamp(0.9)`">Produkter</h2>
 			</div>
 			<div
@@ -12,7 +12,7 @@
 			>
 				<NuxtLink
 					class="bg-white p-2 hover:bg-slate-200 transition-all ease-locomotive-ease duration-300 block border-[2px] rounded-lg h-full"
-					:to="`/${item.parent ? item.parent.slug + '/' : ''}${item.slug}`"
+					:to="linkMap(item)"
 				>
 					<div class="w-full aspect-4/3">
 						<datocms-image
