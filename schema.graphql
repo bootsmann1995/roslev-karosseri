@@ -3081,6 +3081,7 @@ type QuoteItemRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  avatar: FileField
   id: ItemId!
   qouteText: String
   reference: String

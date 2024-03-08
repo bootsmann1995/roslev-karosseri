@@ -28,7 +28,22 @@ query Frontpage {
 		}
 		citater {
 			qouteText
+			reference
 			id
+			avatar {
+				responsiveImage(imgixParams: { auto: format, fit: crop, crop: focalpoint, ar: "1:1" }) {
+					srcSet
+					webpSrcSet
+					sizes
+					src
+					width
+					height
+					aspectRatio
+					alt
+					title
+					__typename
+				}
+			}
 		}
 		usp {
 			text

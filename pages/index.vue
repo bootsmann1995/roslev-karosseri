@@ -4,6 +4,7 @@
 		<div class="pb-[100px] lg:pb-[300px]"></div>
 		<UiSalesPoints v-if="salesPoints" :data="salesPoints" />
 		<UiProducts :products="data?.products" />
+		<UiTestimonial :data="data?.citater" />
 	</div>
 </template>
 <script lang="ts" src="./index.page.ts"></script>
