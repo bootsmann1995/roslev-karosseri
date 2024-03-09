@@ -1,7 +1,10 @@
 <template>
 	<div>
 		<div v-if="data" class="relative" data-speed="clamp(0.8)">
-			<DatocmsImage class="w-screen h-screen -z-10 object-cover" :data="data.image.responsiveImage" />
+			<DatocmsImage
+				class="w-screen h-screen -z-10 [&_img]:object-cover object-cover"
+				:data="data.image.responsiveImage"
+			/>
 			<h1 class="text-white -translate-y-[35vh] ml-4 text-d1-sm lg:text-d1 font-thin" data-speed="clamp(1.1)">
 				{{ data?.overskrift }}
 			</h1>

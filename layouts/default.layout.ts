@@ -19,7 +19,9 @@ export default defineNuxtComponent({
 
 		const resetSmooth = () => {
 			const smooth = ScrollSmoother.get();
-			smooth?.kill();
+			setTimeout(() => {
+				smooth?.kill();
+			}, 100);
 			setTimeout(() => {
 				ScrollSmoother.create({
 					smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position

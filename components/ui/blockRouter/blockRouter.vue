@@ -34,7 +34,10 @@
 					class="col-span-16 grid grid-cols-1 lg:grid-cols-4 gap-5 my-0 lg:my-9"
 				>
 					<div class="col-span-2" :data-speed="isMobile ? 'clamp(1)' : 'clamp(1.2)'">
-						<DatocmsImage class="rounded-xxl" :data="item.image?.responsiveImage"></DatocmsImage>
+						<DatocmsImage
+							class="rounded-xxl [&_img]:!relative"
+							:data="item.image?.responsiveImage"
+						></DatocmsImage>
 					</div>
 					<div
 						class="col-span-2 flex flex-col justify-center"
