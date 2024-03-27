@@ -31,7 +31,7 @@ query Frontpage {
 			reference
 			id
 			avatar {
-				responsiveImage(imgixParams: { auto: format, fit: crop, crop: focalpoint, ar: "1:1" }) {
+				responsiveImage(imgixParams: { auto: format, fit: crop, crop: focalpoint }) {
 					srcSet
 					webpSrcSet
 					sizes

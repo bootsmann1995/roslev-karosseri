@@ -15,6 +15,7 @@ export default defineNuxtConfig({
 		public: {
 			GQL_TOKEN: process.env.GQL_TOKEN,
 			GQL_HOST: process.env.GQL_HOST,
+			PREVIEW: process.env.PREVIEW,
 		},
 	},
 	css: ["@/assets/styles/global.scss"],

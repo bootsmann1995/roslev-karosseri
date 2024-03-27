@@ -26,7 +26,7 @@ export async function request<T>(
 				throw err;
 			}
 		});
-		if (key) {
+		if (key && config.public.PREVIEW !== "true") {
 			cache[key] = response;
 		}
 		return response as T;
