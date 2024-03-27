@@ -1,5 +1,5 @@
 query Products {
-	allProductPages {
+	allProductPages(first: 99) {
 		__typename
 		slug
 		introText
@@ -12,6 +12,9 @@ query Products {
 		}
 		parent {
 			slug
+		}
+		children {
+			id
 		}
 	}
 }

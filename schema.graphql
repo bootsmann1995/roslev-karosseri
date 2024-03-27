@@ -29,6 +29,7 @@ input CaseModelFilter {
   billede: FileFilter
   id: ItemIdFilter
   overskrift: StringFilter
+  position: PositionFilter
   seo: SeoFilter
   slug: SlugFilter
   teaser: TextFilter
@@ -57,6 +58,8 @@ enum CaseModelOrderBy {
   id_DESC
   overskrift_ASC
   overskrift_DESC
+  position_ASC
+  position_DESC
 }
 
 """Record of type case (case)"""
@@ -83,6 +86,7 @@ type CaseRecord implements RecordInterface {
   id: ItemId!
   indhold: [CaseModelIndholdField!]!
   overskrift: String
+  position: IntType
   seo: SeoField
   slug: String
   teaser(
@@ -547,56 +551,6 @@ Represents signed double-precision fractional values as specified by [IEEE 754](
 """
 scalar FloatType
 
-"""Linking fields"""
-enum ForsideModelFieldsReferencingProductPageModel {
-  forside_produkter
-  forside_produkter__productItem_text
-}
-
-input ForsideModelFilter {
-  AND: [ForsideModelFilter]
-  OR: [ForsideModelFilter]
-  _createdAt: CreatedAtFilter
-  _firstPublishedAt: PublishedAtFilter
-  _isValid: BooleanFilter
-  _publicationScheduledAt: PublishedAtFilter
-  _publishedAt: PublishedAtFilter
-  _status: StatusFilter
-  _unpublishingScheduledAt: PublishedAtFilter
-  _updatedAt: UpdatedAtFilter
-  id: ItemIdFilter
-  image: FileFilter
-  overskrift: StringFilter
-  seo: SeoFilter
-  slug: SlugFilter
-  text: StringFilter
-}
-
-enum ForsideModelOrderBy {
-  _createdAt_ASC
-  _createdAt_DESC
-  _firstPublishedAt_ASC
-  _firstPublishedAt_DESC
-  _isValid_ASC
-  _isValid_DESC
-  _publicationScheduledAt_ASC
-  _publicationScheduledAt_DESC
-  _publishedAt_ASC
-  _publishedAt_DESC
-  _status_ASC
-  _status_DESC
-  _unpublishingScheduledAt_ASC
-  _unpublishingScheduledAt_DESC
-  _updatedAt_ASC
-  _updatedAt_DESC
-  id_ASC
-  id_DESC
-  overskrift_ASC
-  overskrift_DESC
-  text_ASC
-  text_DESC
-}
-
 """Record of type Forside (forside)"""
 type ForsideRecord implements RecordInterface {
   _createdAt: DateTime!
@@ -621,7 +575,6 @@ type ForsideRecord implements RecordInterface {
   id: ItemId!
   image: FileField
   overskrift: String
-  produkter: [ProductItemRecord!]!
   seo: SeoField
   slug: String
   text: String
@@ -1788,6 +1741,13 @@ input ImgixParams {
   skip: IntType
 
   """
+  Bypasses any [DatoCMS Automatic Image Optimization](https://www.datocms.com/docs/cdn-settings/advanced-asset-settings) that might be set up for the project.
+  
+  Exercise caution when using this parameter, as it could significantly increase your bandwidth costs.
+  """
+  skipDefaultOptimizations: BooleanType
+
+  """
   Transparency
   
   Adds checkerboard behind images which support transparency.
@@ -2288,19 +2248,6 @@ input InverseRelationshipFieldFilterBetweenCaseAndProductPage {
 }
 
 """Specifies how to filter by linking fields"""
-input InverseRelationshipFieldFilterBetweenForsideAndProductPage {
-  """
-  Filter linking records that reference current record in at least one of the specified fields
-  """
-  anyIn: [ForsideModelFieldsReferencingProductPageModel!]
-
-  """
-  Filter linking records that do not reference current record in any of the specified fields
-  """
-  notIn: [ForsideModelFieldsReferencingProductPageModel!]
-}
-
-"""Specifies how to filter by linking fields"""
 input InverseRelationshipFieldFilterBetweenMenuAndProductPage {
   """
   Filter linking records that reference current record in at least one of the specified fields
@@ -2330,15 +2277,6 @@ input InverseRelationshipFieldFilterBetweenProductPageAndProductPage {
 input InverseRelationshipFilterBetweenCaseAndProductPage {
   """Specifies how to filter by linking fields"""
   fields: InverseRelationshipFieldFilterBetweenCaseAndProductPage
-
-  """Specifies how to filter by linking locales"""
-  locales: LinkingLocalesFilter
-}
-
-"""Specifies how to filter linking records"""
-input InverseRelationshipFilterBetweenForsideAndProductPage {
-  """Specifies how to filter by linking fields"""
-  fields: InverseRelationshipFieldFilterBetweenForsideAndProductPage
 
   """Specifies how to filter by linking locales"""
   locales: LinkingLocalesFilter
@@ -2617,7 +2555,7 @@ type ProductItemRecord implements RecordInterface {
   text: ProductItemModelTextField
 }
 
-union ProductPageModelBlokListeField = FiftyBlockRecord | GalleryBlockRecord | ImageBlockRecord | LinkBlockRecord | TextBlockRecord
+union ProductPageModelBlokListeField = FiftyBlockRecord | GalleryBlockRecord | ImageBlockRecord | LinkBlockRecord | TextBlockRecord | VideoScrollBlockRecord
 
 """Linking fields"""
 enum ProductPageModelFieldsReferencingProductPageModel {
@@ -2677,7 +2615,7 @@ enum ProductPageModelOrderBy {
   position_DESC
 }
 
-"""Record of type Artikel (product_page)"""
+"""Record of type Produkt side (product_page)"""
 type ProductPageRecord implements RecordInterface {
   _allReferencingCases(
     """
@@ -2691,7 +2629,7 @@ type ProductPageRecord implements RecordInterface {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [CaseModelOrderBy] = [_updatedAt_DESC]
+    orderBy: [CaseModelOrderBy] = [position_ASC]
 
     """Skip the first results"""
     skip: IntType
@@ -2709,37 +2647,6 @@ type ProductPageRecord implements RecordInterface {
 
     """Specifies how to filter linking records"""
     through: InverseRelationshipFilterBetweenCaseAndProductPage
-  ): CollectionMetadata!
-  _allReferencingForsides(
-    """
-    If you want to fallback to a default translation when a translation has not been found
-    """
-    fallbackLocales: [SiteLocale!]
-    filter: ForsideModelFilter
-
-    """Limit the number of results"""
-    first: IntType = 20
-
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-    orderBy: [ForsideModelOrderBy] = [_updatedAt_DESC]
-
-    """Skip the first results"""
-    skip: IntType
-
-    """Specifies how to filter linking records"""
-    through: InverseRelationshipFilterBetweenForsideAndProductPage
-  ): [ForsideRecord!]!
-
-  """Returns meta information regarding a record collection"""
-  _allReferencingForsidesMeta(
-    filter: ForsideModelFilter
-
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-
-    """Specifies how to filter linking records"""
-    through: InverseRelationshipFilterBetweenForsideAndProductPage
   ): CollectionMetadata!
   _allReferencingMenus(
     """
@@ -2922,7 +2829,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [CaseModelOrderBy] = [_updatedAt_DESC]
+    orderBy: [CaseModelOrderBy] = [position_ASC]
 
     """Skip the first results"""
     skip: IntType
@@ -2976,7 +2883,7 @@ type Query {
 
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
-    orderBy: [CaseModelOrderBy] = [_updatedAt_DESC]
+    orderBy: [CaseModelOrderBy] = [position_ASC]
   ): CaseRecord
 
   """Returns the single instance record"""
@@ -3290,6 +3197,7 @@ type TextBlockRecord implements RecordInterface {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  grBaggrund: BooleanType
   id: ItemId!
   overskrift: String
   text: TextBlockModelTextField

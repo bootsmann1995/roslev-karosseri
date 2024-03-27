@@ -11,7 +11,7 @@ export default defineNuxtComponent({
 			default: () => ({}),
 		},
 	},
-	setup() {
+	setup(props) {
 		const { isRevealed, reveal, cancel, confirm } = useConfirmDialog();
 		const isMobile = useMediaQuery("(max-width: 968px)") ?? ref(false);
 		const currentImage = ref<ResponsiveImage | null>(null);
@@ -46,6 +46,9 @@ export default defineNuxtComponent({
 				// ScrollSmoother.get();
 			}, 150);
 		};
+		onMounted(() => {
+			console.log(props.data);
+		});
 
 		watch(isMobile, () => {
 			resetSmooth();

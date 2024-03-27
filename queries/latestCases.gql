@@ -1,12 +1,12 @@
-query CasesOverview {
-	allCases {
+query LatestCases {
+	allCases(orderBy: _createdAt_DESC, first: 10) {
 		__typename
 		teaser
 		slug
 		overskrift
 		billede {
 			responsiveImage(
-				imgixParams: { ar: "4:3", auto: format, fit: crop, crop: focalpoint }
+				imgixParams: { ar: "3:4", auto: format, fit: crop, crop: focalpoint }
 				sizes: "(max-width: 500px) 100vw, (max-width: 1000px) 736px, (max-width: 1300px) 322px,(min-width: 1500px) 430px, (max-width: 1920px) 590px, (min-width: 1921px) 100vw"
 			) {
 				width
@@ -21,16 +21,6 @@ query CasesOverview {
 				aspectRatio
 				alt
 			}
-		}
-	}
-	caseoverview {
-		teaser
-		overskrift
-		_seoMetaTags {
-			tag
-			attributes
-			content
-			__typename
 		}
 	}
 }

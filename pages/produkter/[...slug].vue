@@ -10,7 +10,8 @@
 				</div>
 				<div class="col-span-full lg:col-start-8 lg:col-span-9">
 					<DatocmsImage
-						class="block relative [&_img]:!relative"
+						v-if="data?.introImage[0]"
+						class="block relative [&_img]:!relative [&_img]:rounded-md"
 						:data="data?.introImage[0].responsiveImage"
 					/>
 				</div>

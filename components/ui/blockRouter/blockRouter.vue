@@ -8,7 +8,7 @@
 					:data-speed="isMobile ? 'clamp(1)' : 'clamp(1.1)'"
 					class="col-span-16 lg:col-start-2 lg:col-span-14 mb-6 mt-6 lg:mt-11 lg:mb-8"
 				>
-					<div class="container-row">
+					<div v-if="!item.grBaggrund" class="container-row">
 						<h2
 							class="col-span-full lg:col-span-6 text-h3-sm lg:text-h3 mb-2 break-words hyphens-auto"
 							lang="da"
@@ -16,7 +16,15 @@
 							{{ item.overskrift }}
 						</h2>
 						<UtilsStructuredText
-							class="col-span-full lg:col-span-10 break-words hyphens-auto"
+							class="col-span-full lg:col-start-8 lg:col-span-10 break-words hyphens-auto"
+							:text="item.text"
+							lang="da"
+							:unique-key="item.id"
+						/>
+					</div>
+					<div v-else class="container-row">
+						<UtilsStructuredText
+							class="col-span-full lg:col-start-3 lg:col-span-11 break-words hyphens-auto bg-gray-300 p-4 rounded-xxl"
 							:text="item.text"
 							lang="da"
 							:unique-key="item.id"
@@ -59,9 +67,9 @@
 						class="col-span-1"
 						:data-speed="isMobile ? 'clamp(1)' : `clamp(1.1${index})`"
 					>
-						<div class="relative group" @click="openModal(image.responsiveImage)">
+						<div class="relative group h-full" @click="openModal(image.responsiveImage)">
 							<DatocmsImage
-								class="rounded-xxl cursor-pointer group-hover:lg:brightness-50 lg:brightness-100 brightness-50 transition-all duration-300 ease-lait-ease"
+								class="rounded-xxl h-full aspect-4/3 [&_img]:object-cover cursor-pointer group-hover:lg:brightness-50 lg:brightness-100 brightness-50 transition-all duration-300 ease-lait-ease [&_img]:!relative"
 								:data="image.responsiveImage"
 							></DatocmsImage>
 							<p
@@ -78,16 +86,18 @@
 								class="modal-bg bg-[rgba(0,0,0,0.3)] fixed left-0 top-0 w-full h-full flex items-center justify-center z-50"
 								@click.self="cancel()"
 							>
-								<div class="modal relative w-[100vw] p-4 aspect-video h-[80vh]">
+								<div class="modal relative w-[100vw] p-4 h-[80vh]">
 									<button class="absolute right-7 top-6 z-20 font-bold p-4" @click="confirm()">
 										<span class="absolute right-2 top-2 w-3 h-[2px] rotate-45 bg-black"></span>
 										<span class="absolute right-2 top-2 w-3 h-[2px] -rotate-45 bg-black"></span>
 									</button>
-									<DatocmsImage
-										v-if="currentImage"
-										class="rounded-xxl w-full h-full"
-										:data="currentImage"
-									></DatocmsImage>
+									<div class="flex items-center justify-center w-full h-full">
+										<DatocmsImage
+											v-if="currentImage"
+											class="h-full [&_img]:object-cover"
+											:data="currentImage"
+										></DatocmsImage>
+									</div>
 								</div>
 							</div>
 						</teleport>

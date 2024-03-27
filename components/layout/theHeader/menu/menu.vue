@@ -1,9 +1,9 @@
 <template>
 	<div
-		class="navigation-menu fixed h-screen w-screen top-0 left-0 z-10 pt-[15vh]"
+		class="navigation-menu fixed h-screen w-screen top-0 left-0 z-10 pt-[15vh] max-h-screen"
 		:class="[{ 'is-open': isActive === true }, `bg-[${currentColor}]`]"
 	>
-		<div class="grid grid-cols-1 lg:grid-cols-2 px-2 lg:px-8">
+		<div class="grid grid-cols-1 lg:grid-cols-2 px-2 lg:px-8 h-full">
 			<div class="col-start-1 max-lg:row-start-2">
 				<div>
 					<ul class="max-lg mt-5">
@@ -16,11 +16,11 @@
 				</div>
 			</div>
 
-			<nav class="lg:col-start-2 max-lg:row-start-1">
+			<nav class="lg:col-start-2 relative max-lg:row-start-1 h-full">
 				<template v-for="(item, index) in data.productMenu" :key="item.menuLink.id">
 					<li class="list-none pl-0 navigation-link">
 						<NuxtLink
-							class="text-[24px] lg:text-[52px] uppercase mb-5 hover:text-white transition-[color] duration-[200ms] ease-locomotive-ease"
+							class="text-[24px] lg:text-[22px] uppercase mb-5 hover:text-white transition-[color] duration-[200ms] ease-locomotive-ease"
 							:to="menuPrefix(item.menuLink)"
 							@mouseover="setHoverColor(index)"
 							@mouseleave="setHoverColor(-1)"
@@ -28,20 +28,22 @@
 							{{ item.menuLink.overskrift ?? item.menuLink.headline }}</NuxtLink
 						>
 					</li>
-					<li
-						v-for="(child, _index) in item.childMenuLinks"
-						:key="child.link.id"
-						class="list-none pl-2 lg:pl-10 navigation-link"
-					>
-						<NuxtLink
-							class="text-[20px] lg:text-[32px] hover:text-white transition-[color] duration-[500ms] ease-locomotive-ease"
-							:to="menuPrefix(child.link)"
-							@mouseover="setHoverColor(_index)"
-							@mouseleave="setHoverColor(-1)"
+					<template v-for="(child, _index) in item.childMenuLinks">
+						<li
+							v-if="child && child.link"
+							:key="child.link.id"
+							class="list-none pl-2 lg:pl-10 navigation-link"
 						>
-							{{ child.link.overskrift ?? child.link.headline }}</NuxtLink
-						>
-					</li>
+							<NuxtLink
+								class="text-[20px] lg:text-[16px] hover:text-white transition-[color] duration-[500ms] ease-locomotive-ease"
+								:to="menuPrefix(child.link)"
+								@mouseover="setHoverColor(_index)"
+								@mouseleave="setHoverColor(-1)"
+							>
+								{{ child.link.overskrift ?? child.link.headline }}</NuxtLink
+							>
+						</li>
+					</template>
 				</template>
 			</nav>
 		</div>

@@ -2,7 +2,7 @@
 	<div class="container mb-[100px]">
 		<div class="container-row" :data-speed="`clamp(1)`">
 			<div class="col-span-full lg:col-span-11 lg:col-start-3">
-				<div class="w-full relative block">
+				<div class="w-full relative block testimonial">
 					<Swiper
 						:space-between="30"
 						:effect="'fade'"
@@ -64,15 +64,17 @@
 	</div>
 </template>
 <script lang="ts" src="./testimonial.component.ts" />
-<style>
-.swiper-slide {
-	opacity: 0 !important;
-}
-.swiper-slide-active {
-	opacity: 1 !important;
-}
-.swiper-button-prev,
-.swiper-button-next {
-	display: none;
+<style lang="scss">
+.testimonial {
+	.swiper-slide {
+		opacity: 0 !important;
+	}
+	.swiper-slide-active {
+		opacity: 1 !important;
+	}
+	.swiper-button-prev,
+	.swiper-button-next {
+		display: none;
+	}
 }
 </style>

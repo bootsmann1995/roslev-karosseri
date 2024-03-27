@@ -1,5 +1,8 @@
 export const createLink = (link: any) => {
 	let url = "";
+	if (!link || !link.__typename) {
+		return "/";
+	}
 	switch (link.__typename) {
 		case "ProductPageRecord":
 			url = "/produkter/" + url;

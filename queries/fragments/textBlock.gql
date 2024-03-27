@@ -1,6 +1,8 @@
 fragment TextBlockFragment on TextBlockRecord {
 	id
 	_modelApiKey
+	overskrift
+	grBaggrund
 	text {
 		value
 		links {
