@@ -36,7 +36,7 @@
 				<div
 					v-if="item._modelApiKey === 'fifty_block'"
 					:key="item.id"
-					class="col-span-16 grid grid-cols-1 lg:grid-cols-4 gap-5 my-0 lg:my-9"
+					class="col-span-16 grid grid-cols-1 lg:grid-cols-4 gap-5 my-0 lg:my-11"
 				>
 					<div class="col-span-2" :data-speed="isMobile ? 'clamp(1)' : 'clamp(1.2)'">
 						<DatocmsImage class="rounded-xxl" :data="item.image?.responsiveImage"></DatocmsImage>
@@ -93,7 +93,8 @@
 											v-if="currentImage"
 											class="h-full [&_img]:w-auto [&_img]:h-auto [&_img]:object-cover"
 											:data="currentImage"
-										></DatocmsImage>
+										></DatocmsImage
+										>s
 									</div>
 								</div>
 							</div>
