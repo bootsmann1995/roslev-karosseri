@@ -1,5 +1,5 @@
 query CasesOverview {
-	allCases {
+	allCases(orderBy: _createdAt_DESC) {
 		__typename
 		teaser
 		slug

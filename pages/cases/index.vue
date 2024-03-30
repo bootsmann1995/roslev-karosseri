@@ -21,7 +21,10 @@
 							:to="linkMap(card)"
 							class="block rounded-xxl overflow-hidden mb-2 relative after:content-[''''] after:absolute group"
 						>
-							<DatocmsImage class="aspect-3/4" :data="card.billede?.responsiveImage" />
+							<DatocmsImage
+								class="aspect-3/4 [&_img]:object-cover"
+								:data="card.billede?.responsiveImage"
+							/>
 							<h2
 								class="absolute bottom-4 left-2 text-white text-t2 right-2 leading-8 z-10 group-hover:lg:opacity-0 transition-all ease-lait-ease duration-300"
 							>

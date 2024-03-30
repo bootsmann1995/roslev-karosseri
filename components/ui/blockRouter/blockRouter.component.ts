@@ -11,13 +11,16 @@ export default defineNuxtComponent({
 			default: () => ({}),
 		},
 	},
-	setup(props) {
+	setup() {
 		const { isRevealed, reveal, cancel, confirm } = useConfirmDialog();
 		const isMobile = useMediaQuery("(max-width: 968px)") ?? ref(false);
-		const currentImage = ref<ResponsiveImage | null>(null);
-		const openModal = (image: ResponsiveImage) => {
+		const currentImage = ref<number | null>(null);
+		const openModal = (image: number) => {
 			currentImage.value = image;
 			reveal();
+		};
+		const initFunc = (swiper: any) => {
+			console.log(swiper);
 		};
 		const renderInlineRecord = (record: any) => {
 			return record;
@@ -46,9 +49,6 @@ export default defineNuxtComponent({
 				// ScrollSmoother.get();
 			}, 150);
 		};
-		onMounted(() => {
-			console.log(props.data);
-		});
 
 		watch(isMobile, () => {
 			resetSmooth();
@@ -63,6 +63,7 @@ export default defineNuxtComponent({
 			cancel,
 			isMobile,
 			confirm,
+			initFunc,
 		};
 	},
 });
