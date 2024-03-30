@@ -1,9 +1,9 @@
 <template>
-	<div class="container-row ml-3 lg:ml-6 !mr-0 mb-[120px]">
+	<div class="container-row ml-3 lg:ml-6 !mr-0 my-[120px]">
 		<div class="col-span-full">
 			<h2 class="text-h2">Se vores seneste arbejde</h2>
 		</div>
-		<div class="col-span-16 my-8 lg:my-11 cursor-grab">
+		<div class="col-span-full lg:col-span-16 my-8 lg:my-11 cursor-grab">
 			<Swiper
 				:space-between="12"
 				:breakpoints="{ 0: { slidesPerView: 1.5 }, 768: { slidesPerView: 4.5 } }"
@@ -18,7 +18,7 @@
 						/>
 						<div>
 							<h3 class="text-t3 text-[16px] text-night-black-500 mb-1 mt-3">{{ item.overskrift }}</h3>
-							<p class="text-[14px]">{{ item.teaser }}</p>
+							<p class="text-[14px] text-gray-500 line-clamp-3">{{ item.teaser }}</p>
 						</div>
 					</NuxtLink>
 				</SwiperSlide>

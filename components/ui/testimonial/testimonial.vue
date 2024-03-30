@@ -13,7 +13,11 @@
 						:modules="[SwiperEffectFade, SwiperNavigation]"
 						@init="initSwiper"
 					>
-						<SwiperSlide v-for="testimonial in data" :key="testimonial.reference" class="h-full bg-white">
+						<SwiperSlide
+							v-for="testimonial in data"
+							:key="testimonial.reference"
+							class="h-full bg-white cursor-grab"
+						>
 							<div class="grid grid-cols-11 gap-x-3 bg-white">
 								<div class="row-start-1 col-span-full h-[44px] max-lg:hidden"></div>
 								<div

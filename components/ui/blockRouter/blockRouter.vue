@@ -9,14 +9,11 @@
 					class="col-span-16 lg:col-start-2 lg:col-span-14 mb-6 mt-6 lg:mt-11 lg:mb-8"
 				>
 					<div v-if="!item.grBaggrund" class="container-row">
-						<h2
-							class="col-span-full lg:col-span-6 text-h3-sm lg:text-h3 mb-2 break-words hyphens-auto"
-							lang="da"
-						>
+						<h2 class="col-span-full text-h3-sm lg:text-h3 mb-2 break-words hyphens-auto" lang="da">
 							{{ item.overskrift }}
 						</h2>
 						<UtilsStructuredText
-							class="col-span-full lg:col-start-8 lg:col-span-10 break-words hyphens-auto"
+							class="col-span-full break-words hyphens-auto"
 							:text="item.text"
 							lang="da"
 							:unique-key="item.id"
@@ -24,7 +21,7 @@
 					</div>
 					<div v-else class="container-row">
 						<UtilsStructuredText
-							class="col-span-full lg:col-start-3 lg:col-span-11 break-words hyphens-auto bg-gray-300 p-4 rounded-xxl"
+							class="col-span-full lg:col-start-2 lg:col-span-13 break-words hyphens-auto bg-gray-200 p-4 rounded-xxl"
 							:text="item.text"
 							lang="da"
 							:unique-key="item.id"
@@ -67,9 +64,9 @@
 						class="col-span-1"
 						:data-speed="isMobile ? 'clamp(1)' : `clamp(1.1${index})`"
 					>
-						<div class="relative group h-full" @click="openModal(image.responsiveImage)">
+						<div class="relative group h-full bg-gray-100" @click="openModal(image.responsiveImage)">
 							<DatocmsImage
-								class="rounded-xxl h-full aspect-4/3 [&_img]:object-cover cursor-pointer group-hover:lg:brightness-50 lg:brightness-100 brightness-50 transition-all duration-300 ease-lait-ease [&_img]:!relative"
+								class="rounded-xxl h-full aspect-4/3 [&_img]:object-cover cursor-pointer group-hover:lg:brightness-50 lg:brightness-100 brightness-50 transition-all duration-300 ease-lait-ease"
 								:data="image.responsiveImage"
 							></DatocmsImage>
 							<p
@@ -94,7 +91,7 @@
 									<div class="flex items-center justify-center w-full h-full">
 										<DatocmsImage
 											v-if="currentImage"
-											class="h-full [&_img]:object-cover"
+											class="h-full [&_img]:w-auto [&_img]:h-auto [&_img]:object-cover"
 											:data="currentImage"
 										></DatocmsImage>
 									</div>

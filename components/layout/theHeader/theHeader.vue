@@ -3,7 +3,7 @@
 		<div class="px-2 lg:px-5 relative z-50">
 			<header
 				class="relative grid grid-cols-3 justify-between items-center header-comp mt-2 p-2 lg:p-3"
-				:class="{ 'is-scrolled': (headerIsScrolledBy && !menuIsOpen) || (lightMode && !menuIsOpen) }"
+				:class="{ 'is-scrolled ': (headerIsScrolledBy && !menuIsOpen) || (lightMode && !menuIsOpen) }"
 			>
 				<div class="">
 					<button
