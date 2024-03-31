@@ -2,6 +2,9 @@ fragment GalleryBlockFragment on GalleryBlockRecord {
 	id
 	_modelApiKey
 	images {
+		video {
+			mp4Url(res: high)
+		}
 		...ImageFragment
 	}
 }

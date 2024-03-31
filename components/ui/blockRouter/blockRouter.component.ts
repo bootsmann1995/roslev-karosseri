@@ -16,11 +16,9 @@ export default defineNuxtComponent({
 		const isMobile = useMediaQuery("(max-width: 968px)") ?? ref(false);
 		const currentImage = ref<number | null>(null);
 		const openModal = (image: number) => {
+			console.log(image);
 			currentImage.value = image;
 			reveal();
-		};
-		const initFunc = (swiper: any) => {
-			console.log(swiper);
 		};
 		const renderInlineRecord = (record: any) => {
 			return record;
@@ -63,7 +61,6 @@ export default defineNuxtComponent({
 			cancel,
 			isMobile,
 			confirm,
-			initFunc,
 		};
 	},
 });

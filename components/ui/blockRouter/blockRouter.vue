@@ -64,16 +64,22 @@
 						class="col-span-1"
 						:data-speed="isMobile ? 'clamp(1)' : `clamp(1.1${index})`"
 					>
-						<div class="relative group h-full bg-gray-100" @click="openModal(image.responsiveImage)">
+						<div
+							class="relative group h-full bg-gray-100"
+							@click="openModal(image.video != null ? image.video : image.responsiveImage)"
+						>
+							{{ image.video }}
 							<DatocmsImage
+								v-if="image.responsiveImage"
 								class="rounded-xxl h-full aspect-4/3 [&_img]:object-cover cursor-pointer group-hover:lg:brightness-50 lg:brightness-100 brightness-50 transition-all duration-300 ease-lait-ease"
 								:data="image.responsiveImage"
 							></DatocmsImage>
+							<div v-else class="rounded-xxl h-full aspect-4/3"></div>
 							<p
 								:class="{ '-order-1': item.reverse }"
 								class="text-white absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group-hover:opacity-100 transition-all duration-300 ease-lait-ease lg:opacity-0"
 							>
-								Se billede
+								Se {{ item.video ? "Video" : "billede" }}
 							</p>
 						</div>
 
@@ -89,12 +95,17 @@
 										<span class="absolute right-2 top-2 w-3 h-[2px] -rotate-45 bg-black"></span>
 									</button>
 									<div class="flex items-center justify-center w-full h-full">
+										{{ currentImage }}
 										<DatocmsImage
-											v-if="currentImage"
+											v-if="currentImage && currentImage.width"
 											class="h-full [&_img]:w-auto [&_img]:h-auto [&_img]:object-cover"
 											:data="currentImage"
-										></DatocmsImage
-										>s
+										></DatocmsImage>
+										<video
+											v-if="currentImage && currentImage.mp4Url"
+											:src="currentImage.mp4Url"
+											class="w-full h-full block"
+										></video>
 									</div>
 								</div>
 							</div>

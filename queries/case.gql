@@ -67,6 +67,9 @@ query CaseItem($slug: String) {
 						aspectRatio
 						alt
 					}
+					video {
+						mp4Url(res: high)
+					}
 				}
 			}
 			... on TextBlockRecord {
