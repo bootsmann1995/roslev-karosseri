@@ -15,6 +15,7 @@
 							:to="menuPrefix(item.menuLink)"
 							@mouseover="setHoverColor(index)"
 							@mouseleave="setHoverColor(-1)"
+							@click="closeMenu"
 						>
 							{{ item.menuLink.overskrift ?? item.menuLink.headline }}</NuxtLink
 						>
@@ -28,6 +29,7 @@
 										:to="menuPrefix(item.menuLink)"
 										@mouseover="setHoverColor(index)"
 										@mouseleave="setHoverColor(-1)"
+										@click="closeMenu"
 									>
 										{{ item.menuLink.overskrift ?? item.menuLink.headline }}</NuxtLink
 									>
@@ -43,6 +45,7 @@
 											:to="menuPrefix(child.link)"
 											@mouseover="setHoverColor(_index)"
 											@mouseleave="setHoverColor(-1)"
+											@click="closeMenu"
 										>
 											{{ child.link.overskrift ?? child.link.headline }}</NuxtLink
 										>
@@ -62,6 +65,7 @@
 						class="text-[18px] !font-normal"
 						:to="menuPrefix(item.link)"
 						:class="{ 'border-t border-gray-500 pt-2 pr-2': index === 0 }"
+						@click="closeMenu"
 					>
 						{{ item.link.headline ?? item.link.overskrift }}
 					</NuxtLink>

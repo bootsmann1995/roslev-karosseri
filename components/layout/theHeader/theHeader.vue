@@ -35,7 +35,7 @@
 				<div class="flex justify-end"></div>
 			</header>
 		</div>
-		<LayoutTheHeaderMenu :data="menu" :is-active="menuIsOpen" />
+		<LayoutTheHeaderMenu :data="menu" :is-active="menuIsOpen" @close-menu="menuIsOpen = false" />
 	</div>
 </template>
 <script lang="ts" src="./theHeader.component" />

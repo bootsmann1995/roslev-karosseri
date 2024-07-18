@@ -17,7 +17,7 @@
 				class="w-full"
 			>
 				<SwiperSlide v-for="(item, index) in data.allCases" :key="index" class="group flex !h-auto">
-					<NuxtLink :to="createLink(item)" class="">
+					<NuxtLink :to="createLink(item)" class="flex flex-col justify-between">
 						<div>
 							<div class="overflow-hidden">
 								<DatocmsImage
@@ -34,7 +34,13 @@
 								<p class="text-[14px] text-gray-500 line-clamp-3">{{ item.teaser }}</p>
 							</div>
 						</div>
-						<p>læs mere</p>
+						<p class="mt-1 text-blue-500 text-[14px]">
+							Læs mere
+							<IconCSS
+								name="tabler:arrow-right"
+								class="!w-[16px] group-hover:translate-x-[3px] transition-all duration-300 ease-lait-ease"
+							/>
+						</p>
 					</NuxtLink>
 				</SwiperSlide>
 			</Swiper>

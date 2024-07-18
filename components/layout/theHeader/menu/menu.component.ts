@@ -11,7 +11,8 @@ export default defineNuxtComponent({
 			default: false,
 		},
 	},
-	setup(props) {
+	emits: ["closeMenu"],
+	setup(props, { emit }) {
 		const colors = ref(["#60656F", "#C49991", "#0275bf", "#91C499", "#9991C4"]);
 		const currentColor = ref("#F7F7FF");
 		const watchProp = computed(() => {
@@ -37,6 +38,10 @@ export default defineNuxtComponent({
 				index = ((index % colors.value.length) + colors.value.length) % colors.value.length;
 				currentColor.value = colors.value[index];
 			}
+		};
+
+		const closeMenu = () => {
+			emit("closeMenu");
 		};
 
 		watch(
@@ -68,6 +73,7 @@ export default defineNuxtComponent({
 		return {
 			setHoverColor,
 			currentColor,
+			closeMenu,
 			menuPrefix,
 			socialLinks,
 		};

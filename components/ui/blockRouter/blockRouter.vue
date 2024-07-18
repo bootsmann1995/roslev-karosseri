@@ -72,6 +72,7 @@
 						>
 							<DatocmsImage
 								v-if="image.responsiveImage"
+								:intersection-margin="'-100px 0px 0px 0px'"
 								class="rounded-xxl h-full aspect-4/3 [&_img]:object-cover cursor-pointer group-hover:lg:brightness-50 lg:brightness-100 brightness-50 transition-all duration-300 ease-lait-ease"
 								:data="image.responsiveImage"
 							></DatocmsImage>
