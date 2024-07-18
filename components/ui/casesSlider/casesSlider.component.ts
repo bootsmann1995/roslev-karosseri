@@ -1,6 +1,6 @@
 export default defineNuxtComponent({
 	props: {
-		data: Array,
+		data: Object,
 	},
 	setup() {
 		const linkMap = (link: any) => {

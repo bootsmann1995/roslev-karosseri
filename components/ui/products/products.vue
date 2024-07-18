@@ -7,11 +7,7 @@
 				</h2>
 			</div>
 			<template v-for="(item, index) in products" :key="`product-${index}`">
-				<div
-					v-if="item.icon"
-					class="col-span-6 lg:col-span-3 block"
-					:data-speed="isLargeScreen ? 'clamp(0.8)' : 'clamp(1)'"
-				>
+				<div v-if="item.icon" class="col-span-6 lg:col-span-3 block">
 					<NuxtLink
 						class="bg-white p-2 hover:bg-slate-200 transition-all ease-locomotive-ease duration-300 block border-[2px] rounded-lg h-full"
 						:to="linkMap(item)"

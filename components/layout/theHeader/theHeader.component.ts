@@ -1,7 +1,11 @@
-import { HeaderMenu } from "interfaces/layout/header.interface";
-
 export default defineNuxtComponent({
-	async setup() {
+	props: {
+		data: {
+			type: Object,
+			default: null,
+		},
+	},
+	async setup(props) {
 		const headerIsScrolledBy = useState("headerIsScrolledBy", () => false);
 		const activeMenuClass = useState("activeMenuClass");
 		const lightMode = useState("lightMode");
@@ -13,12 +17,10 @@ export default defineNuxtComponent({
 			checkScroll();
 		});
 
-		const { data } = await useFetch<HeaderMenu>("/api/header");
-
 		const menu = computed(() => {
 			return {
-				mainMenu: data?.value?.mainMenu,
-				productMenu: data?.value?.productMenu,
+				mainMenu: props.data?.mainMenu,
+				productMenu: props.data?.productMenu,
 			};
 		});
 
@@ -44,7 +46,6 @@ export default defineNuxtComponent({
 			headerIsScrolledBy,
 			openMenu,
 			menuIsOpen,
-			data,
 			menu,
 			activeMenuClass,
 			lightMode,

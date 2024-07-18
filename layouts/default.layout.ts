@@ -1,7 +1,8 @@
 export default defineNuxtComponent({
-	setup() {
+	async setup() {
 		const router = useRouter();
 		const lightMode = useState("lightMode");
+		const { data } = await useFetch("/api/header");
 
 		watch(
 			router.currentRoute,
@@ -13,6 +14,7 @@ export default defineNuxtComponent({
 
 		return {
 			lightMode,
+			data,
 		};
 	},
 });
