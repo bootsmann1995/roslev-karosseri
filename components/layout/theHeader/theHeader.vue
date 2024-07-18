@@ -32,18 +32,7 @@
 				<NuxtLink to="/" class="block">
 					<img class="w-full h-5 lg:h-6 object-contain" src="~/assets/images/logo.png" alt="logo" />
 				</NuxtLink>
-				<div class="flex justify-end">
-					<!-- <IconCSS
-						name="majesticons:search-line"
-						class="transition-all ease-locomotive-ease-2 duration-[350ms]"
-						:class="[
-							{
-								'!bg-night-black-500': headerIsScrolledBy || menuIsOpen || activeMenuClass || lightMode,
-							},
-							{ '!bg-white': !headerIsScrolledBy && !menuIsOpen && !activeMenuClass && !lightMode },
-						]"
-					/> -->
-				</div>
+				<div class="flex justify-end"></div>
 			</header>
 		</div>
 		<LayoutTheHeaderMenu :data="menu" :is-active="menuIsOpen" />

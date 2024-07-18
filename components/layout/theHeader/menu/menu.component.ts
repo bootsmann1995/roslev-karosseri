@@ -1,5 +1,4 @@
 import { HeaderMenu } from "interfaces/layout/header.interface";
-import menu from "./menu.vue";
 
 export default defineNuxtComponent({
 	props: {
@@ -39,6 +38,27 @@ export default defineNuxtComponent({
 				currentColor.value = colors.value[index];
 			}
 		};
+
+		watch(
+			() => props.isActive,
+			() => {
+				const nodeList = document.querySelectorAll(".navigation-link--accordion");
+
+				if (props.isActive) {
+					setTimeout(() => {
+						nodeList.forEach((node) => {
+							(node as HTMLElement).classList.add("!duration-300");
+							(node as HTMLElement).classList.add("!delay-0");
+						});
+					}, 700);
+				} else {
+					nodeList.forEach((node) => {
+						(node as HTMLElement).classList.remove("!duration-300");
+						(node as HTMLElement).classList.remove("!delay-0");
+					});
+				}
+			}
+		);
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const menuPrefix = (item: any) => {
