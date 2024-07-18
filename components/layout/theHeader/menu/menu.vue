@@ -33,7 +33,7 @@
 						<li
 							v-if="child && child.link"
 							:key="child.link.id"
-							class="list-none pl-2 lg:pl-10 navigation-link"
+							class="list-none pl-2 lg:pl-5 navigation-link"
 						>
 							<NuxtLink
 								class="text-[14px] lg:text-[16px] hover:text-white transition-[color] duration-[500ms] ease-locomotive-ease"

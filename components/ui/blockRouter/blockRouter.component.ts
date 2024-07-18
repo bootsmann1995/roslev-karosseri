@@ -1,8 +1,6 @@
 import { useConfirmDialog, useMediaQuery } from "@vueuse/core";
 import type { PropType } from "vue";
-import type { CaseItemQuery, ResponsiveImage } from "~/generated-types";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { CaseItemQuery } from "~/generated-types";
 
 export default defineNuxtComponent({
 	props: {
@@ -15,9 +13,15 @@ export default defineNuxtComponent({
 		const { isRevealed, reveal, cancel, confirm } = useConfirmDialog();
 		const isMobile = useMediaQuery("(max-width: 968px)") ?? ref(false);
 		const currentImage = ref<number | null>(null);
-		const openModal = (image: number) => {
-			console.log(image);
+		const currentIndex = ref<number | null>(null);
+		const imagesArr = ref([]);
+		const swiper = ref();
+		const swiperEl = ref();
+
+		const openModal = (image: number, index: number, images: []) => {
 			currentImage.value = image;
+			currentIndex.value = index;
+			imagesArr.value = images;
 			reveal();
 		};
 		const renderInlineRecord = (record: any) => {
@@ -28,28 +32,14 @@ export default defineNuxtComponent({
 			return record;
 		};
 
+		const setSwiper = (swiperEl: unknown) => {
+			swiper.value = swiperEl;
+		};
+
 		watch(isRevealed, (value) => {
 			if (!value) {
 				currentImage.value = null;
 			}
-		});
-
-		const resetSmooth = () => {
-			const smooth = ScrollSmoother.get();
-			smooth?.kill();
-			setTimeout(() => {
-				ScrollSmoother.create({
-					smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
-					effects: true, // looks for data-speed and data-lag attributes on elements
-					smoothTouch: 0.1, // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
-				});
-				ScrollTrigger.normalizeScroll(true);
-				// ScrollSmoother.get();
-			}, 150);
-		};
-
-		watch(isMobile, () => {
-			resetSmooth();
 		});
 
 		return {
@@ -57,8 +47,13 @@ export default defineNuxtComponent({
 			renderLinkToRecord,
 			openModal,
 			currentImage,
+			imagesArr,
+			swiper,
+			setSwiper,
+			swiperEl,
 			isRevealed,
 			cancel,
+			currentIndex,
 			isMobile,
 			confirm,
 		};

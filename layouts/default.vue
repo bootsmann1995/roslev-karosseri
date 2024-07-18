@@ -5,7 +5,7 @@
 			<div id="smooth-content">
 				<main class="bg-white">
 					<NuxtPage />
-					<footer class="bg-slate-800">
+					<footer class="bg-slate-800" data-scroll>
 						<div class="container">
 							<div class="container-row">
 								<div class="col-span-16 lg:h-[150px] max-lg:py-4">

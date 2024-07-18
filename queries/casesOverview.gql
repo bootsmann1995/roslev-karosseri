@@ -6,7 +6,7 @@ query CasesOverview {
 		overskrift
 		billede {
 			responsiveImage(
-				imgixParams: { ar: "4:3", auto: format, fit: crop, crop: focalpoint }
+				imgixParams: { ar: "4:3", auto: [format, enhance, compress], fit: crop, crop: focalpoint }
 				sizes: "(max-width: 500px) 100vw, (max-width: 1000px) 736px, (max-width: 1300px) 322px,(min-width: 1500px) 430px, (max-width: 1920px) 590px, (min-width: 1921px) 100vw"
 			) {
 				width
@@ -26,6 +26,23 @@ query CasesOverview {
 	caseoverview {
 		teaser
 		overskrift
+		billede {
+			responsiveImage(
+				imgixParams: { ar: "16:9", auto: [format, enhance, compress], fit: crop, crop: focalpoint }
+			) {
+				width
+				webpSrcSet
+				title
+				srcSet
+				src
+				sizes
+				height
+				bgColor
+				base64
+				aspectRatio
+				alt
+			}
+		}
 		_seoMetaTags {
 			tag
 			attributes

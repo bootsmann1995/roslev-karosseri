@@ -66,9 +66,10 @@
 					>
 						<div
 							class="relative group h-full bg-gray-100"
-							@click="openModal(image.video != null ? image.video : image.responsiveImage)"
+							@click="
+								openModal(image.video != null ? image.video : image.responsiveImage, index, item.images)
+							"
 						>
-							{{ image.video }}
 							<DatocmsImage
 								v-if="image.responsiveImage"
 								class="rounded-xxl h-full aspect-4/3 [&_img]:object-cover cursor-pointer group-hover:lg:brightness-50 lg:brightness-100 brightness-50 transition-all duration-300 ease-lait-ease"
@@ -82,38 +83,62 @@
 								Se {{ item.video ? "Video" : "billede" }}
 							</p>
 						</div>
-
-						<teleport to="body">
-							<div
-								v-if="isRevealed"
-								class="modal-bg bg-[rgba(0,0,0,0.3)] fixed left-0 top-0 w-full h-full flex items-center justify-center z-50"
-								@click.self="cancel()"
-							>
-								<div class="modal relative w-[100vw] p-4 h-[80vh]">
-									<button class="absolute right-7 top-6 z-20 font-bold p-4" @click="confirm()">
-										<span class="absolute right-2 top-2 w-3 h-[2px] rotate-45 bg-black"></span>
-										<span class="absolute right-2 top-2 w-3 h-[2px] -rotate-45 bg-black"></span>
-									</button>
-									<div class="flex items-center justify-center w-full h-full">
-										{{ currentImage }}
-										<DatocmsImage
-											v-if="currentImage && currentImage.width"
-											class="h-full [&_img]:w-auto [&_img]:h-auto [&_img]:object-cover"
-											:data="currentImage"
-										></DatocmsImage>
-										<video
-											v-if="currentImage && currentImage.mp4Url"
-											:src="currentImage.mp4Url"
-											class="w-full h-full block"
-										></video>
-									</div>
-								</div>
-							</div>
-						</teleport>
 					</div>
 				</div>
 			</template>
 		</div>
+		<teleport to="body">
+			<div
+				v-if="isRevealed"
+				class="modal-bg bg-[rgba(0,0,0,0.8)] fixed left-0 top-0 w-full h-full flex items-center justify-center z-[99]"
+				@click.self="cancel()"
+			>
+				<div class="modal relative w-[100vw] p-4 h-[80vh] px-4">
+					<button class="absolute right-7 top-6 z-20 font-bold p-4 bg-white rounded-full" @click="confirm()">
+						<span class="absolute right-2 top-[18px] w-3 h-[2px] rotate-45 bg-black"></span>
+						<span class="absolute right-2 top-[18px] w-3 h-[2px] -rotate-45 bg-black"></span>
+					</button>
+					<div class="flex items-center justify-center w-full h-full">
+						<Swiper
+							:slides-per-view="1"
+							class="w-full h-full cursor-grab"
+							:allow-slide-next="true"
+							:modules="[SwiperNavigation]"
+							@init="setSwiper"
+						>
+							<SwiperSlide v-for="(currentImage, index) in imagesArr" :key="index" class="group">
+								<DatocmsImage
+									v-if="currentImage && currentImage.responsiveImage"
+									class="h-full [&_img]:w-auto [&_img]:h-auto [&_img]:object-contain"
+									:data="currentImage.responsiveImage"
+								></DatocmsImage>
+								<video
+									v-if="currentImage && currentImage.video"
+									:src="currentImage.video.mp4Url"
+									class="w-full h-full block"
+								></video>
+							</SwiperSlide>
+						</Swiper>
+						<template v-if="swiper">
+							<button
+								:disabled="swiper.isBeginning"
+								class="absolute left-2 top-1/2 -translate-y-1/2 z-[999] bg-white rounded-full disabled:opacity-25 disabled:cursor-not-allowed p-[3px]"
+								@click="swiper.isBeginning ? undefined : swiper.slidePrev()"
+							>
+								<IconCSS name="tabler:arrow-left" class="text-blue-500 !h-[30px] !w-[30px]"></IconCSS>
+							</button>
+							<button
+								:disabled="swiper.isEnd"
+								class="absolute right-4 top-1/2 -translate-y-1/2 z-[999] bg-white rounded-full disabled:opacity-25 disabled:cursor-not-allowed p-[3px]"
+								@click="swiper.isEnd ? undefined : swiper.slideNext()"
+							>
+								<IconCSS name="tabler:arrow-right" class="text-blue-500 !h-[30px] !w-[30px]"></IconCSS>
+							</button>
+						</template>
+					</div>
+				</div>
+			</div>
+		</teleport>
 	</div>
 </template>
 <script lang="ts" src="./blockRouter.component.ts" />

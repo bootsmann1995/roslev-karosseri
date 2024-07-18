@@ -1,14 +1,13 @@
 <template>
 	<div>
 		<div class="container">
-			<div class="container-row pt-[100px] lg:pt-[180px]">
-				<h1 :data-speed="isMobile === true ? 'clamp(1.0)' : `clamp(1)`" class="col-span-12 text-h2 mb-7">
-					{{ data?.page?.overskrift }}
-				</h1>
-			</div>
+			<div class="container-row pt-[100px] lg:pt-[180px]"></div>
 			<div class="container-row mb-8 lg:mb-12">
-				<div class="col-span-16 lg:col-span-8">
-					<h2 class="text-t2 mb-4">Info</h2>
+				<div class="col-span-16 lg:col-span-8 flex items-start flex-col justify-center">
+					<h1 class="col-span-12 text-h2 mb-1">
+						{{ data?.page?.overskrift }}
+					</h1>
+					<h2 class="text-t2 mb-0">Info</h2>
 					<p class="flex items-center mb-1">
 						<span class="font-bold">Adresse: </span>
 						<span class="ml-1"> {{ data?.company?.address }}</span>

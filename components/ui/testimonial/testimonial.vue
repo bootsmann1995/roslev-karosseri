@@ -35,13 +35,16 @@
 								<div
 									class="col-span-full max-lg:pt-[40px] max-lg:pb-8 max-lg:px-2 max-lg:bg-light-grey max-lg:rounded-md lg:col-start-4 lg:col-span-7 lg:row-start-2"
 								>
-									<h2 class="text-h3-sm lg:text-h3 text-blue-500 mb-2">
-										{{ testimonial.qouteText }}
+									<h2 class="text-h3-sm lg:text-h3 max-lg:text-center text-blue-500 mb-2">
+										"{{ testimonial.qouteText }}"
 									</h2>
-									<p class="text-rich-black text-t3-sm lg:text-t3">
+									<p class="text-rich-black max-lg:text-center text-t3-sm lg:text-t3">
 										{{ testimonial.reference }}
 									</p>
-									<div v-if="swiper" class="flex mt-6 lg:mt-9">
+									<div
+										v-if="swiper"
+										class="flex max-lg:justify-center max-lg:items-center mt-6 lg:mt-9"
+									>
 										<button
 											class="mr-6 rounded-full text-white flex items-center justify-center w-[36px] h-[36px] bg-blue-500 disabled:bg-[#B1ABAB]"
 											:disabled="swiper.activeIndex === 0"

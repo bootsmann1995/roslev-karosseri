@@ -360,7 +360,10 @@ module.exports = {
 				"lait-shadow": "0px 12px 24px 12px rgb(74 74 73 / 10%)",
 				custom: "6px 0px 15px 0px rgb(0 0 0 / 5%)",
 			},
-			backgroundImage: {},
+			backgroundImage: {
+				"overlay-gradient":
+					"linear-gradient(28.68deg, #0275bf 2.56%, rgba(0, 74, 108, .5) 30.78%, rgba(0, 74, 108, 0) 63.77%);",
+			},
 			gridColumn: {
 				"span-13": "span 13 / span 13",
 				"span-14": "span 14 / span 14",

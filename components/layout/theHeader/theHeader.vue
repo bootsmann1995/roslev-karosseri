@@ -1,5 +1,5 @@
 <template>
-	<div class="fixed w-screen left-0 top-0 z-10">
+	<div class="fixed w-screen left-0 top-0 z-50">
 		<div class="px-2 lg:px-5 relative z-50">
 			<header
 				class="relative grid grid-cols-3 justify-between items-center header-comp mt-2 p-2 lg:p-3"

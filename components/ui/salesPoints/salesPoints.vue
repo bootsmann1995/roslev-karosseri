@@ -1,11 +1,11 @@
 <template>
-	<div class="flex justify-center items-center">
-		<div v-if="data" class="grid grid-cols-1 w-full px-2 lg:px-0 lg:grid-cols-3 lg:w-4/5 gap-3 relative z-10">
+	<div class="flex justify-center items-center lg:mt-[120px]">
+		<div v-if="data" class="grid grid-cols-1 w-full px-2 lg:px-0 lg:grid-cols-3 lg:w-4/5 lg:gap-3 relative z-10">
 			<div
 				v-for="(item, i) in data.usp"
 				ref="uItem"
 				:key="item.id"
-				class="rounded-xl bg-gray-200 p-3 h-[200px] grid grid-rows-2 mb-8 last-of-type:mb-0"
+				class="rounded-xl bg-gray-200 p-3 h-[200px] grid grid-rows-2 mb-3 lg:mb-8 last-of-type:mb-0"
 				data-speed="clamp(0.8)"
 			>
 				<div class="row-start-1 grid place-items-center">
