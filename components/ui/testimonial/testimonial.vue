@@ -38,14 +38,14 @@
 									<h2 class="text-h3-sm lg:text-h3 max-lg:text-center text-blue-500 mb-2">
 										"{{ testimonial.qouteText }}"
 									</h2>
-									<p class="text-rich-black max-lg:text-center text-t3-sm lg:text-t3">
+									<p class="max-lg:pb-2 text-rich-black max-lg:text-center text-t3-sm lg:text-t3">
 										{{ testimonial.reference }}
 									</p>
 								</div>
 								<div class="row-start-3 col-span-full h-[44px] max-lg:hidden"></div>
 								<div
 									v-if="swiper"
-									class="absolute right-2 bottom-2 flex max-lg:justify-center max-lg:items-center mt-6 lg:mt-9"
+									class="absolute bottom-0 left-1/2 max-lg:-translate-x-1/2 lg:right-2 lg:bottom-2 flex max-lg:justify-center max-lg:items-center mt-6 lg:mt-9"
 								>
 									<button
 										class="mr-6 rounded-full text-white flex items-center justify-center w-[36px] h-[36px] bg-blue-500 disabled:bg-[#B1ABAB]"
