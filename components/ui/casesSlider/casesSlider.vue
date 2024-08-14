@@ -1,6 +1,6 @@
 <template>
 	<div class="container-row ml-3 relative lg:ml-6 !mr-0 my-[100px] overflow-hidden">
-		<NuxtLink to="/cases/" class="absolute right-3 top-5 text-blue-500 font-bold group flex items-center">
+		<NuxtLink to="/nyheder/" class="absolute right-3 top-5 text-blue-500 font-bold group flex items-center">
 			Se alle nyheder
 			<IconCSS
 				class="group-hover:translate-x-[5px] transition-transform ease-lait-ease duration-300"

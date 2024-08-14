@@ -8,7 +8,7 @@ export const createLink = (link: any) => {
 			url = "/produkter/" + url;
 			break;
 		case "CaseRecord":
-			url = "/cases/" + url;
+			url = "/nyheder/" + url;
 			break;
 		default:
 			url = "/";
