@@ -25,7 +25,7 @@
 		<UiBlockRouter :data="data?.blokListe"></UiBlockRouter>
 		<div class="container mt-[50px] lg:mt-[100px]">
 			<div class="container-row">
-				<div class="col-start-3 col-end-14 bg-gray-200 px-5 py-7 rounded-xl">
+				<div class="max-md:col-span-full lg:col-start-3 lg:col-end-14 bg-gray-200 px-5 py-7 rounded-xl">
 					<h2 class="text-h2-sm lg:text-h2 text-center mb-3">Spørgsmål?</h2>
 					<p class="text-center">
 						Kontakt os hvis du har nogle spørgsmål eller du ønsker at høre mere om vores produkter/løsninger
