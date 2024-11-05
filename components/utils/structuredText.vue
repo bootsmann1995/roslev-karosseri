@@ -1,11 +1,12 @@
 <template>
-	<datocms-structured-text
-		class="text-rte"
-		:class="{ 'first-p': teaserSetting }"
-		:data="data"
-		:render-inline-record="renderInlineRecord"
-		:render-link-to-record="renderLinkToRecord"
-	/>
+	<div class="text-rte">
+		<datocms-structured-text
+			:class="{ 'first-p': teaserSetting }"
+			:data="data"
+			:render-inline-record="renderInlineRecord"
+			:render-link-to-record="renderLinkToRecord"
+		/>
+	</div>
 </template>
 <script lang="ts" src="./structuredText.component.ts" />
 <style lang="scss">

@@ -320,6 +320,8 @@ module.exports = {
 			lg: "0.5rem",
 			xl: "0.625rem",
 			xxl: "0.75rem",
+			xxxl: "4.75rem",
+			xxxxl: "7.75rem",
 			full: "9999px",
 		},
 		extend: {
@@ -377,6 +379,13 @@ module.exports = {
 				16: "repeat(16, minmax(0, 1fr))",
 			},
 			gridColumnStart: {
+				13: "13",
+				14: "14",
+				15: "15",
+				16: "16",
+				17: "17",
+			},
+			gridColumnEnd: {
 				13: "13",
 				14: "14",
 				15: "15",

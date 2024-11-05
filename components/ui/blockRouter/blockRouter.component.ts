@@ -1,6 +1,7 @@
 import { useConfirmDialog, useMediaQuery } from "@vueuse/core";
 import type { PropType } from "vue";
 import type { CaseItemQuery } from "~/generated-types";
+import { createLink } from "~/utils/createLink";
 
 export default defineNuxtComponent({
 	props: {
@@ -55,6 +56,7 @@ export default defineNuxtComponent({
 			cancel,
 			currentIndex,
 			isMobile,
+			createLink,
 			confirm,
 		};
 	},

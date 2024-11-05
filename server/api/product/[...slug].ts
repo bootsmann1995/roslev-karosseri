@@ -1,5 +1,6 @@
-import { ProductPageDocument, ProductPageQuery } from "~/generated-types";
+import { ContactPageDocument, ContactPageQuery, ProductPageDocument, ProductPageQuery } from "~/generated-types";
 import { request } from "~/ressources/datocms";
+import { createLink } from "~/utils/createLink";
 import { splitSlugParts } from "~/utils/splitSlugParts";
 
 export default defineEventHandler(async (event) => {
@@ -14,8 +15,9 @@ export default defineEventHandler(async (event) => {
 	}
 	const config = useRuntimeConfig();
 	const document = await request<ProductPageQuery>(ProductPageDocument, { slug }, "productPage" + slug, config);
+	const contactPageDocument = await request<ContactPageQuery>(ContactPageDocument, {}, "contactPage", config);
 
 	const page = document.allProductPages[0];
 
-	return page;
+	return { ...page, contactPageUrl: `/${contactPageDocument.contactPage?.slug}/` };
 });

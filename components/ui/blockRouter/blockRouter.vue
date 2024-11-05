@@ -38,19 +38,27 @@
 					:key="item.id"
 					class="col-span-16 grid grid-cols-1 lg:grid-cols-4 gap-5 my-0 lg:my-11"
 				>
-					<div class="col-span-2" :data-speed="isMobile ? 'clamp(1)' : 'clamp(1.2)'">
-						<DatocmsImage class="rounded-xxl" :data="item.image?.responsiveImage"></DatocmsImage>
+					<div
+						class="col-span-2 [&_img]:object-cover aspect-4/3"
+						:data-speed="isMobile ? 'clamp(1)' : 'clamp(1.2)'"
+					>
+						<DatocmsImage
+							:layout="'responsive'"
+							class="rounded-xxl w-full h-full"
+							:data="item.image?.responsiveImage"
+						></DatocmsImage>
 					</div>
 					<div
 						class="col-span-2 flex flex-col justify-center"
 						:data-speed="isMobile ? 'clamp(1)' : 'clamp(1.1)'"
 					>
-						<h2 class="mb-2 text-h3-sm">{{ item.headline }}</h2>
-						<DatocmsStructuredText
-							:data="item.text"
-							:render-inline-record="renderInlineRecord"
-							:render-link-to-record="renderLinkToRecord"
-						/>
+						<h2 class="mb-2 lg:text-h2 text-h2-sm">{{ item.headline }}</h2>
+						<UtilsStructuredText :text="item.text" :unique-key="item.id" />
+						<NuxtLink
+							class="bg-blue-500 text-white w-max px-2 py-1 rounded-full mt-2"
+							:to="createLink(item.link)"
+							>{{ item.link.overskrift }}</NuxtLink
+						>
 					</div>
 				</div>
 				<div

@@ -2964,7 +2964,7 @@ type ProductPageRecord implements RecordInterface {
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
   blokListe: [ProductPageModelBlokListeField!]!
-  children: [ProductPageRecord]
+  children: [ProductPageRecord!]!
   icon: FileField
   id: ItemId!
   introImage: [FileField!]!
