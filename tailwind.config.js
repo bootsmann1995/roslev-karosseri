@@ -365,6 +365,9 @@ module.exports = {
 			backgroundImage: {
 				"overlay-gradient":
 					"linear-gradient(28.68deg, #0275bf 2.56%, rgba(0, 74, 108, .5) 30.78%, rgba(0, 74, 108, 0) 63.77%);",
+				"overlay-gradient-2":
+					"linear-gradient(15.68deg, #0275bf 0.56%, rgba(0, 74, 108, .5) 32.78%, rgba(0, 74, 108, 0) 89.77%);",
+			}
 			},
 			gridColumn: {
 				"span-13": "span 13 / span 13",

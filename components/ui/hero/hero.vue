@@ -1,6 +1,7 @@
 <template>
 	<div class="overflow-hidden">
 		<div v-if="data" class="relative mb-[40px] lg:mb-[60px]">
+			<span class="top-0 left-0 w-full h-full bg-overlay-gradient absolute z-10"></span>
 			<div class="max-lg:h-[50vh] w-screen lg:h-screen">
 				<DatocmsImage
 					class="w-full h-full [&_img]:object-cover relative"
