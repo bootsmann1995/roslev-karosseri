@@ -15,6 +15,7 @@ export default defineNuxtConfig({
 		"nuxt-swiper",
 	],
 	runtimeConfig: {
+		BASE_URL: process.env.BASE_URL,
 		public: {
 			GQL_TOKEN: process.env.GQL_TOKEN,
 			GQL_HOST: process.env.GQL_HOST,

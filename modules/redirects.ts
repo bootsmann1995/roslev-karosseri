@@ -89,7 +89,7 @@ export default defineNuxtModule({
 				},
 
 				{ from: "/om-os", to: "/kontakt" },
-				{ from: "/handicapbiler/9-produkter", to: "/produkter" },
+				{ from: "/handicapbiler/9-produkter", to: "/produkter/specialopgaver" },
 				{ from: "/institutions-og-taxabusser/eksempler", to: "/produkter" },
 				{ from: "/sidste-nyt", to: "/nyheder" },
 			];
