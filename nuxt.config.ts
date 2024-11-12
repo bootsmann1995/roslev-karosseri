@@ -52,7 +52,7 @@ export default defineNuxtConfig({
 	// 	},
 	// },
 	laitRobots: {
-		allowRobots: process.env.ROBOTS ?? "false",
+		allowRobots: process.env.ROBOTS === "true",
 		userAgent: "*",
 	},
 });
