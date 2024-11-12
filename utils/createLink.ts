@@ -19,5 +19,9 @@ export const createLink = (link: any) => {
 
 	if (link.slug) url += link.slug;
 
+	if (url[url.length - 1] !== "/") {
+		url += "/";
+	}
+
 	return url;
 };

@@ -23,3 +23,7 @@ logs
 !.env.example
 
 public/robots.txt
+
+public/sitemap.xml
+
+public/sitemap.xml.gz
