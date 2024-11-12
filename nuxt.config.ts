@@ -30,6 +30,12 @@ export default defineNuxtConfig({
 	experimental: { payloadExtraction: true },
 	nitro: {
 		compressPublicAssets: true,
+		prerender: {
+			concurrency: 10,
+			interval: 100,
+			crawlLinks: false,
+			routes: ["/"],
+		},
 		routeRules: {},
 	},
 	delayHydration: {

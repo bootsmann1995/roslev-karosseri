@@ -10,6 +10,7 @@ export default defineNuxtComponent({
 		const { data, error } = await useFetch("/api/cases-overview");
 
 		if (!data.value || error.value) {
+			console.log("SADADSA");
 			throw createError({ statusCode: 404, message: "Page not found", fatal: true });
 		}
 

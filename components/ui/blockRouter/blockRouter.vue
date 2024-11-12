@@ -55,9 +55,10 @@
 						<h2 class="mb-2 lg:text-h2 text-h2-sm">{{ item.headline }}</h2>
 						<UtilsStructuredText :text="item.text" :unique-key="item.id" />
 						<NuxtLink
+							v-if="item.link"
 							class="bg-blue-500 text-white w-max px-2 py-1 rounded-full mt-2"
 							:to="createLink(item.link)"
-							>{{ item.link.overskrift }}</NuxtLink
+							>{{ item.link?.overskrift }}</NuxtLink
 						>
 					</div>
 				</div>
