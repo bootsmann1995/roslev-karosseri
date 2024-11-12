@@ -10,7 +10,7 @@ export default defineNuxtComponent({
 		const { data } = await useFetch<CaseItemQuery["allCases"][0]>("/api/case/" + params.slug);
 
 		if (!data.value) {
-			throw createError("Page Not Found");
+			throw createError({ statusCode: 404, message: "Page not found", fatal: true });
 		}
 
 		const seoMetaTags = data.value?._seoMetaTags ?? null;

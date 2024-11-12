@@ -14,7 +14,7 @@ export default defineNuxtComponent({
 			`/api/product/${fullPath.replace(/\?.*$/, "")}`
 		);
 		if (!data.value || error.value) {
-			throw createError("Page Not Found");
+			throw createError({ statusCode: 404, message: "Page not found", fatal: true });
 		}
 		const seoMetaTags = data.value?._seoMetaTags ?? null;
 		if (seoMetaTags) {

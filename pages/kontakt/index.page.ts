@@ -21,7 +21,7 @@ export default defineNuxtComponent({
 		}
 
 		if (!data.value) {
-			throw createError("Page Not Found");
+			throw createError({ statusCode: 404, message: "Page not found", fatal: true });
 		}
 
 		return {
