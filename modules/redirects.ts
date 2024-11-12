@@ -12,10 +12,27 @@ export default defineNuxtModule({
 		const nuxt = useNuxt();
 		nuxt.hook("nitro:build:before", (nitroConfig) => {
 			const redirects: { from: string; to: string }[] = [
+				{
+					from: "https://roslevkarosseri.dk/",
+					to: "https://www.roslev-karosseri.dk/",
+				},
+				{
+					from: "https://www.roslevkarosseri.dk/",
+					to: "https://www.roslev-karosseri.dk/",
+				},
+				{
+					from: "https://www.roslevkarosseri.dk/*",
+					to: "https://www.roslev-karosseri.dk/:splat",
+				},
+				{
+					from: "https://roslevkarosseri.dk/*",
+					to: "https://www.roslev-karosseri.dk/:splat",
+				},
 				{ from: "/mandskabsbiler", to: "/produkter/mandskabsbiler" },
 				{ from: "/sandwichkasser", to: "/produkter/sandwichkasser" },
 
 				{ from: "/ladbiler", to: "/produkter/ladbiler" },
+				{ from: "/specialopgaver", to: "/produkter/specialopgaver" },
 
 				{ from: "/varebiler", to: "/produkter/varebiler" },
 
