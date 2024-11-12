@@ -12,63 +12,63 @@ export default defineNuxtModule({
 		const nuxt = useNuxt();
 		nuxt.hook("nitro:build:before", (nitroConfig) => {
 			const redirects: { from: string; to: string }[] = [
-				{ from: "/mandskabsbiler", to: "/produker/mandskabsbiler" },
-				{ from: "/sandwichkasser", to: "/produker/sandwichkasser" },
+				{ from: "/mandskabsbiler", to: "/produkter/mandskabsbiler" },
+				{ from: "/sandwichkasser", to: "/produkter/sandwichkasser" },
 
-				{ from: "/ladbiler", to: "/produker/ladbiler" },
+				{ from: "/ladbiler", to: "/produkter/ladbiler" },
 
-				{ from: "/varebiler", to: "/produker/varebiler" },
+				{ from: "/varebiler", to: "/produkter/varebiler" },
 
-				{ from: "/handicapbiler", to: "/produker/handicap-biler" },
+				{ from: "/handicapbiler", to: "/produkter/handicap-biler" },
 
-				{ from: "/institutions-og-taxabusser", to: "/produker/institutions-og-taxabusser" },
+				{ from: "/institutions-og-taxabusser", to: "/produkter/institutions-og-taxabusser" },
 
-				{ from: "/lifteftersyn", to: "/produker/lifteftersyn" },
+				{ from: "/lifteftersyn", to: "/produkter/lifteftersyn" },
 
-				{ from: "/ladbiler/traelad", to: "/produker/ladbiler/traelad" },
+				{ from: "/ladbiler/traelad", to: "/produkter/ladbiler/traelad" },
 
-				{ from: "/ladbiler/aluknaeklad", to: "/produker/ladbiler/aluknaeklad" },
+				{ from: "/ladbiler/aluknaeklad", to: "/produkter/ladbiler/aluknaeklad" },
 
-				{ from: "/varebiler/varebilslifte", to: "/produker/varebiler/varebilslifte" },
+				{ from: "/varebiler/varebilslifte", to: "/produkter/varebiler/varebilslifte" },
 
-				{ from: "/varebiler/aluramper", to: "/produker/varebiler/aluramper" },
+				{ from: "/varebiler/aluramper", to: "/produkter/varebiler/aluramper" },
 
-				{ from: "/handicapbiler/korestolslifte", to: "/produker/handicap-biler/korestolslifte" },
+				{ from: "/handicapbiler/korestolslifte", to: "/produkter/handicap-biler/korestolslifte" },
 
 				{
 					from: "/handicapbiler/specialsaeder-og-konsoller",
-					to: "/produker/handicap-biler/specialsaeder-og-drejekonsoller",
+					to: "/produkter/handicap-biler/specialsaeder-og-drejekonsoller",
 				},
 
-				{ from: "/handicapbiler/korestolskraner", to: "/produker/handicap-biler/korestolskraner" },
+				{ from: "/handicapbiler/korestolskraner", to: "/produkter/handicap-biler/korestolskraner" },
 
-				{ from: "/handicapbiler/forerplads", to: "/produker/handicap-biler/forerplads" },
+				{ from: "/handicapbiler/forerplads", to: "/produkter/handicap-biler/forerplads" },
 
 				{
 					from: "/institutions-og-taxabusser/passagersaeder",
-					to: "/produker/institutions-og-taxabusser/passagersaeder",
+					to: "/produkter/institutions-og-taxabusser/passagersaeder",
 				},
 
-				{ from: "/institutions-og-taxabusser/buslifte", to: "/produker/institutions-og-taxabusser/buslifte" },
+				{ from: "/institutions-og-taxabusser/buslifte", to: "/produkter/institutions-og-taxabusser/buslifte" },
 
 				{
 					from: "/institutions-og-taxabusser/drejeklapstole",
-					to: "/produker/institutions-og-taxabusser/drejeklapstole",
+					to: "/produkter/institutions-og-taxabusser/drejeklapstole",
 				},
 
 				{
 					from: "/specialopgaver/klimastyrede-varebiler",
-					to: "/produker/specialopgaver/klimastyrede-varebiler",
+					to: "/produkter/specialopgaver/klimastyrede-varebiler",
 				},
-				{ from: "/specialopgaver/bogbusser", to: "/produker/specialopgaver/bogbusser" },
+				{ from: "/specialopgaver/bogbusser", to: "/produkter/specialopgaver/bogbusser" },
 
-				{ from: "/specialopgaver/kontorbusser", to: "/produker/specialopgaver/kontorbusser" },
+				{ from: "/specialopgaver/kontorbusser", to: "/produkter/specialopgaver/kontorbusser" },
 
-				{ from: "/specialopgaver/sundhedsbusser", to: "/produker/specialopgaver/sundhedsbusser" },
+				{ from: "/specialopgaver/sundhedsbusser", to: "/produkter/specialopgaver/sundhedsbusser" },
 
 				{
 					from: "/specialopgaver/laboratoriebusser",
-					to: "/produker/specialopgaver/laboratoriebus-til-koge-sygehus",
+					to: "/produkter/specialopgaver/laboratoriebus-til-koge-sygehus",
 				},
 
 				{ from: "/om-os", to: "/kontakt" },
