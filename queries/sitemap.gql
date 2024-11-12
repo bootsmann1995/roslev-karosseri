@@ -1,0 +1,46 @@
+query Sitemap {
+	allProductPages {
+		__typename
+		id
+		_status
+		_modelApiKey
+		slug
+		parent {
+			__typename
+			slug
+			id
+			_modelApiKey
+		}
+	}
+	allCases {
+		__typename
+		overskrift
+		id
+		_modelApiKey
+		slug
+	}
+	case {
+		__typename
+		slug
+		id
+		_modelApiKey
+	}
+	caseoverview {
+		__typename
+		slug
+		id
+		_modelApiKey
+	}
+	contactPage {
+		__typename
+		slug
+		id
+		_modelApiKey
+	}
+	productPage {
+		__typename
+		slug
+		id
+		_modelApiKey
+	}
+}

@@ -3,6 +3,9 @@ import { gzipSync } from "node:zlib";
 import { defineNuxtModule, useNuxt } from "@nuxt/kit";
 import { join } from "pathe";
 import chalk from "chalk";
+import { request } from "../ressources/datocms";
+import { SitemapDocument, type SitemapQuery } from "../generated-types";
+import { createLink } from "../utils/createLink";
 
 export default defineNuxtModule({
 	meta: {
@@ -12,14 +15,32 @@ export default defineNuxtModule({
 		const nuxt = useNuxt();
 		const dir = "./public/";
 		nuxt.hook("build:before", async () => {
-			// const sitemap = await request<SitemapQuery>(
-			// 	SitemapDocument,
-			// 	{ locale: nuxt.options.runtimeConfig.public.LOCALE ?? "en" },
-			// 	"sitemap",
-			// 	nuxt.options.runtimeConfig
-			// );
+			const sitemap = await request<SitemapQuery>(
+				SitemapDocument,
+				{ locale: nuxt.options.runtimeConfig.public.LOCALE ?? "en" },
+				"sitemap",
+				nuxt.options.runtimeConfig
+			);
 
-			const routes: string[] = [];
+			const pagesArray = [];
+
+			for (const key in sitemap) {
+				if (Object.prototype.hasOwnProperty.call(sitemap, key)) {
+					const pageType = sitemap[key];
+					if (pageType && pageType.length != null) {
+						// eslint-disable-next-line @typescript-eslint/no-explicit-any
+						pageType.forEach((page: any) => {
+							pagesArray.push(page);
+						});
+					} else if (pageType && !pageType.length) {
+						pagesArray.push(pageType);
+					}
+				}
+			}
+
+			const routes = pagesArray.map((x) => {
+				return createLink(x);
+			});
 
 			const timestamp = new Date().toISOString();
 

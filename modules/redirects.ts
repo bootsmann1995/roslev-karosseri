@@ -89,6 +89,9 @@ export default defineNuxtModule({
 				},
 
 				{ from: "/om-os", to: "/kontakt" },
+				{ from: "/handicapbiler/9-produkter", to: "/produkter" },
+				{ from: "/institutions-og-taxabusser/eksempler", to: "/produkter" },
+				{ from: "/sidste-nyt", to: "/nyheder" },
 			];
 
 			if (redirects && redirects.length > 0) {
