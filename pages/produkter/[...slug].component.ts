@@ -4,14 +4,13 @@ export default defineNuxtComponent({
 	async setup() {
 		const lightMode = useState("lightMode");
 
-		const { fullPath } = useRoute();
+		const { currentRoute } = useRouter();
 
 		onMounted(() => {
 			lightMode.value = true;
 		});
-
 		const { data, error } = await useFetch<ProductPageQuery["allProductPages"][0]>(
-			`/api/product/${fullPath.replace(/\?.*$/, "")}`
+			`/api/product/${currentRoute.value.fullPath.replace(/\?.*$/, "")}`.replaceAll("//", "/")
 		);
 		if (!data.value || error.value) {
 			throw createError({ statusCode: 404, message: "Page not found", fatal: true });
